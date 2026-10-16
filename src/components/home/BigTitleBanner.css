@@ -1,0 +1,92 @@
+.big-title-section {
+  background-color: #080808;
+  padding: 120px 5% 100px 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.big-title-glow-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.6);
+  width: 600px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(226, 168, 41, 0.22) 0%, transparent 70%);
+  opacity: 0;
+  transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.big-title-glow-bg.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.big-title-container {
+  max-width: 1250px;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease-out, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.big-title-container.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.aesthetic-tag {
+  color: #e2a829;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 25px;
+}
+
+.aesthetic-big-heading {
+  font-size: clamp(3.8rem, 10.5vw, 9.5rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -3px;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.big-title-container.animate-in .word-1 { transition-delay: 0.15s; opacity: 1; transform: translateY(0); }
+.big-title-container.animate-in .word-2 { transition-delay: 0.35s; opacity: 1; transform: translateY(0); }
+.big-title-container.animate-in .word-3 { transition-delay: 0.55s; opacity: 1; transform: translateY(0); }
+
+.gold-stroke {
+  color: transparent;
+  -webkit-text-stroke: 2px #e2a829;
+}
+
+.accent-dot {
+  color: #e2a829;
+}
+
+.aesthetic-subtext {
+  color: #a0a0a0;
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  max-width: 700px;
+  margin: 40px auto 0 auto;
+  line-height: 1.6;
+  font-style: italic;
+}
