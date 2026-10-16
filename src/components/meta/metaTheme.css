@@ -1,0 +1,250 @@
+/* ============================================================
+   META SUMMIT — page-scoped cinematic theme
+   Everything here is scoped strictly to .meta-summit-page-view.
+   No global or shared styles are affected.
+   ============================================================ */
+
+.meta-summit-page-view {
+  --meta-black: #07090f;
+  --meta-navy: #0a1428;
+  --meta-navy-elev: #0e1a33;
+  --meta-crimson: #e32636;
+  --meta-crimson-dark: #941b2b;
+  --meta-blue: #2563eb;
+  --meta-ice: #8cb8ff;
+  --meta-white: #f5f5f7;
+  --meta-grey: #a8afbf;
+  --meta-font-display: 'Anton', 'Arial Narrow', 'Impact', sans-serif;
+  --meta-border-red: rgba(227, 38, 54, 0.3);
+  --meta-border-blue: rgba(140, 184, 255, 0.3);
+
+  background-color: var(--meta-black);
+  color: var(--meta-white);
+  position: relative;
+  overflow-x: clip;
+}
+
+/* ---------- Shared element restyles (page scope only) ---------- */
+
+/* Tighter, deliberate vertical rhythm for this page's sections */
+.meta-summit-page-view section.section-py {
+  padding-top: clamp(3rem, 5.5vw, 4.75rem);
+  padding-bottom: clamp(3rem, 5.5vw, 4.75rem);
+}
+
+.meta-summit-page-view .circuit-label {
+  color: var(--meta-ice);
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+}
+
+.meta-summit-page-view .circuit-label .circuit-dot {
+  background: var(--meta-crimson);
+  box-shadow: 0 0 8px rgba(227, 38, 54, 0.8);
+}
+
+.meta-summit-page-view .section-title {
+  font-family: var(--meta-font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  color: var(--meta-white);
+}
+
+.meta-summit-page-view .section-subtitle {
+  color: var(--meta-grey);
+}
+
+/* Buttons: cinematic overrides, page scope only */
+.meta-summit-page-view .btn-primary {
+  background: linear-gradient(135deg, #e32636 0%, #941b2b 100%);
+  color: #ffffff;
+  border: 1px solid rgba(227, 38, 54, 0.55);
+  box-shadow:
+    0 6px 24px rgba(227, 38, 54, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.meta-summit-page-view .btn-primary:hover {
+  background: linear-gradient(135deg, #f03746 0%, #a52131 100%);
+  box-shadow:
+    0 8px 32px rgba(227, 38, 54, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transform: translateY(-2px);
+}
+
+.meta-summit-page-view .btn-secondary {
+  background: rgba(10, 20, 40, 0.55);
+  color: var(--meta-white);
+  border: 1px solid var(--meta-border-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.meta-summit-page-view .btn-secondary:hover {
+  border-color: var(--meta-ice);
+  color: var(--meta-ice);
+  background: rgba(14, 26, 51, 0.8);
+  box-shadow: 0 6px 24px rgba(37, 99, 235, 0.22);
+  transform: translateY(-2px);
+}
+
+/* ---------- Ghost outline display words ---------- */
+
+.meta-ghost-word {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  font-family: var(--meta-font-display);
+  font-size: clamp(3rem, 8vw, 6.25rem);
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(140, 184, 255, 0.09);
+}
+
+/* ---------- Spider-web corner SVG ---------- */
+
+.meta-web {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  color: rgba(140, 184, 255, 0.38);
+}
+
+.meta-web path,
+.meta-web line {
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1;
+}
+
+.meta-web--tl {
+  transform: scaleX(-1);
+}
+
+.meta-web--bl {
+  transform: rotate(180deg);
+}
+
+.meta-web--br {
+  transform: scaleY(-1);
+}
+
+/* ---------- Suspended spider motif ---------- */
+
+.meta-spider {
+  position: absolute;
+  width: 34px;
+  pointer-events: none;
+  z-index: 3;
+  color: rgba(245, 245, 247, 0.5);
+}
+
+.meta-spider .spider-thread {
+  stroke: currentColor;
+  stroke-width: 1;
+  opacity: 0.75;
+}
+
+.meta-spider .spider-sway {
+  transform-box: view-box;
+  transform-origin: 24px 0;
+  animation: metaSpiderSway 6s ease-in-out infinite;
+}
+
+.meta-spider .spider-body-fill {
+  fill: currentColor;
+}
+
+.meta-spider .spider-leg {
+  stroke: currentColor;
+  stroke-width: 1.5;
+  fill: none;
+  stroke-linecap: round;
+}
+
+@keyframes metaSpiderSway {
+  0%,
+  100% {
+    transform: rotate(2.4deg);
+  }
+  50% {
+    transform: rotate(-2.4deg);
+  }
+}
+
+/* ---------- Single strand + vertical tether line ---------- */
+
+.meta-strand {
+  position: absolute;
+  pointer-events: none;
+  overflow: visible;
+  color: rgba(140, 184, 255, 0.42);
+}
+
+.meta-strand path {
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.meta-tether {
+  display: block;
+  width: 1px;
+  height: clamp(64px, 9vw, 128px);
+  margin: 0 auto;
+  transform-origin: top center;
+  background: linear-gradient(
+    180deg,
+    rgba(227, 38, 54, 0.7) 0%,
+    rgba(140, 184, 255, 0.45) 46%,
+    transparent 100%
+  );
+}
+
+/* ---------- Section hairlines (red-to-blue gradient rules) ---------- */
+
+.meta-hairline {
+  position: relative;
+}
+
+.meta-hairline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(227, 38, 54, 0.35) 30%,
+    rgba(37, 99, 235, 0.35) 70%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .meta-summit-page-view *,
+  .meta-summit-page-view *::before,
+  .meta-summit-page-view *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
