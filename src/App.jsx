@@ -11,7 +11,7 @@ import FacultyCommittee from './components/home/FacultyCommittee';
 import CoreCommittee from './components/home/CoreCommittee';
 import AboutRedirect from './components/home/AboutRedirect';
 import './App.css';
-import smoothscroll from './Smoothscroll';
+import smoothscroll from './Smoothscroll';make 
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);

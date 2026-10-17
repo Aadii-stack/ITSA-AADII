@@ -72,8 +72,8 @@
     }
 
     /* ==========================================================================
-       SUITABLE DEVELOPER TERMINAL PRELOADER
-       High-performance, thematic loader simulating compiler & spatial initialization
+       CENTERED ITSA LIQUID WATER / WAVE FILLING PRELOADER
+       High-performance, vector liquid wave simulation filling the letters ITSA
        ========================================================================== */
     #preloader {
       position: fixed;
@@ -93,116 +93,70 @@
       will-change: clip-path, transform, opacity;
     }
 
-    .loader-box {
+    .liquid-preloader-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      max-width: 680px;
       width: 100%;
-      max-width: 480px;
-      background: rgba(16, 16, 16, 0.65);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: var(--radius);
-      padding: 28px 24px;
-      position: relative;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 24px rgba(200, 134, 26, 0.1);
     }
 
-    .loader-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border-subtle);
-      font-family: var(--font-code);
-      font-size: 11px;
-      letter-spacing: 1px;
+    .liquid-svg-wrapper {
+      width: 100%;
+      max-width: 620px;
+      filter: drop-shadow(0 12px 35px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 30px rgba(200, 134, 26, 0.28));
     }
 
-    .loader-title {
-      color: var(--accent-ochre-bright);
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .liquid-loader-svg {
+      width: 100%;
+      height: auto;
+      overflow: visible;
+      display: block;
     }
 
-    .loader-indicator {
-      width: 7px;
-      height: 7px;
-      background: var(--accent-ochre-bright);
-      border-radius: 50%;
-      display: inline-block;
-      animation: blinkLoader 1s infinite alternate;
+    .liquid-ghost-text {
+      fill: rgba(255, 255, 255, 0.05);
+      stroke: rgba(200, 134, 26, 0.35);
+      stroke-width: 2.5px;
     }
 
-    @keyframes blinkLoader {
-      0% { opacity: 0.3; }
-      100% { opacity: 1; }
+    .liquid-rim-text {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.25);
+      stroke-width: 1.5px;
+      pointer-events: none;
     }
 
-    .loader-system-tag {
-      color: var(--text-muted);
+    /* Continuous fluid wave horizontal oscillation */
+    .wave-front {
+      animation: waveHorizontalFront 2.2s linear infinite;
     }
 
-    .loader-terminal-lines {
-      font-family: var(--font-code);
-      font-size: 12px;
-      line-height: 1.7;
-      min-height: 76px;
-      margin-bottom: 22px;
-      color: #A0A0A0;
+    .wave-back {
+      animation: waveHorizontalBack 3.2s linear infinite;
     }
 
-    .terminal-line {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      opacity: 0;
-      transform: translateY(4px);
+    @keyframes waveHorizontalFront {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-700px);
+      }
     }
 
-    .terminal-prompt {
-      color: var(--accent-ochre-bright);
+    @keyframes waveHorizontalBack {
+      0% {
+        transform: translateX(-700px);
+      }
+      100% {
+        transform: translateX(0);
+      }
     }
 
-    .terminal-status-ok {
-      color: #6FCF97;
-      margin-left: auto;
-      font-size: 11px;
-    }
 
-    .loader-progress-wrap {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .loader-track {
-      flex: 1;
-      height: 3px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 2px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .loader-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--accent-ochre), var(--accent-ochre-bright));
-      border-radius: 2px;
-      box-shadow: 0 0 10px var(--accent-ochre-glow);
-      transition: width 0.08s ease-out;
-    }
-
-    .loader-percentage {
-      font-family: var(--font-display);
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--accent-ochre-bright);
-      min-width: 46px;
-      text-align: right;
-    }
 
     /* Screen Reader Only Utility */
     .sr-only {
@@ -303,84 +257,78 @@
       min-height: 640px;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
-      padding: 0 clamp(24px, 8vw, 120px);
+      justify-content: center;
+      text-align: center;
+      padding: 0 clamp(20px, 6vw, 80px);
       z-index: 10;
       overflow: hidden;
     }
 
     .hero-content {
       position: relative;
-      max-width: 820px;
+      max-width: 1040px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
       z-index: 12;
       pointer-events: auto;
     }
 
-    /* Headline: ITSA (Main Highlight)
+    /* Headline: INFORMATION TECHNOLOGY STUDENT ASSOCIATION (Main Highlight in Center)
        - Bevan Slab Display, Weight 700
-       - Scaled with clamp
-       - Color: #FFFFFF
-       - Clip-path animation reveal: inset(100% 0 0 0) to inset(0% 0 0 0) */
+       - 4-way collision physics convergence with bounce
+       - Color: #FFFFFF */
     .hero-headline-wrap {
-      overflow: hidden;
+      overflow: visible;
       padding-bottom: 8px;
+      max-width: 1040px;
     }
 
     .hero-headline {
       font-family: var(--font-display);
       font-weight: 700;
-      font-size: clamp(64px, 12vw, 130px);
-      line-height: 0.95;
-      letter-spacing: -1px;
+      font-size: clamp(24px, 4.2vw, 54px);
+      line-height: 1.18;
+      letter-spacing: -0.5px;
       color: var(--text-main);
       margin: 0;
       text-transform: uppercase;
-      clip-path: inset(100% 0 0 0);
-      will-change: clip-path;
-      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.85);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15em;
     }
 
+    .headline-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.38em;
+      white-space: nowrap;
+    }
+
+    .headline-word {
+      display: inline-block;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    /* Motto under headline: Make it happen */
     .hero-motto {
       display: inline-block;
-      margin-top: 14px;
+      margin-top: 22px;
       font-family: var(--font-body);
-      font-size: 13px;
+      font-size: clamp(16px, 2.5vw, 24px);
       font-weight: 400;
-      letter-spacing: 2px;
+      letter-spacing: 2.5px;
       color: var(--accent-ochre-bright);
       text-transform: uppercase;
       opacity: 0;
-      transform: translateY(10px);
-      will-change: opacity, transform;
-    }
-
-    /* Subtitle: Information Technology Student Association · SLRTCE
-       - Archivo Black, Weight 400
-       - Color: #888888
-       - GSAP word-by-word reveal stagger */
-    .hero-subtitle {
-      font-family: var(--font-body);
-      font-size: clamp(14px, 1.8vw, 17px);
-      font-weight: 400;
-      letter-spacing: 0.5px;
-      line-height: 1.5;
-      color: var(--text-muted);
-      margin-top: 24px;
-      max-width: 620px;
-    }
-
-    .hero-subtitle .word {
-      display: inline-block;
-      opacity: 0;
       transform: translateY(12px);
-      margin-right: 0.28em;
       will-change: opacity, transform;
-    }
-
-    .hero-subtitle .separator {
-      color: var(--accent-ochre-bright);
-      font-weight: 600;
-      margin: 0 0.15em;
     }
 
     /* CTA Button: Explore →
@@ -437,41 +385,6 @@
 
     .hero-cta-btn:hover .cta-arrow {
       transform: translateX(4px);
-    }
-
-    /* Hero bottom status telemetry with Glassmorphism */
-    .hero-telemetry {
-      position: absolute;
-      bottom: 24px;
-      left: clamp(24px, 8vw, 120px);
-      right: clamp(24px, 8vw, 120px);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 12;
-      pointer-events: none;
-      font-family: var(--font-body);
-      font-size: 11px;
-      letter-spacing: 1px;
-      color: #888888;
-      background: rgba(14, 14, 14, 0.45);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: var(--radius);
-      padding: 10px 18px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
-    }
-
-    .telemetry-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .telemetry-val {
-      color: var(--text-secondary);
-      font-weight: 500;
     }
 
 
@@ -654,10 +567,11 @@
       }
       .hero-cta-btn {
         width: 100%;
+        max-width: 260px;
         justify-content: center;
       }
-      .loader-box {
-        padding: 22px 18px;
+      .liquid-svg-wrapper {
+        max-width: 90vw;
       }
     }
 
@@ -669,7 +583,7 @@
       .hero-headline {
         clip-path: inset(0% 0 0 0) !important;
       }
-      .hero-subtitle .word {
+      .hero-motto {
         opacity: 1 !important;
         transform: none !important;
       }
@@ -677,48 +591,48 @@
         opacity: 1 !important;
         transform: none !important;
       }
-      .status-dot {
-        animation: none !important;
-      }
     }
   </style>
 </head>
 <body>
 
   <!-- ==========================================================================
-       DEVELOPER TERMINAL PRELOADER
+       CENTERED ITSA LIQUID WATER / WAVE FILLING PRELOADER
        ========================================================================== -->
   <div id="preloader" aria-live="polite">
-    <div class="loader-box">
-      <div class="loader-header">
-        <div class="loader-title">
-          <span class="loader-indicator"></span>
-          <span>KERNEL://BOOT</span>
-        </div>
-        <div class="loader-system-tag">ITSA_SLRTCE // 2026</div>
-      </div>
-      <div class="loader-terminal-lines" id="terminal-lines">
-        <div class="terminal-line" id="term-line-1">
-          <span class="terminal-prompt">&gt;</span>
-          <span>Initializing Three.js spatial view...</span>
-          <span class="terminal-status-ok">[OK]</span>
-        </div>
-        <div class="terminal-line" id="term-line-2">
-          <span class="terminal-prompt">&gt;</span>
-          <span>Synthesizing 42 glassmorphic syntax nodes...</span>
-          <span class="terminal-status-ok">[LOADED]</span>
-        </div>
-        <div class="terminal-line" id="term-line-3">
-          <span class="terminal-prompt">&gt;</span>
-          <span>Establishing SLRTCE core protocols...</span>
-          <span class="terminal-status-ok">[READY]</span>
-        </div>
-      </div>
-      <div class="loader-progress-wrap">
-        <div class="loader-track">
-          <div class="loader-fill" id="loader-progress-fill"></div>
-        </div>
-        <div class="loader-percentage" id="loader-percent-num">0%</div>
+    <div class="liquid-preloader-container">
+      <div class="liquid-svg-wrapper">
+        <svg class="liquid-loader-svg" viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ITSA Loading Animation">
+          <defs>
+            <!-- Vibrant Ochre to Gold Liquid Gradient -->
+            <linearGradient id="liquid-gradient" x1="0%" y1="100%" x2="0%" y2="0%">
+              <stop offset="0%" stop-color="#C8861A" />
+              <stop offset="55%" stop-color="#E59B24" />
+              <stop offset="100%" stop-color="#FFAE33" />
+            </linearGradient>
+
+            <!-- Text Clip Path strictly shaped as ITSA in Bevan font -->
+            <clipPath id="itsa-water-clip">
+              <text x="350" y="165" text-anchor="middle" font-family="'Bevan', Georgia, serif" font-weight="700" font-size="140" letter-spacing="6">ITSA</text>
+            </clipPath>
+          </defs>
+
+          <!-- 1. Background ghost letters (translucent outline & subtle fill) -->
+          <text class="liquid-ghost-text" x="350" y="165" text-anchor="middle" font-family="'Bevan', Georgia, serif" font-weight="700" font-size="140" letter-spacing="6">ITSA</text>
+
+          <!-- 2. Rising Liquid Water Wave clipped strictly to ITSA -->
+          <g clip-path="url(#itsa-water-clip)">
+            <g id="liquid-water-group" transform="translate(0, 190)">
+              <!-- Back wave with phase offset -->
+              <path class="wave-back" d="M -700 0 Q -525 18 -350 0 T 0 0 T 350 0 T 700 0 T 1050 0 T 1400 0 L 1400 300 L -700 300 Z" fill="#996310" opacity="0.65" />
+              <!-- Front wave -->
+              <path class="wave-front" d="M -700 0 Q -525 -18 -350 0 T 0 0 T 350 0 T 700 0 T 1050 0 T 1400 0 L 1400 300 L -700 300 Z" fill="url(#liquid-gradient)" opacity="0.95" />
+            </g>
+          </g>
+
+          <!-- 3. Specular inner highlight rim on ITSA -->
+          <text class="liquid-rim-text" x="350" y="165" text-anchor="middle" font-family="'Bevan', Georgia, serif" font-weight="700" font-size="140" letter-spacing="6">ITSA</text>
+        </svg>
       </div>
     </div>
   </div>
@@ -741,19 +655,25 @@
   <main>
     <section class="hero-container" id="hero">
       <div class="hero-content">
-        <!-- Headline: ITSA (Main Highlight) -->
+        <!-- Headline: INFORMATION TECHNOLOGY STUDENT ASSOCIATION (Highlight in center) -->
         <div class="hero-headline-wrap">
-          <h1 class="hero-headline" id="hero-headline">ITSA</h1>
+          <h1 class="hero-headline" id="hero-headline" aria-label="Information Technology Student Association">
+            <span class="headline-line line-top">
+              <span class="headline-word word-information">INFORMATION</span>
+            </span>
+            <span class="headline-line line-middle">
+              <span class="headline-word word-technology">TECHNOLOGY</span>
+              <span class="headline-word word-student">STUDENT</span>
+            </span>
+            <span class="headline-line line-bottom">
+              <span class="headline-word word-association">ASSOCIATION</span>
+            </span>
+          </h1>
         </div>
 
-        <!-- Subtitle: Information Technology Student Association · SLRTCE -->
-        <p class="hero-subtitle" id="hero-subtitle" aria-label="Information Technology Student Association · SLRTCE">
-          Information Technology Student Association <span class="separator">·</span> SLRTCE
-        </p>
-
-        <!-- Motto: MAKE IT HAPPEN -->
+        <!-- Subtitle under headline: Make it happen -->
         <div class="hero-motto" id="hero-motto">
-          <span>// MAKE IT HAPPEN</span>
+          <span>Make it happen</span>
         </div>
 
         <!-- CTA: Explore → -->
@@ -762,26 +682,6 @@
             <span>Explore</span>
             <span class="cta-arrow" aria-hidden="true">→</span>
           </a>
-        </div>
-      </div>
-
-      <!-- Real-time Hero Telemetry Indicators -->
-      <div class="hero-telemetry" aria-hidden="true">
-        <div class="telemetry-item">
-          <span>ENV:</span>
-          <span class="telemetry-val">PRODUCTION</span>
-        </div>
-        <div class="telemetry-item">
-          <span>LATENCY:</span>
-          <span class="telemetry-val">0.3ms</span>
-        </div>
-        <div class="telemetry-item">
-          <span>GLASS_NODES:</span>
-          <span class="telemetry-val" id="node-count-display">42</span>
-        </div>
-        <div class="telemetry-item">
-          <span>CAM_Z:</span>
-          <span class="telemetry-val" id="cam-z-display">200.0</span>
         </div>
       </div>
 
@@ -911,16 +811,12 @@
       }
 
       /* ------------------------------------------------------------------------
-         3. SUITABLE DEVELOPER BOOT PRELOADER SEQUENCE
-         Simulates an authentic terminal boot and seamlessly transitions into hero
+         3. ITSA LIQUID WATER / WAVE FILLING PRELOADER SEQUENCE
+         Simulates liquid rising through the letters ITSA, then reveals hero
          ------------------------------------------------------------------------ */
       function initPreloader(onCompleteCallback) {
         const preloader = document.getElementById('preloader');
-        const fillBar = document.getElementById('loader-progress-fill');
-        const percentNum = document.getElementById('loader-percent-num');
-        const line1 = document.getElementById('term-line-1');
-        const line2 = document.getElementById('term-line-2');
-        const line3 = document.getElementById('term-line-3');
+        const waterGroup = document.getElementById('liquid-water-group');
 
         if (prefersReducedMotion) {
           if (preloader) preloader.style.display = 'none';
@@ -931,10 +827,10 @@
         const bootObj = { progress: 0 };
         const tl = gsap.timeline({
           onComplete: () => {
-            // Slick vertical clip-path reveal of the hero scene behind
+            // Elegant curtain lift revealing the centered hero scene
             gsap.to(preloader, {
               clipPath: 'inset(0 0 100% 0)',
-              duration: 0.85,
+              duration: 0.9,
               ease: 'power4.inOut',
               onComplete: () => {
                 preloader.style.display = 'none';
@@ -944,127 +840,154 @@
           }
         });
 
-        // Line 1 reveal
-        tl.to(line1, { opacity: 1, y: 0, duration: 0.2, ease: 'power2.out' }, 0.05);
-
-        // Progress bar 0 -> 42%
-        tl.to(bootObj, {
-          progress: 42,
-          duration: 0.45,
-          ease: 'power1.inOut',
-          onUpdate: () => {
-            const val = Math.floor(bootObj.progress);
-            fillBar.style.width = val + '%';
-            percentNum.textContent = val + '%';
-          }
-        }, 0.1);
-
-        // Line 2 reveal
-        tl.to(line2, { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out' }, 0.45);
-
-        // Progress bar 42 -> 86%
-        tl.to(bootObj, {
-          progress: 86,
-          duration: 0.4,
-          ease: 'power2.inOut',
-          onUpdate: () => {
-            const val = Math.floor(bootObj.progress);
-            fillBar.style.width = val + '%';
-            percentNum.textContent = val + '%';
-          }
-        }, 0.55);
-
-        // Line 3 reveal
-        tl.to(line3, { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out' }, 0.85);
-
-        // Progress bar 86 -> 100%
+        // Animate liquid rising smoothly through ITSA from 0% (y = 190) to 100% (y = 38)
         tl.to(bootObj, {
           progress: 100,
-          duration: 0.3,
-          ease: 'power3.out',
+          duration: 2.0,
+          ease: 'power2.inOut',
           onUpdate: () => {
-            const val = Math.floor(bootObj.progress);
-            fillBar.style.width = val + '%';
-            percentNum.textContent = val + '%';
+            const p = bootObj.progress;
+            const yVal = 190 - (p / 100) * 152; // 190 -> 38
+            if (waterGroup) {
+              waterGroup.setAttribute('transform', 'translate(0, ' + yVal + ')');
+            }
           }
-        }, 0.95);
+        });
 
-        tl.to({}, { duration: 0.2 }); // Brief hold at 100%
+        tl.to({}, { duration: 0.2 }); // Subtle hold at 100% fill
       }
 
       /* ------------------------------------------------------------------------
-         4. HERO ENTRANCE ANIMATIONS (CLIP-PATH & WORD-BY-WORD STAGGER)
+         4. HERO ENTRANCE ANIMATIONS (4-WAY COLLISION WITH CLEAN BOUNDARY IMPACT)
+         - INFORMATION: Drops from Top
+         - TECHNOLOGY:  Rushes in from Left
+         - STUDENT:     Rushes in from Right
+         - ASSOCIATION: Rises from Bottom
+         - Clean collision: TECHNOLOGY 'Y' meets STUDENT 'S' with crisp recoil bounce
+         - No letter overlap at any point in the animation
+         - Followed by 'Make it happen' motto & CTA button
          ------------------------------------------------------------------------ */
       function initHeroEntrance() {
-        const headline = document.getElementById('hero-headline');
-        const subtitleEl = document.getElementById('hero-subtitle');
+        const wordInfo = document.querySelector('.word-information');
+        const wordTech = document.querySelector('.word-technology');
+        const wordStudent = document.querySelector('.word-student');
+        const wordAssoc = document.querySelector('.word-association');
         const mottoEl = document.getElementById('hero-motto');
         const ctaWrap = document.getElementById('hero-cta');
 
-        subtitleEl.innerHTML = `
-          <span class="word">Information</span>
-          <span class="word">Technology</span>
-          <span class="word">Student</span>
-          <span class="word">Association</span>
-          <span class="separator">·</span>
-          <span class="word">SLRTCE</span>
-        `;
-        const words = subtitleEl.querySelectorAll('.word');
-        const separator = subtitleEl.querySelector('.separator');
-
         if (prefersReducedMotion) {
-          headline.style.clipPath = 'inset(0% 0 0 0)';
-          words.forEach(w => { w.style.opacity = '1'; w.style.transform = 'none'; });
-          if (separator) separator.style.opacity = '1';
+          [wordInfo, wordTech, wordStudent, wordAssoc].forEach(el => {
+            if (el) { el.style.opacity = '1'; el.style.transform = 'none'; }
+          });
           if (mottoEl) { mottoEl.style.opacity = '1'; mottoEl.style.transform = 'none'; }
-          ctaWrap.style.opacity = '1';
-          ctaWrap.style.transform = 'none';
+          if (ctaWrap) { ctaWrap.style.opacity = '1'; ctaWrap.style.transform = 'none'; }
           return;
         }
 
-        const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+        const tl = gsap.timeline();
 
-        // Clip-path reveal for headline: inset(100% 0 0 0) -> inset(0% 0 0 0)
-        tl.to(headline, {
-          clipPath: 'inset(0% 0 0 0)',
-          duration: 1.15,
-          delay: 0.1,
-        });
+        // Initial positions (clean offscreen/offset start)
+        if (wordInfo) gsap.set(wordInfo, { y: -170, opacity: 0, scale: 0.95 });
+        if (wordTech) gsap.set(wordTech, { x: -280, opacity: 0, scale: 0.95 });
+        if (wordStudent) gsap.set(wordStudent, { x: 280, opacity: 0, scale: 0.95 });
+        if (wordAssoc) gsap.set(wordAssoc, { y: 170, opacity: 0, scale: 0.95 });
 
-        // Word-by-word subtitle reveal with 0.08s stagger
-        tl.to(words, {
+        // Phase 1: Fast inwards rush (0 -> 0.46s)
+        // Technology reaches +4px (just touching edge), Student reaches -4px, then both bounce back cleanly
+        tl.to(wordInfo, {
+          y: 4,
           opacity: 1,
-          y: 0,
-          duration: 0.7,
-          stagger: 0.08,
-          ease: 'power3.out',
-        }, '-=0.45');
+          scale: 1,
+          duration: 0.46,
+          ease: 'power3.in'
+        }, 0);
 
-        if (separator) {
-          tl.fromTo(separator, 
-            { opacity: 0, scale: 0.5 }, 
-            { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(2)' }, 
-            '-=0.5'
-          );
-        }
+        tl.to(wordAssoc, {
+          y: -4,
+          opacity: 1,
+          scale: 1,
+          duration: 0.46,
+          ease: 'power3.in'
+        }, 0);
 
-        // Motto reveal
+        tl.to(wordTech, {
+          x: 4, // Just kisses the boundary at the gap between Y and S
+          opacity: 1,
+          scale: 1,
+          duration: 0.46,
+          ease: 'power3.in'
+        }, 0);
+
+        tl.to(wordStudent, {
+          x: -4, // Just kisses the boundary
+          opacity: 1,
+          scale: 1,
+          duration: 0.46,
+          ease: 'power3.in'
+        }, 0);
+
+        // Phase 2: Instant elastic collision recoil (elastic bounce-back outwards, then settle at 0)
+        // Notice: Recoil goes OUTWARDS (negative for tech, positive for student) so they NEVER overlap!
+        tl.to(wordTech, {
+          keyframes: [
+            { x: -16, duration: 0.16, ease: 'power2.out' }, // Elastic recoil rebound to the left
+            { x: 3, duration: 0.14, ease: 'power2.inOut' },  // Secondary micro-settle
+            { x: 0, duration: 0.18, ease: 'power3.out' }    // Rest at home position
+          ]
+        }, 0.46);
+
+        tl.to(wordStudent, {
+          keyframes: [
+            { x: 16, duration: 0.16, ease: 'power2.out' }, // Elastic recoil rebound to the right
+            { x: -3, duration: 0.14, ease: 'power2.inOut' }, // Secondary micro-settle
+            { x: 0, duration: 0.18, ease: 'power3.out' }    // Rest at home position
+          ]
+        }, 0.46);
+
+        tl.to(wordInfo, {
+          keyframes: [
+            { y: -12, duration: 0.16, ease: 'power2.out' }, // Recoil upwards
+            { y: 2, duration: 0.14, ease: 'power2.inOut' },
+            { y: 0, duration: 0.18, ease: 'power3.out' }
+          ]
+        }, 0.46);
+
+        tl.to(wordAssoc, {
+          keyframes: [
+            { y: 12, duration: 0.16, ease: 'power2.out' },  // Recoil downwards
+            { y: -2, duration: 0.14, ease: 'power2.inOut' },
+            { y: 0, duration: 0.18, ease: 'power3.out' }
+          ]
+        }, 0.46);
+
+        // Impact spark shockwave / micro-vibration on the headline container
+        tl.to('.hero-headline', {
+          keyframes: [
+            { scale: 1.03, duration: 0.08, ease: 'power1.out' },
+            { scale: 0.99, duration: 0.1, ease: 'power1.inOut' },
+            { scale: 1, duration: 0.12, ease: 'power2.out' }
+          ]
+        }, 0.46);
+
+        // Motto reveal: Make it happen
         if (mottoEl) {
           tl.to(mottoEl, {
             opacity: 1,
             y: 0,
-            duration: 0.5,
-            ease: 'power3.out',
-          }, '-=0.35');
+            duration: 0.65,
+            ease: 'back.out(1.8)',
+          }, '-=0.2');
         }
 
-        // CTA Button reveal
-        tl.to(ctaWrap, {
-          opacity: 1,
-          y: 0,
-          duration: 0.65,
-          ease: 'power3.out',
-        }, '-=0.25');
+        // CTA Button reveal: Explore →
+        if (ctaWrap) {
+          tl.to(ctaWrap, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power3.out',
+          }, '-=0.3');
+        }
       }
 
       /* ------------------------------------------------------------------------
@@ -1128,7 +1051,26 @@
         { text: 'go func() { listenAndServe() }();', type: 'go' },
         { text: 'def build_tomorrow(students):', type: 'python' },
         { text: 'SELECT * FROM minds WHERE curiosity = true;', type: 'sql' },
-        { text: '// 42 glassmorphic syntax nodes', type: 'comment' }
+
+        // Additional Cloud, Systems, Web3 & Algorithms
+        { text: 'kubectl apply -f cluster-prod.yaml', type: 'terminal' },
+        { text: 'terraform apply -auto-approve', type: 'terminal' },
+        { text: 'const socket = new WebSocket("wss://itsa/live");', type: 'js' },
+        { text: 'let buffer = Vec::with_capacity(4096);', type: 'rust' },
+        { text: 'model = NeuralNetwork(layers=[128, 64]);', type: 'python' },
+        { text: 'const entropy = computeSystemEntropy(stream);', type: 'js' },
+        { text: 'export const ARCHITECTS = new Set(["SLRTCE"]);', type: 'js' },
+        { text: 'fetch("/api/hackathon/register").then(submit);', type: 'js' },
+        { text: 'fn solve_problem<T: Logic>(input: T) -> Solution', type: 'rust' },
+        { text: 'const pipeline = createStreamPipeline();', type: 'js' },
+        { text: 'pragma solidity ^0.8.20;', type: 'solidity' },
+        { text: 'app.use(cors({ origin: "itsa.slrtce.in" }));', type: 'js' },
+        { text: 'optimizer.zero_grad(); loss.backward();', type: 'python' },
+        { text: 'new Promise((resolve) => craft(resolve));', type: 'js' },
+        { text: 'git remote add upstream github.com/itsa', type: 'terminal' },
+        { text: 'gh pr merge --auto --squash', type: 'terminal' },
+        { text: 'npx create-next-app@latest itsa-hub', type: 'terminal' },
+        { text: '// 62 glassmorphic syntax nodes', type: 'comment' }
       ];
 
       /* ------------------------------------------------------------------------
@@ -1300,8 +1242,6 @@
          Spacious layout preventing clutter, refined scale, clear negative space
          ------------------------------------------------------------------------ */
       const canvasEl = document.getElementById('three-viewport');
-      const camZDisplay = document.getElementById('cam-z-display');
-      const nodeCountDisplay = document.getElementById('node-count-display');
 
       let scene, camera, renderer;
       let fragmentGroup;
@@ -1347,20 +1287,16 @@
         const isMobile = window.innerWidth < 768;
         const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
         
-        // Curated counts: 42 on desktop, 26 on tablet, 18 on mobile (avoids clutter!)
-        const totalCount = isMobile ? 18 : (isTablet ? 26 : CODE_SNIPPETS.length);
-
-        if (nodeCountDisplay) {
-          nodeCountDisplay.textContent = totalCount;
-        }
+        // Curated counts: 62 on desktop, 38 on tablet, 24 on mobile
+        const totalCount = isMobile ? 24 : (isTablet ? 38 : CODE_SNIPPETS.length);
 
         for (let i = 0; i < totalCount; i++) {
           const snippet = CODE_SNIPPETS[i % CODE_SNIPPETS.length];
           const texData = createCodeTexture(snippet, false);
 
-          // Refined, tasteful plane geometry sizing (0.17x — clean, not too big)
-          const planeWidth = texData.width * 0.17;
-          const planeHeight = texData.height * 0.17;
+          // Sized up slightly (0.24x) for bold, crisp readability in 3D space
+          const planeWidth = texData.width * 0.24;
+          const planeHeight = texData.height * 0.24;
           const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
 
           // 3 Depth Tiers: well-spaced along Z
@@ -1389,20 +1325,18 @@
           const scaleMul = scaleCompensation * (0.92 + Math.random() * 0.14);
 
           // Wide spatial dispersion preventing overlapping clumps
-          let xPos = (Math.random() - 0.48) * 540;
-          let yPos = (Math.random() - 0.5) * 310;
+          let xPos = (Math.random() - 0.5) * 580;
+          let yPos = (Math.random() - 0.5) * 330;
 
-          // Generous Negative Space around the Left-of-Center Hero Headline
-          if (zPos > -90) {
-            const inHeadlineX = xPos > -145 && xPos < 45;
-            const inHeadlineY = yPos > -55 && yPos < 55;
-            if (inHeadlineX && inHeadlineY) {
-              if (Math.random() > 0.45) {
-                xPos = 60 + Math.random() * 210; // Disperse to right
-              } else if (Math.random() > 0.5) {
-                yPos = 75 + Math.random() * 85;  // Disperse to top
+          // Generous Negative Space around the Centered Hero Headline
+          if (zPos > -80) {
+            const inCenterX = Math.abs(xPos) < 170;
+            const inCenterY = Math.abs(yPos) < 70;
+            if (inCenterX && inCenterY) {
+              if (Math.random() > 0.5) {
+                xPos = (xPos >= 0 ? 1 : -1) * (180 + Math.random() * 115);
               } else {
-                yPos = -75 - Math.random() * 80; // Disperse to bottom
+                yPos = (yPos >= 0 ? 1 : -1) * (85 + Math.random() * 85);
               }
             }
           }
@@ -1496,9 +1430,6 @@
 
             // Camera pulls back z: 200 -> 350
             cameraDrift.z = 200 + progress * 150;
-            if (camZDisplay) {
-              camZDisplay.textContent = cameraDrift.z.toFixed(1);
-            }
 
             // Code opacity reduces gently on scroll
             const opacityFactor = Math.max(0.18, 1 - progress * 0.78);
