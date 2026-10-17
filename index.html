@@ -1,18 +1,1627 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ITSA — Information Technology Student Association | SLRTCE</title>
-    <meta name="description" content="Official website of the Information Technology Student Association (ITSA) at Shree L. R. Tiwari College of Engineering (SLRTCE). MAKE IT HAPPEN." />
-    <link rel="icon" type="image/png" href="/assets/itsa-logo.png" />
-    <!-- Preconnect to Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ITSA — Information Technology Student Association | SLRTCE</title>
+  <meta name="description" content="Information Technology Student Association (ITSA) at Shree L. R. Tiwari College of Engineering (SLRTCE). MAKE IT HAPPEN." />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/itsa-logo.png" />
+
+  <!-- Google Fonts: Bevan (Highlights), Archivo Black (Headings & Body), IBM Plex Mono (Code) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;700&family=Bevan:ital@0;1&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <!-- External CDNs: Three.js r128, GSAP 3.12, ScrollTrigger, Lenis -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;700&family=Bevan:ital@0;1&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+    /* ==========================================================================
+       CSS RESET & BASE DESIGN TOKENS
+       Brand: Dark (#0A0A0A), Vibrant Ochre Accent (#C8861A / #E59B24), Text (#F5F5F5)
+       Typography: Bevan (Highlights), Archivo Black (Headings/Body), IBM Plex Mono (Code)
+       Corners: Max 4px border-radius
+       ========================================================================== */
+    :root {
+      --bg-color: #0A0A0A;
+      --accent-ochre: #C8861A;
+      --accent-ochre-bright: #E59B24;
+      --accent-ochre-dim: rgba(200, 134, 26, 0.16);
+      --accent-ochre-glow: rgba(229, 155, 36, 0.4);
+      --text-main: #FFFFFF;
+      --text-secondary: #F0F0F0;
+      --text-muted: #8E8E8E;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-ochre: rgba(200, 134, 26, 0.28);
+      --font-display: 'Bevan', Georgia, serif;
+      --font-body: 'Archivo Black', 'Arial Black', sans-serif;
+      --font-text: 'Archivo', sans-serif;
+      --font-code: 'IBM Plex Mono', 'JetBrains Mono', monospace;
+      --radius: 4px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      scroll-behavior: auto;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ==========================================================================
+       SUITABLE DEVELOPER TERMINAL PRELOADER
+       High-performance, thematic loader simulating compiler & spatial initialization
+       ========================================================================== */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #0A0A0A;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      user-select: none;
+      clip-path: inset(0 0 0 0);
+      will-change: clip-path, transform, opacity;
+    }
+
+    .loader-box {
+      width: 100%;
+      max-width: 480px;
+      background: rgba(16, 16, 16, 0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 24px rgba(200, 134, 26, 0.1);
+    }
+
+    .loader-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-family: var(--font-code);
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    .loader-title {
+      color: var(--accent-ochre-bright);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .loader-indicator {
+      width: 7px;
+      height: 7px;
+      background: var(--accent-ochre-bright);
+      border-radius: 50%;
+      display: inline-block;
+      animation: blinkLoader 1s infinite alternate;
+    }
+
+    @keyframes blinkLoader {
+      0% { opacity: 0.3; }
+      100% { opacity: 1; }
+    }
+
+    .loader-system-tag {
+      color: var(--text-muted);
+    }
+
+    .loader-terminal-lines {
+      font-family: var(--font-code);
+      font-size: 12px;
+      line-height: 1.7;
+      min-height: 76px;
+      margin-bottom: 22px;
+      color: #A0A0A0;
+    }
+
+    .terminal-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      transform: translateY(4px);
+    }
+
+    .terminal-prompt {
+      color: var(--accent-ochre-bright);
+    }
+
+    .terminal-status-ok {
+      color: #6FCF97;
+      margin-left: auto;
+      font-size: 11px;
+    }
+
+    .loader-progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .loader-track {
+      flex: 1;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .loader-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-ochre), var(--accent-ochre-bright));
+      border-radius: 2px;
+      box-shadow: 0 0 10px var(--accent-ochre-glow);
+      transition: width 0.08s ease-out;
+    }
+
+    .loader-percentage {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent-ochre-bright);
+      min-width: 46px;
+      text-align: right;
+    }
+
+    /* Screen Reader Only Utility */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* ==========================================================================
+       THREE.JS CANVAS
+       Fixed behind the hero and sized to 100vh viewport
+       ========================================================================== */
+    #three-viewport {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+      display: block;
+    }
+
+    /* Background grid pattern for subtle perspective guidance */
+    .hero-grid-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Top Navigation bar */
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 72px;
+      padding: 0 clamp(20px, 5vw, 64px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 50;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(10, 10, 10, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .nav-brand-badge {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-ochre-bright);
+      border: 1px solid var(--accent-ochre-bright);
+      padding: 3px 8px;
+      border-radius: var(--radius);
+      letter-spacing: 1px;
+    }
+
+    .nav-brand-name {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ==========================================================================
+       HERO SECTION
+       Positioned slightly left of center, vertically centered
+       ========================================================================== */
+    .hero-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 640px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 clamp(24px, 8vw, 120px);
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 820px;
+      z-index: 12;
+      pointer-events: auto;
+    }
+
+    /* Headline: ITSA (Main Highlight)
+       - Bevan Slab Display, Weight 700
+       - Scaled with clamp
+       - Color: #FFFFFF
+       - Clip-path animation reveal: inset(100% 0 0 0) to inset(0% 0 0 0) */
+    .hero-headline-wrap {
+      overflow: hidden;
+      padding-bottom: 8px;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(64px, 12vw, 130px);
+      line-height: 0.95;
+      letter-spacing: -1px;
+      color: var(--text-main);
+      margin: 0;
+      text-transform: uppercase;
+      clip-path: inset(100% 0 0 0);
+      will-change: clip-path;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .hero-motto {
+      display: inline-block;
+      margin-top: 14px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      color: var(--accent-ochre-bright);
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(10px);
+      will-change: opacity, transform;
+    }
+
+    /* Subtitle: Information Technology Student Association · SLRTCE
+       - Archivo Black, Weight 400
+       - Color: #888888
+       - GSAP word-by-word reveal stagger */
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(14px, 1.8vw, 17px);
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      line-height: 1.5;
+      color: var(--text-muted);
+      margin-top: 24px;
+      max-width: 620px;
+    }
+
+    .hero-subtitle .word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(12px);
+      margin-right: 0.28em;
+      will-change: opacity, transform;
+    }
+
+    .hero-subtitle .separator {
+      color: var(--accent-ochre-bright);
+      font-weight: 600;
+      margin: 0 0.15em;
+    }
+
+    /* CTA Button: Explore →
+       - Transparent background
+       - 1px ochre border
+       - Ochre text
+       - Sharp 4px corners
+       - Subtle hover interaction */
+    .hero-cta-wrap {
+      margin-top: 36px;
+      opacity: 0;
+      transform: translateY(16px);
+      will-change: opacity, transform;
+    }
+
+    .hero-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: transparent;
+      border: 1px solid var(--accent-ochre-bright);
+      border-radius: var(--radius);
+      color: var(--accent-ochre-bright);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      text-decoration: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+    }
+
+    .hero-cta-btn:hover {
+      background-color: var(--accent-ochre-dim);
+      border-color: #FFAE33;
+      color: #FFC064;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(229, 155, 36, 0.22);
+    }
+
+    .hero-cta-btn:active {
+      transform: translateY(0);
+    }
+
+    .hero-cta-btn .cta-arrow {
+      font-family: var(--font-body);
+      display: inline-block;
+      transition: transform 0.25s ease;
+    }
+
+    .hero-cta-btn:hover .cta-arrow {
+      transform: translateX(4px);
+    }
+
+    /* Hero bottom status telemetry with Glassmorphism */
+    .hero-telemetry {
+      position: absolute;
+      bottom: 24px;
+      left: clamp(24px, 8vw, 120px);
+      right: clamp(24px, 8vw, 120px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 12;
+      pointer-events: none;
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: #888888;
+      background: rgba(14, 14, 14, 0.45);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius);
+      padding: 10px 18px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    .telemetry-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .telemetry-val {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+
+    /* ==========================================================================
+       OVERVIEW & PILLARS SECTION (Destination for CTA scroll)
+       ========================================================================== */
+    .section-overview {
+      position: relative;
+      width: 100%;
+      background-color: var(--bg-color);
+      z-index: 15;
+      padding: 120px clamp(24px, 8vw, 120px) 140px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .overview-header {
+      max-width: 680px;
+      margin-bottom: 64px;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--accent-ochre-bright);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      font-weight: 400;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 400;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      color: var(--text-main);
+      margin-bottom: 18px;
+    }
+
+    .section-desc {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: 0.2px;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    /* 3 Pillars Grid */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 72px;
+    }
+
+    .pillar-card {
+      background: rgba(18, 18, 18, 0.7);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 36px 30px;
+      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .pillar-card:hover {
+      border-color: rgba(229, 155, 36, 0.45);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .pillar-index {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--accent-ochre-bright);
+      letter-spacing: 1.5px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .pillar-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+
+    .pillar-text {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.2px;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    /* Terminal Metrics Bar */
+    .metrics-bar {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      background: rgba(14, 14, 14, 0.85);
+      padding: 24px 32px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+    }
+
+    .metric-col {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .metric-num {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 3.5vw, 38px);
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      color: var(--accent-ochre-bright);
+    }
+
+    .metric-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    /* Site Footer */
+    .site-footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 40px clamp(24px, 8vw, 120px);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      background: #0A0A0A;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      color: #888888;
+      z-index: 15;
+      position: relative;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-ochre {
+      color: var(--accent-ochre-bright);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE ADAPTATIONS
+       ========================================================================== */
+    @media (max-width: 900px) {
+      .hero-telemetry {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-container {
+        padding: 0 20px;
+      }
+      .site-nav {
+        padding: 0 20px;
+      }
+      .section-overview {
+        padding: 80px 20px 100px;
+      }
+      .hero-cta-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .loader-box {
+        padding: 22px 18px;
+      }
+    }
+
+    /* Accessibility: Respect Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      #preloader {
+        display: none !important;
+      }
+      .hero-headline {
+        clip-path: inset(0% 0 0 0) !important;
+      }
+      .hero-subtitle .word {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .hero-cta-wrap {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .status-dot {
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       DEVELOPER TERMINAL PRELOADER
+       ========================================================================== -->
+  <div id="preloader" aria-live="polite">
+    <div class="loader-box">
+      <div class="loader-header">
+        <div class="loader-title">
+          <span class="loader-indicator"></span>
+          <span>KERNEL://BOOT</span>
+        </div>
+        <div class="loader-system-tag">ITSA_SLRTCE // 2026</div>
+      </div>
+      <div class="loader-terminal-lines" id="terminal-lines">
+        <div class="terminal-line" id="term-line-1">
+          <span class="terminal-prompt">&gt;</span>
+          <span>Initializing Three.js spatial view...</span>
+          <span class="terminal-status-ok">[OK]</span>
+        </div>
+        <div class="terminal-line" id="term-line-2">
+          <span class="terminal-prompt">&gt;</span>
+          <span>Synthesizing 42 glassmorphic syntax nodes...</span>
+          <span class="terminal-status-ok">[LOADED]</span>
+        </div>
+        <div class="terminal-line" id="term-line-3">
+          <span class="terminal-prompt">&gt;</span>
+          <span>Establishing SLRTCE core protocols...</span>
+          <span class="terminal-status-ok">[READY]</span>
+        </div>
+      </div>
+      <div class="loader-progress-wrap">
+        <div class="loader-track">
+          <div class="loader-fill" id="loader-progress-fill"></div>
+        </div>
+        <div class="loader-percentage" id="loader-percent-num">0%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Three.js Canvas Container -->
+  <canvas id="three-viewport" aria-hidden="true"></canvas>
+
+  <!-- Background Decorative Grid Overlay -->
+  <div class="hero-grid-overlay" aria-hidden="true"></div>
+
+  <!-- Navigation Bar -->
+  <header class="site-nav">
+    <a href="#" class="nav-brand" aria-label="ITSA SLRTCE Home">
+      <span class="nav-brand-badge">ITSA</span>
+      <span class="nav-brand-name">SLRTCE</span>
+    </a>
+  </header>
+
+  <!-- Main Hero Section -->
+  <main>
+    <section class="hero-container" id="hero">
+      <div class="hero-content">
+        <!-- Headline: ITSA (Main Highlight) -->
+        <div class="hero-headline-wrap">
+          <h1 class="hero-headline" id="hero-headline">ITSA</h1>
+        </div>
+
+        <!-- Subtitle: Information Technology Student Association · SLRTCE -->
+        <p class="hero-subtitle" id="hero-subtitle" aria-label="Information Technology Student Association · SLRTCE">
+          Information Technology Student Association <span class="separator">·</span> SLRTCE
+        </p>
+
+        <!-- Motto: MAKE IT HAPPEN -->
+        <div class="hero-motto" id="hero-motto">
+          <span>// MAKE IT HAPPEN</span>
+        </div>
+
+        <!-- CTA: Explore → -->
+        <div class="hero-cta-wrap" id="hero-cta">
+          <a href="#overview" class="hero-cta-btn" id="cta-button" aria-label="Explore ITSA overview section">
+            <span>Explore</span>
+            <span class="cta-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Real-time Hero Telemetry Indicators -->
+      <div class="hero-telemetry" aria-hidden="true">
+        <div class="telemetry-item">
+          <span>ENV:</span>
+          <span class="telemetry-val">PRODUCTION</span>
+        </div>
+        <div class="telemetry-item">
+          <span>LATENCY:</span>
+          <span class="telemetry-val">0.3ms</span>
+        </div>
+        <div class="telemetry-item">
+          <span>GLASS_NODES:</span>
+          <span class="telemetry-val" id="node-count-display">42</span>
+        </div>
+        <div class="telemetry-item">
+          <span>CAM_Z:</span>
+          <span class="telemetry-val" id="cam-z-display">200.0</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Overview Section (Destination for CTA click & scroll proof) -->
+    <section class="section-overview" id="overview">
+      <div class="overview-header">
+        <span class="section-eyebrow">// CORE PILLARS</span>
+        <h2 class="section-title">ENGINEERING THE ARCHITECTS OF TOMORROW</h2>
+        <p class="section-desc">
+          The Information Technology Student Association bridges academia and high-impact engineering through hands-on technical environments, peer-driven innovation, and collaborative software craftsmanship.
+        </p>
+      </div>
+
+      <!-- 3 Pillars Cards -->
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <span class="pillar-index">01 / WORKSHOPS</span>
+          <h3 class="pillar-title">Deep Technical Sprints</h3>
+          <p class="pillar-text">
+            Hands-on immersions covering modern systems programming, cloud architecture, high-concurrency backends, and creative computing.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <span class="pillar-index">02 / HACKATHONS</span>
+          <h3 class="pillar-title">Annual Innovation Sprint</h3>
+          <p class="pillar-text">
+            36-hour flagship hackathons pitting engineering teams against real-world distributed systems, web3 protocols, and algorithmic challenges.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <span class="pillar-index">03 / OPEN SOURCE</span>
+          <h3 class="pillar-title">Collaborative Codebases</h3>
+          <p class="pillar-text">
+            Student-maintained projects powering campus automation, open knowledge repositories, and contributions to global developer tools.
+          </p>
+        </div>
+      </div>
+
+      <!-- Terminal Metrics -->
+      <div class="metrics-bar">
+        <div class="metric-col">
+          <span class="metric-num">500+</span>
+          <span class="metric-label">// ACTIVE STUDENT DEVELOPERS</span>
+        </div>
+        <div class="metric-col">
+          <span class="metric-num">32+</span>
+          <span class="metric-label">// ANNUAL TECHNICAL SESSIONS</span>
+        </div>
+        <div class="metric-col">
+          <span class="metric-num">100%</span>
+          <span class="metric-label">// STUDENT OPERATED INITIATIVES</span>
+        </div>
+        <div class="metric-col">
+          <span class="metric-num">2026</span>
+          <span class="metric-label">// SLRTCE IT ACADEMIC YEAR</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-left">
+      <span>&copy; 2026 ITSA &middot; Shree L. R. Tiwari College of Engineering</span>
+    </div>
+    <div class="footer-right">
+      <span>BUILT WITH <span class="footer-ochre">THREE.JS</span> &amp; <span class="footer-ochre">DEV PASSION</span></span>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       APPLICATION JAVASCRIPT
+       ========================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ------------------------------------------------------------------------
+         1. MOTION PREFERENCE CHECK
+         ------------------------------------------------------------------------ */
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ------------------------------------------------------------------------
+         2. LENIS SMOOTH SCROLL INITIALIZATION
+         ------------------------------------------------------------------------ */
+      gsap.registerPlugin(ScrollTrigger);
+
+      let lenis = null;
+      if (!prefersReducedMotion && typeof Lenis !== 'undefined') {
+        lenis = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          direction: 'vertical',
+          gestureDirection: 'vertical',
+          smooth: true,
+          smoothTouch: false,
+          touchMultiplier: 2,
+        });
+
+        lenis.on('scroll', ScrollTrigger.update);
+
+        gsap.ticker.add((time) => {
+          lenis.raf(time * 1000);
+        });
+
+        gsap.ticker.lagSmoothing(0);
+      }
+
+      // Smooth CTA anchor scroll handler
+      const ctaBtn = document.getElementById('cta-button');
+      if (ctaBtn) {
+        ctaBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = document.querySelector('#overview');
+          if (target) {
+            if (lenis) {
+              lenis.scrollTo(target, { offset: -60, duration: 1.4 });
+            } else {
+              target.scrollIntoView({ behavior: 'smooth' });
+            }
+          }
+        });
+      }
+
+      /* ------------------------------------------------------------------------
+         3. SUITABLE DEVELOPER BOOT PRELOADER SEQUENCE
+         Simulates an authentic terminal boot and seamlessly transitions into hero
+         ------------------------------------------------------------------------ */
+      function initPreloader(onCompleteCallback) {
+        const preloader = document.getElementById('preloader');
+        const fillBar = document.getElementById('loader-progress-fill');
+        const percentNum = document.getElementById('loader-percent-num');
+        const line1 = document.getElementById('term-line-1');
+        const line2 = document.getElementById('term-line-2');
+        const line3 = document.getElementById('term-line-3');
+
+        if (prefersReducedMotion) {
+          if (preloader) preloader.style.display = 'none';
+          if (onCompleteCallback) onCompleteCallback();
+          return;
+        }
+
+        const bootObj = { progress: 0 };
+        const tl = gsap.timeline({
+          onComplete: () => {
+            // Slick vertical clip-path reveal of the hero scene behind
+            gsap.to(preloader, {
+              clipPath: 'inset(0 0 100% 0)',
+              duration: 0.85,
+              ease: 'power4.inOut',
+              onComplete: () => {
+                preloader.style.display = 'none';
+                if (onCompleteCallback) onCompleteCallback();
+              }
+            });
+          }
+        });
+
+        // Line 1 reveal
+        tl.to(line1, { opacity: 1, y: 0, duration: 0.2, ease: 'power2.out' }, 0.05);
+
+        // Progress bar 0 -> 42%
+        tl.to(bootObj, {
+          progress: 42,
+          duration: 0.45,
+          ease: 'power1.inOut',
+          onUpdate: () => {
+            const val = Math.floor(bootObj.progress);
+            fillBar.style.width = val + '%';
+            percentNum.textContent = val + '%';
+          }
+        }, 0.1);
+
+        // Line 2 reveal
+        tl.to(line2, { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out' }, 0.45);
+
+        // Progress bar 42 -> 86%
+        tl.to(bootObj, {
+          progress: 86,
+          duration: 0.4,
+          ease: 'power2.inOut',
+          onUpdate: () => {
+            const val = Math.floor(bootObj.progress);
+            fillBar.style.width = val + '%';
+            percentNum.textContent = val + '%';
+          }
+        }, 0.55);
+
+        // Line 3 reveal
+        tl.to(line3, { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out' }, 0.85);
+
+        // Progress bar 86 -> 100%
+        tl.to(bootObj, {
+          progress: 100,
+          duration: 0.3,
+          ease: 'power3.out',
+          onUpdate: () => {
+            const val = Math.floor(bootObj.progress);
+            fillBar.style.width = val + '%';
+            percentNum.textContent = val + '%';
+          }
+        }, 0.95);
+
+        tl.to({}, { duration: 0.2 }); // Brief hold at 100%
+      }
+
+      /* ------------------------------------------------------------------------
+         4. HERO ENTRANCE ANIMATIONS (CLIP-PATH & WORD-BY-WORD STAGGER)
+         ------------------------------------------------------------------------ */
+      function initHeroEntrance() {
+        const headline = document.getElementById('hero-headline');
+        const subtitleEl = document.getElementById('hero-subtitle');
+        const mottoEl = document.getElementById('hero-motto');
+        const ctaWrap = document.getElementById('hero-cta');
+
+        subtitleEl.innerHTML = `
+          <span class="word">Information</span>
+          <span class="word">Technology</span>
+          <span class="word">Student</span>
+          <span class="word">Association</span>
+          <span class="separator">·</span>
+          <span class="word">SLRTCE</span>
+        `;
+        const words = subtitleEl.querySelectorAll('.word');
+        const separator = subtitleEl.querySelector('.separator');
+
+        if (prefersReducedMotion) {
+          headline.style.clipPath = 'inset(0% 0 0 0)';
+          words.forEach(w => { w.style.opacity = '1'; w.style.transform = 'none'; });
+          if (separator) separator.style.opacity = '1';
+          if (mottoEl) { mottoEl.style.opacity = '1'; mottoEl.style.transform = 'none'; }
+          ctaWrap.style.opacity = '1';
+          ctaWrap.style.transform = 'none';
+          return;
+        }
+
+        const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+
+        // Clip-path reveal for headline: inset(100% 0 0 0) -> inset(0% 0 0 0)
+        tl.to(headline, {
+          clipPath: 'inset(0% 0 0 0)',
+          duration: 1.15,
+          delay: 0.1,
+        });
+
+        // Word-by-word subtitle reveal with 0.08s stagger
+        tl.to(words, {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.08,
+          ease: 'power3.out',
+        }, '-=0.45');
+
+        if (separator) {
+          tl.fromTo(separator, 
+            { opacity: 0, scale: 0.5 }, 
+            { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(2)' }, 
+            '-=0.5'
+          );
+        }
+
+        // Motto reveal
+        if (mottoEl) {
+          tl.to(mottoEl, {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: 'power3.out',
+          }, '-=0.35');
+        }
+
+        // CTA Button reveal
+        tl.to(ctaWrap, {
+          opacity: 1,
+          y: 0,
+          duration: 0.65,
+          ease: 'power3.out',
+        }, '-=0.25');
+      }
+
+      /* ------------------------------------------------------------------------
+         5. CURATED DEVELOPER CODE SNIPPETS (42 CLEAN, UNCLUTTERED NODES)
+         Short, iconic fragments that provide visual depth without walls of text
+         ------------------------------------------------------------------------ */
+      const CODE_SNIPPETS = [
+        // Core required snippets
+        { text: 'const itsa = new Community();', type: 'js' },
+        { text: 'function buildFuture() {}', type: 'js' },
+        { text: 'import { creativity } from "technology";', type: 'js' },
+        { text: 'while (learning) { create(); }', type: 'js' },
+        { text: 'class Developer extends Student {}', type: 'js' },
+        { text: 'git commit -m "build something great"', type: 'terminal', hasCursor: true },
+        { text: 'npm run dev', type: 'terminal', hasCursor: true },
+        { text: 'const ideas = await buildSomething();', type: 'js' },
+        {
+          text: '<section class="innovation">\n  <h1>Build the future</h1>\n</section>',
+          type: 'html',
+          lines: ['<section class="innovation">', '  <h1>Build the future</h1>', '</section>']
+        },
+        {
+          text: '.developer {\n  creativity: infinite;\n  color: #C8861A;\n}',
+          type: 'css',
+          lines: ['.developer {', '  creativity: infinite;', '  color: #C8861A;', '}']
+        },
+
+        // Concise Terminal & Architecture
+        { text: 'docker compose up -d', type: 'terminal' },
+        { text: 'git push origin main', type: 'terminal' },
+        { text: 'cargo build --release', type: 'terminal' },
+        { text: 'pnpm add ambition', type: 'terminal' },
+        { text: 'tail -f /var/log/itsa/ambition.log', type: 'terminal', hasCursor: true },
+        { text: 'echo "MAKE IT HAPPEN"', type: 'terminal', hasCursor: true },
+        { text: 'chmod +x deploy_future.sh', type: 'terminal' },
+        { text: 'python -m itsa.hackathon --start', type: 'terminal' },
+        { text: 'systemctl start itsa-core', type: 'terminal' },
+        { text: 'curl -X POST api.slrtce.in/itsa', type: 'terminal' },
+        { text: 'git checkout -b feature/infinite', type: 'terminal' },
+
+        // Clean Modern JS / TS / Systems
+        { text: 'interface Future<T> extends Innovation<T>', type: 'ts' },
+        { text: 'const [impact, setImpact] = useState(Infinity);', type: 'js' },
+        { text: 'export const LEADERS = ["code", "create"];', type: 'js' },
+        { text: 'await Promise.all([dream(), code(), ship()]);', type: 'js' },
+        { text: 'type Result<T> = Success<T> | Lesson;', type: 'ts' },
+        { text: 'const slrtce = { it: "Excellence", year: 2026 };', type: 'js' },
+        { text: 'export default defineCommunity({ name: "ITSA" });', type: 'js' },
+        { text: 'const isReady = true; if (isReady) execute();', type: 'js' },
+        { text: 'console.log("Welcome to ITSA SLRTCE");', type: 'js' },
+        { text: 'const latency = 0; // zero hesitation', type: 'js' },
+        { text: 'import { leadership } from "@/itsa";', type: 'js' },
+        { text: 'const vision = new Vision({ slrtce: true });', type: 'js' },
+        { text: 'while (curious) { explore(); }', type: 'js' },
+        { text: 'const stack = ["TypeScript", "Rust", "Python"];', type: 'js' },
+        { text: 'export async function bootstrap() {}', type: 'js' },
+        { text: 'const status = "ONLINE_AND_BUILDING";', type: 'js' },
+        { text: 'Object.freeze({ limits: null });', type: 'js' },
+        { text: 'window.ITSA_DISPATCH("IGNITE");', type: 'js' },
+        { text: 'const roadmap = new Set(["Learn", "Build"]);', type: 'js' },
+        { text: 'go func() { listenAndServe() }();', type: 'go' },
+        { text: 'def build_tomorrow(students):', type: 'python' },
+        { text: 'SELECT * FROM minds WHERE curiosity = true;', type: 'sql' },
+        { text: '// 42 glassmorphic syntax nodes', type: 'comment' }
+      ];
+
+      /* ------------------------------------------------------------------------
+         6. CANVAS TEXTURE GENERATOR WITH AUTHENTIC GLASSMORPHISM
+         Translucent frosted background, specular edge sheen, crisp monospace text
+         ------------------------------------------------------------------------ */
+      const OCHRE_KEYWORD = '#FFA31A'; // Vibrant glowing ochre
+      const OCHRE_STRING = '#FFC97A';  // Warm gold for strings & literals
+      const WHITE_TEXT = '#FFFFFF';    // High-contrast crisp white
+      const MUTED_TEXT = '#C8C8C8';    // Clean light grey for punctuation
+      const COMMENT_COLOR = '#8E8E8E'; // Legible comment grey
+
+      function renderSyntaxLine(ctx, text, startX, startY, type) {
+        ctx.font = '600 14px "IBM Plex Mono", "JetBrains Mono", monospace';
+        let currentX = startX;
+
+        // Terminal prompt prefix styling
+        if (type === 'terminal' && !text.startsWith('#')) {
+          ctx.fillStyle = OCHRE_KEYWORD;
+          ctx.fillText('$ ', currentX, startY);
+          currentX += ctx.measureText('$ ').width;
+        }
+
+        // Comment check
+        if (text.trim().startsWith('//') || text.trim().startsWith('#')) {
+          ctx.fillStyle = COMMENT_COLOR;
+          ctx.fillText(text, currentX, startY);
+          return currentX + ctx.measureText(text).width;
+        }
+
+        // Token split
+        const tokens = text.split(/("[^"]*"|'[^']*'|`[^`]*`|\s+|[{}()[\];,.<>:=+\-*/])/g).filter(Boolean);
+
+        const keywords = new Set([
+          'const', 'let', 'var', 'function', 'class', 'extends', 'import', 'from',
+          'export', 'default', 'while', 'return', 'async', 'await', 'new', 'interface',
+          'type', 'def', 'if', 'else', 'try', 'catch', 'SELECT', 'FROM', 'WHERE',
+          'fn', 'pub', 'struct', 'go', 'func', 'package', 'git', 'npm', 'pnpm',
+          'docker', 'curl', 'systemctl', 'cat', 'chmod', 'npx', 'tail', 'grep',
+          'python', 'echo', 'sudo', 'kubectl', 'cargo'
+        ]);
+
+        const values = new Set(['true', 'false', 'null', 'undefined', 'Infinity', 'infinite']);
+
+        tokens.forEach(tok => {
+          if (tok.startsWith('"') || tok.startsWith("'") || tok.startsWith('`')) {
+            ctx.fillStyle = OCHRE_STRING;
+          } else if (keywords.has(tok)) {
+            ctx.fillStyle = OCHRE_KEYWORD;
+          } else if (values.has(tok) || /^\d+(\.\d+)?(px|ms|s)?$/.test(tok)) {
+            ctx.fillStyle = OCHRE_STRING;
+          } else if (tok.startsWith('<') || tok.endsWith('>')) {
+            ctx.fillStyle = OCHRE_KEYWORD;
+          } else if (/^[{}()[\];,.:]$/.test(tok)) {
+            ctx.fillStyle = MUTED_TEXT;
+          } else {
+            ctx.fillStyle = WHITE_TEXT;
+          }
+          ctx.fillText(tok, currentX, startY);
+          currentX += ctx.measureText(tok).width;
+        });
+
+        return currentX;
+      }
+
+      function createCodeTexture(snippet, isCursorVisible = false) {
+        const dpr = 2; // Hi-DPI crispness
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        const lines = snippet.lines || [snippet.text];
+        const lineHeight = 22;
+        const padX = 16;
+        const padY = 11;
+
+        ctx.font = '600 14px "IBM Plex Mono", "JetBrains Mono", monospace';
+        let maxTextWidth = 0;
+        lines.forEach(line => {
+          let extraWidth = (snippet.type === 'terminal' && !line.startsWith('#')) ? ctx.measureText('$ ').width : 0;
+          let w = ctx.measureText(line).width + extraWidth;
+          if (w > maxTextWidth) maxTextWidth = w;
+        });
+
+        if (snippet.hasCursor) {
+          maxTextWidth += 16;
+        }
+
+        const width = Math.ceil(maxTextWidth + padX * 2);
+        const height = Math.ceil(lines.length * lineHeight + padY * 2);
+
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+
+        ctx.scale(dpr, dpr);
+
+        // --- AUTHENTIC FROSTED GLASS CARD RENDERING ---
+        const r = 4; // Max 4px radius per project rules
+
+        // 1. Frosted Translucent Gradient Fill
+        const glassGrad = ctx.createLinearGradient(0, 0, width, height);
+        glassGrad.addColorStop(0, 'rgba(255, 255, 255, 0.09)');
+        glassGrad.addColorStop(0.35, 'rgba(20, 20, 20, 0.45)');
+        glassGrad.addColorStop(1, 'rgba(10, 10, 10, 0.65)');
+
+        ctx.beginPath();
+        ctx.moveTo(r, 0.5);
+        ctx.lineTo(width - r, 0.5);
+        ctx.quadraticCurveTo(width, 0.5, width, r);
+        ctx.lineTo(width, height - r);
+        ctx.quadraticCurveTo(width, height, width - r, height);
+        ctx.lineTo(r, height);
+        ctx.quadraticCurveTo(0.5, height, 0.5, height - r);
+        ctx.lineTo(0.5, r);
+        ctx.quadraticCurveTo(0.5, 0.5, r, 0.5);
+        ctx.closePath();
+
+        ctx.fillStyle = glassGrad;
+        ctx.fill();
+
+        // 2. Translucent Glass Border
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        // 3. Specular Highlight: Top-edge glass reflection sheen
+        ctx.beginPath();
+        ctx.moveTo(r + 2, 1.5);
+        ctx.lineTo(width - r - 2, 1.5);
+        const sheenGrad = ctx.createLinearGradient(r + 2, 1.5, width - r - 2, 1.5);
+        sheenGrad.addColorStop(0, 'rgba(255, 255, 255, 0.04)');
+        sheenGrad.addColorStop(0.5, 'rgba(255, 255, 255, 0.28)');
+        sheenGrad.addColorStop(1, 'rgba(200, 134, 26, 0.22)');
+        ctx.strokeStyle = sheenGrad;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        // Render syntax lines
+        let lastLineEndX = padX;
+        let lastLineY = padY + 15;
+        lines.forEach((line, idx) => {
+          const y = padY + 15 + idx * lineHeight;
+          lastLineEndX = renderSyntaxLine(ctx, line, padX, y, snippet.type);
+          lastLineY = y;
+        });
+
+        // Glowing blinking cursor
+        if (snippet.hasCursor && isCursorVisible) {
+          ctx.fillStyle = OCHRE_KEYWORD;
+          ctx.fillRect(lastLineEndX + 4, lastLineY - 13, 7, 15);
+        }
+
+        const texture = new THREE.CanvasTexture(canvas);
+        texture.generateMipmaps = true;
+        texture.minFilter = THREE.LinearMipmapLinearFilter;
+        texture.magFilter = THREE.LinearFilter;
+
+        return {
+          texture,
+          canvas,
+          ctx,
+          width,
+          height,
+          dpr
+        };
+      }
+
+      /* ------------------------------------------------------------------------
+         7. THREE.JS SCENE, BALANCED SPATIAL SPREAD & GLASSMORPHIC MESHES
+         Spacious layout preventing clutter, refined scale, clear negative space
+         ------------------------------------------------------------------------ */
+      const canvasEl = document.getElementById('three-viewport');
+      const camZDisplay = document.getElementById('cam-z-display');
+      const nodeCountDisplay = document.getElementById('node-count-display');
+
+      let scene, camera, renderer;
+      let fragmentGroup;
+      const codeFragments = [];
+      const cursorFragments = [];
+
+      const mouse = { x: 0, y: 0 };
+      const targetMouse = { x: 0, y: 0 };
+      const cameraDrift = { x: 0, y: 0, z: 200 };
+
+      let isVisible = true;
+      let clock = new THREE.Clock();
+
+      function initThreeScene() {
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x0A0A0A);
+
+        // Soft fog density for airy, crystalline depth
+        scene.fog = new THREE.FogExp2(0x0A0A0A, 0.0016);
+
+        const aspect = window.innerWidth / window.innerHeight;
+        camera = new THREE.PerspectiveCamera(50, aspect, 1, 1200);
+        camera.position.set(0, 0, 200);
+
+        renderer = new THREE.WebGLRenderer({
+          canvas: canvasEl,
+          antialias: true,
+          alpha: false,
+          powerPreference: 'high-performance',
+        });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        fragmentGroup = new THREE.Group();
+        scene.add(fragmentGroup);
+
+        buildCodeFragments();
+        bindEvents();
+        setupScrollInteractions();
+      }
+
+      function buildCodeFragments() {
+        const isMobile = window.innerWidth < 768;
+        const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+        
+        // Curated counts: 42 on desktop, 26 on tablet, 18 on mobile (avoids clutter!)
+        const totalCount = isMobile ? 18 : (isTablet ? 26 : CODE_SNIPPETS.length);
+
+        if (nodeCountDisplay) {
+          nodeCountDisplay.textContent = totalCount;
+        }
+
+        for (let i = 0; i < totalCount; i++) {
+          const snippet = CODE_SNIPPETS[i % CODE_SNIPPETS.length];
+          const texData = createCodeTexture(snippet, false);
+
+          // Refined, tasteful plane geometry sizing (0.17x — clean, not too big)
+          const planeWidth = texData.width * 0.17;
+          const planeHeight = texData.height * 0.17;
+          const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
+
+          // 3 Depth Tiers: well-spaced along Z
+          // Tier 0: Foreground (z: 30 to 90)
+          // Tier 1: Midground (z: -60 to 30)
+          // Tier 2: Background (z: -190 to -60)
+          const depthTier = i % 3;
+          let zPos = 0;
+          let initialOpacity = 0.85;
+
+          if (depthTier === 0) {
+            zPos = 30 + Math.random() * 60;
+            initialOpacity = 0.90 + Math.random() * 0.08;
+          } else if (depthTier === 1) {
+            zPos = -60 + Math.random() * 90;
+            initialOpacity = 0.78 + Math.random() * 0.12;
+          } else {
+            zPos = -190 + Math.random() * 130;
+            initialOpacity = 0.65 + Math.random() * 0.15;
+          }
+
+          const distFromCam = 200 - zPos;
+
+          // Gentle depth scale: preserves legibility without ballooning in size
+          const scaleCompensation = 0.96 + (distFromCam / 260) * 0.22;
+          const scaleMul = scaleCompensation * (0.92 + Math.random() * 0.14);
+
+          // Wide spatial dispersion preventing overlapping clumps
+          let xPos = (Math.random() - 0.48) * 540;
+          let yPos = (Math.random() - 0.5) * 310;
+
+          // Generous Negative Space around the Left-of-Center Hero Headline
+          if (zPos > -90) {
+            const inHeadlineX = xPos > -145 && xPos < 45;
+            const inHeadlineY = yPos > -55 && yPos < 55;
+            if (inHeadlineX && inHeadlineY) {
+              if (Math.random() > 0.45) {
+                xPos = 60 + Math.random() * 210; // Disperse to right
+              } else if (Math.random() > 0.5) {
+                yPos = 75 + Math.random() * 85;  // Disperse to top
+              } else {
+                yPos = -75 - Math.random() * 80; // Disperse to bottom
+              }
+            }
+          }
+
+          const material = new THREE.MeshBasicMaterial({
+            map: texData.texture,
+            transparent: true,
+            opacity: initialOpacity,
+            depthWrite: false,
+            side: THREE.DoubleSide,
+          });
+
+          const mesh = new THREE.Mesh(geometry, material);
+          mesh.position.set(xPos, yPos, zPos);
+          mesh.scale.set(scaleMul, scaleMul, 1);
+
+          const hasRotation = Math.random() < 0.25;
+          mesh.userData = {
+            baseX: xPos,
+            baseY: yPos,
+            baseZ: zPos,
+            driftSpeedX: 0.15 + Math.random() * 0.24,
+            driftSpeedY: 0.12 + Math.random() * 0.20,
+            driftAmpX: 5 + Math.random() * 10,
+            driftAmpY: 4 + Math.random() * 8,
+            phase: Math.random() * Math.PI * 2,
+            rotSpeedZ: hasRotation ? (Math.random() - 0.5) * 0.06 : 0,
+            baseRotZ: hasRotation ? (Math.random() - 0.5) * 0.04 : 0,
+            baseOpacity: initialOpacity,
+            snippet,
+            texData
+          };
+
+          if (hasRotation) {
+            mesh.rotation.z = mesh.userData.baseRotZ;
+          }
+
+          fragmentGroup.add(mesh);
+          codeFragments.push(mesh);
+
+          if (snippet.hasCursor) {
+            cursorFragments.push({
+              mesh,
+              snippet,
+              texData,
+              cursorVisible: false,
+            });
+          }
+        }
+
+        initCursorBlink();
+      }
+
+      /* ------------------------------------------------------------------------
+         8. LOOPING CURSOR BLINK ON SELECTED CODE FRAGMENTS
+         ------------------------------------------------------------------------ */
+      let cursorInterval = null;
+      function initCursorBlink() {
+        if (prefersReducedMotion || cursorFragments.length === 0) return;
+
+        cursorInterval = setInterval(() => {
+          if (!isVisible) return;
+
+          cursorFragments.forEach(item => {
+            item.cursorVisible = !item.cursorVisible;
+            const updated = createCodeTexture(item.snippet, item.cursorVisible);
+            
+            if (item.mesh.material.map) {
+              item.mesh.material.map.dispose();
+            }
+            item.mesh.material.map = updated.texture;
+            item.mesh.material.needsUpdate = true;
+            item.texData = updated;
+          });
+        }, 530);
+      }
+
+      /* ------------------------------------------------------------------------
+         9. SCROLL INTERACTIONS (CAMERA PULLBACK & CODE FADE)
+         ------------------------------------------------------------------------ */
+      function setupScrollInteractions() {
+        const heroSection = document.getElementById('hero');
+
+        ScrollTrigger.create({
+          trigger: heroSection,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 0.8,
+          onUpdate: (self) => {
+            const progress = self.progress;
+
+            // Camera pulls back z: 200 -> 350
+            cameraDrift.z = 200 + progress * 150;
+            if (camZDisplay) {
+              camZDisplay.textContent = cameraDrift.z.toFixed(1);
+            }
+
+            // Code opacity reduces gently on scroll
+            const opacityFactor = Math.max(0.18, 1 - progress * 0.78);
+            codeFragments.forEach(mesh => {
+              mesh.material.opacity = mesh.userData.baseOpacity * opacityFactor;
+            });
+          }
+        });
+      }
+
+      /* ------------------------------------------------------------------------
+         10. MOUSE PARALLAX & EVENT HANDLING
+         ------------------------------------------------------------------------ */
+      function bindEvents() {
+        if (window.innerWidth > 768 && !prefersReducedMotion) {
+          window.addEventListener('mousemove', (e) => {
+            targetMouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+            targetMouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+          }, { passive: true });
+        }
+
+        window.addEventListener('resize', onWindowResize, { passive: true });
+
+        document.addEventListener('visibilitychange', () => {
+          isVisible = !document.hidden;
+          if (isVisible) {
+            clock.start();
+            requestAnimationFrame(renderLoop);
+          } else {
+            clock.stop();
+          }
+        });
+
+        window.addEventListener('beforeunload', disposeAll);
+      }
+
+      function onWindowResize() {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(width, height);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        ScrollTrigger.refresh();
+      }
+
+      /* ------------------------------------------------------------------------
+         11. TIME-BASED RENDER LOOP
+         ------------------------------------------------------------------------ */
+      function renderLoop() {
+        if (!isVisible) return;
+        requestAnimationFrame(renderLoop);
+
+        const delta = clock.getDelta();
+        const elapsedTime = clock.getElapsedTime();
+
+        // Parallax lerp
+        mouse.x += (targetMouse.x - mouse.x) * 0.05;
+        mouse.y += (targetMouse.y - mouse.y) * 0.05;
+
+        camera.position.x = mouse.x * 24;
+        camera.position.y = mouse.y * 15;
+        camera.position.z = cameraDrift.z;
+
+        camera.lookAt(0, 0, 0);
+
+        // Sinusoidal drift across all code planes
+        if (!prefersReducedMotion) {
+          for (let i = 0; i < codeFragments.length; i++) {
+            const mesh = codeFragments[i];
+            const u = mesh.userData;
+
+            mesh.position.x = u.baseX + Math.sin(elapsedTime * u.driftSpeedX + u.phase) * u.driftAmpX;
+            mesh.position.y = u.baseY + Math.cos(elapsedTime * u.driftSpeedY + u.phase) * u.driftAmpY;
+
+            if (u.rotSpeedZ !== 0) {
+              mesh.rotation.z = u.baseRotZ + Math.sin(elapsedTime * u.rotSpeedZ + u.phase) * 0.05;
+            }
+          }
+        }
+
+        renderer.render(scene, camera);
+      }
+
+      /* ------------------------------------------------------------------------
+         12. CLEAN DISPOSAL
+         ------------------------------------------------------------------------ */
+      function disposeAll() {
+        if (cursorInterval) clearInterval(cursorInterval);
+
+        if (codeFragments) {
+          codeFragments.forEach(mesh => {
+            if (mesh.geometry) mesh.geometry.dispose();
+            if (mesh.material) {
+              if (mesh.material.map) mesh.material.map.dispose();
+              mesh.material.dispose();
+            }
+          });
+        }
+
+        if (renderer) {
+          renderer.dispose();
+        }
+      }
+
+      /* ------------------------------------------------------------------------
+         13. INITIALIZE ON DOM READY WITH BOOT LOADER
+         ------------------------------------------------------------------------ */
+      window.addEventListener('DOMContentLoaded', () => {
+        initThreeScene();
+        clock.start();
+        renderLoop();
+
+        // Run preloader first, then reveal the hero typography sequence
+        initPreloader(() => {
+          initHeroEntrance();
+        });
+      });
+
+    })();
+  </script>
+</body>
 </html>
