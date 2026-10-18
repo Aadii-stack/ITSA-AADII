@@ -105,3 +105,65 @@
 @keyframes textSlideUp {
   to { opacity: 1; transform: translateY(0); }
 }
+
+@keyframes scrollCode {
+  from { transform: translateY(-50%); }
+  to   { transform: translateY(0); }
+}
+
+/* ── Code rain background ── */
+.code-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  gap: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.code-scroll-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  animation: scrollCode linear infinite;
+  will-change: transform;
+}
+
+.code-scroll-line {
+  padding: 5px 12px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 0.62rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #e2a829;
+  opacity: 0.35;
+  line-height: 1.9;
+  letter-spacing: 0.03em;
+}
+
+.code-scroll-column:nth-child(2n) .code-scroll-line {
+  color: #ffffff;
+  opacity: 0.18;
+}
+
+.code-scroll-column:nth-child(3n) .code-scroll-line {
+  color: #e2a829;
+  opacity: 0.22;
+}
+
+/* ── Blur overlay (≈60% blur effect) ── */
+.code-blur-layer {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(12px) brightness(0.45);
+  -webkit-backdrop-filter: blur(12px) brightness(0.45);
+  background: rgba(8, 8, 8, 0.55);
+  z-index: 1;
+}
+
+/* Ensure intro content floats above everything */
+.intro-container {
+  position: relative;
+  z-index: 2;
+}

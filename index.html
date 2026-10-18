@@ -91,9 +91,82 @@
       user-select: none;
       clip-path: inset(0 0 0 0);
       will-change: clip-path, transform, opacity;
+      overflow: hidden;
+    }
+
+    /* Scrolling Code Background Stream — Full-page top-to-bottom coverage with Orange & White syntax */
+    .preloader-code-stream {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      pointer-events: none;
+      z-index: 2;
+      overflow: hidden;
+    }
+
+    /* Subtle CRT monitor scanline texture */
+    .preloader-code-stream::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.18) 0px,
+        rgba(0, 0, 0, 0.18) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .code-stream-col {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 12px 36px;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: clamp(20px, 2.3vw, 29px);
+      line-height: 1.7;
+      letter-spacing: 0.6px;
+      white-space: nowrap;
+      overflow: visible;
+      animation: codeScrollDownFast 30s linear infinite;
+      will-change: transform;
+      filter: blur(1.5px);
+      opacity: 0.62;
+      text-shadow: 0 0 10px rgba(255, 140, 0, 0.2);
+    }
+
+    .code-stream-col span {
+      display: block;
+      padding: 1px 0;
+      color: rgba(255, 255, 255, 0.88); /* Crisp White by default */
+    }
+
+    /* Syntax Highlighting: Pure White & Orange Palette */
+    .code-stream-col .kw  { color: #FFA31A; text-shadow: 0 0 10px rgba(255, 163, 26, 0.55); font-weight: 700; } /* Vibrant Electric Orange */
+    .code-stream-col .str { color: #FFC064; text-shadow: 0 0 8px rgba(255, 192, 100, 0.45); }                 /* Warm Amber Orange */
+    .code-stream-col .fn  { color: #FFFFFF; text-shadow: 0 0 12px rgba(255, 255, 255, 0.7); font-weight: 600; } /* Brilliant Pure White */
+    .code-stream-col .typ { color: #FFAE33; text-shadow: 0 0 8px rgba(255, 174, 51, 0.45); }                 /* Golden Orange */
+    .code-stream-col .cmt { color: rgba(255, 255, 255, 0.4); font-style: italic; }                            /* Translucent Muted White */
+
+    @keyframes codeScrollDownFast {
+      0%   { transform: translateY(-50%); }
+      100% { transform: translateY(0%); }
     }
 
     .liquid-preloader-container {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -101,12 +174,13 @@
       gap: 24px;
       max-width: 680px;
       width: 100%;
+      z-index: 10;
     }
 
     .liquid-svg-wrapper {
       width: 100%;
       max-width: 620px;
-      filter: drop-shadow(0 12px 35px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 30px rgba(200, 134, 26, 0.28));
+      filter: drop-shadow(0 14px 40px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 35px rgba(229, 155, 36, 0.35));
     }
 
     .liquid-loader-svg {
@@ -600,6 +674,55 @@
        CENTERED ITSA LIQUID WATER / WAVE FILLING PRELOADER
        ========================================================================== -->
   <div id="preloader" aria-live="polite">
+    <!-- Scrolling Code Background Stream — single full-page column -->
+    <div class="preloader-code-stream" id="preloader-code-stream" aria-hidden="true"></div>
+    <script>
+      (function() {
+        var lines = [
+          '<span class="kw">import</span> { <span class="fn">DistributedClusterManager</span>, <span class="typ">NodeProtocolV2</span> } <span class="kw">from</span> <span class="str">"@itsa/distributed-runtime/kernel/v3"</span>; <span class="kw">const</span> cluster = <span class="kw">new</span> <span class="fn">DistributedClusterManager</span>({ shardCount: <span class="typ">64</span>, tls: <span class="kw">true</span> });',
+          '<span class="kw">async function</span> <span class="fn">initializeSpatialField</span>(engineConfig: <span class="typ">EngineOptions</span>): <span class="typ">Promise</span>&lt;<span class="typ">ExecutionStatus</span>&gt; { <span class="kw">const</span> buffer = <span class="kw">await</span> cluster.<span class="fn">allocateRingBuffer</span>(<span class="typ">0x40000</span>); <span class="kw">return</span> buffer.<span class="fn">mount</span>(engineConfig); }',
+          '<span class="cmt">// [KERNEL DEBUG] 0.08ms latency verified across 1024 mesh nodes — zero hesitation packet routing enabled</span>',
+          '<span class="kw">export const</span> <span class="fn">SYSTEM_TOPOLOGY</span>: <span class="typ">Readonly</span>&lt;<span class="typ">Record</span>&lt;<span class="typ">string</span>, <span class="typ">NodeDescriptor</span>&gt;&gt; = { <span class="str">"slrtce-node-01"</span>: { address: <span class="str">"10.244.0.12:9092"</span>, heartbeat: <span class="typ">Date.now</span>(), health: <span class="str">"HEALTHY"</span> } };',
+          '<span class="kw">while</span> (student.hasCuriosity() &amp;&amp; !system.isTerminated()) { <span class="kw">const</span> idea = student.<span class="fn">synthesizeNextInnovation</span>(); <span class="kw">await</span> <span class="fn">deployToProduction</span>(idea); }',
+          '<span class="kw">git</span> commit -am <span class="str">"feat(core): implement high-frequency quantum entropy stream and neural dispatch gateway"</span> &amp;&amp; <span class="kw">git</span> push origin main --force-with-lease',
+          '<span class="kw">const</span> socket = <span class="kw">new</span> <span class="fn">WebSocket</span>(<span class="str">"wss://edge.itsa.slrtce.in/v2/telemetry/live-stream?compression=zstd&amp;auth_bearer=eyJhbGciOi"</span>);',
+          '<span class="kw">pub fn</span> <span class="fn">process_incoming_packet_stream</span>&lt;T: <span class="typ">ZeroCopyPayload</span> + <span class="typ">Send</span> + <span class="typ">Sync</span>&gt;(packet: &amp;<span class="kw">mut</span> <span class="typ">VecDeque</span>&lt;T&gt;) -&gt; <span class="typ">Result</span>&lt;<span class="typ">usize</span>, <span class="typ">SystemError</span>&gt; { packet.<span class="fn">drain</span>(..).<span class="fn">fold</span>(0, |acc, _| acc + 1) }',
+          '<span class="kw">docker</span> compose -f docker-compose.prod.yml up -d --build --scale worker=16 --remove-orphans &amp;&amp; docker logs -f --tail=200 itsa_production_core',
+          '<span class="kw">const</span> [systemThroughput, setThroughput] = <span class="fn">useState</span>&lt;<span class="typ">ThroughputMetrics</span>&gt;({ gigaopsPerSecond: <span class="typ">142.85</span>, memoryBandwidthGbps: <span class="typ">1024.0</span>, status: <span class="str">"PEAK_PERFORMANCE"</span> });',
+          '<span class="kw">pragma</span> solidity ^0.8.24; <span class="kw">contract</span> <span class="fn">ITSACommunityToken</span> <span class="kw">is</span> <span class="typ">ERC20Permit</span>, <span class="typ">Ownable2Step</span> { <span class="kw">constructor</span>() <span class="typ">ERC20</span>(<span class="str">"ITSA Innovation"</span>, <span class="str">"ITSA"</span>) { _mint(msg.sender, <span class="typ">1_000_000_000e18</span>); } }',
+          '<span class="kw">class</span> <span class="fn">DistributedNeuralPipeline</span>&lt;<span class="typ">InputData</span>, <span class="typ">InferenceResult</span>&gt; <span class="kw">extends</span> <span class="typ">AsyncTransformStream</span>&lt;<span class="typ">InputData</span>, <span class="typ">InferenceResult</span>&gt; { <span class="kw">override async</span> <span class="fn">transform</span>(chunk) { <span class="kw">return</span> <span class="kw">this</span>.<span class="fn">infer</span>(chunk); } }',
+          '<span class="kw">SELECT</span> student_id, full_name, repo_count, commits_this_term, rank <span class="kw">FROM</span> engineers <span class="kw">WHERE</span> active = <span class="kw">true</span> <span class="kw">ORDER BY</span> contribution_score <span class="kw">DESC</span> <span class="kw">LIMIT</span> <span class="typ">500</span>;',
+          '<span class="kw">systemctl</span> enable --now itsa-matrix-orchestrator.service &amp;&amp; journalctl -u itsa-matrix-orchestrator -f --output=json-pretty',
+          '<span class="kw">type</span> <span class="typ">InferenceResult</span>&lt;T&gt; = { success: <span class="kw">true</span>; latencyMs: <span class="typ">number</span>; payload: T } | { success: <span class="kw">false</span>; errorCode: <span class="str">"PIPELINE_UNDERFLOW"</span> };',
+          '<span class="kw">pnpm</span> add @tensorflow/tfjs-node-gpu @noble/curves @solana/web3.js fastify @trpc/server @trpc/client drizzle-orm postgres',
+          '<span class="kw">cargo</span> build --release --target x86_64-unknown-linux-musl --bin itsa-hypervisor --features <span class="str">"avx512,simd_acceleration,zero_copy"</span>',
+          '<span class="cmt">// [CRITICAL MONITOR DISPATCH] Macro optical scan active :: Focal plane calibration calibrated for high-precision inspection</span>',
+          '<span class="kw">terraform</span> plan -out=tfplan.binary &amp;&amp; terraform apply -auto-approve tfplan.binary -parallelism=32',
+          '<span class="kw">kubectl</span> apply -f k8s/production-ingress.yaml -f k8s/cluster-autoscaler.yaml --namespace=itsa-system --wait=true --timeout=300s',
+          '<span class="kw">const</span> model = <span class="kw">new</span> <span class="fn">TransformerDecoder</span>({ numLayers: <span class="typ">32</span>, embeddingDim: <span class="typ">2048</span>, attentionHeads: <span class="typ">32</span>, rotaryEmbeddings: <span class="kw">true</span>, flashAttentionV2: <span class="kw">true</span> });',
+          '<span class="kw">def</span> <span class="fn">train_autoregressive_agent</span>(dataset, optimizer, scheduler, max_epochs=<span class="typ">1000</span>): optimizer.<span class="fn">zero_grad</span>(); loss = model(dataset); loss.<span class="fn">backward</span>(); optimizer.<span class="fn">step</span>()',
+          '<span class="kw">go func</span>() { <span class="kw">if</span> err := http.<span class="fn">ListenAndServeTLS</span>(<span class="str">":8443"</span>, <span class="str">"certs/cert.pem"</span>, <span class="str">"certs/key.pem"</span>, secureRouter); err != <span class="kw">nil</span> { log.<span class="fn">Fatal</span>(err) } }();',
+          '<span class="kw">curl</span> -X POST https://api.slrtce.in/v1/itsa/hackathon/submit -H <span class="str">"Content-Type: application/json"</span> -d <span class="str">\'{"team": "ITSA_ELITE", "status": "SHIPPED"}\'</span>',
+          '<span class="kw">let mut</span> memory_arena = <span class="typ">ArenaAllocator</span>::<span class="fn">new</span>(<span class="typ">1024</span> * <span class="typ">1024</span> * <span class="typ">512</span>); <span class="kw">let</span> slice = memory_arena.<span class="fn">alloc_slice_copy</span>(&amp;raw_telemetry_bytes);',
+          '<span class="cmt">// Continuous matrix telemetry scrolling at elevated velocity -- RGB syntax highlight verified</span>',
+          '<span class="kw">tail</span> -n 100 -f /var/log/itsa/ambition.log | jq <span class="str">\'.level == "INFO" | {timestamp: .time, message: .msg}\'</span>'
+        ];
+        var stream = document.getElementById('preloader-code-stream');
+        // Single column filling full width
+        var col = document.createElement('div');
+        col.className = 'code-stream-col';
+        // Build 2x content for seamless continuous looping
+        var html = '';
+        for (var r = 0; r < 6; r++) {
+          for (var j = 0; j < lines.length; j++) {
+            html += '<span>' + lines[j] + '</span>';
+          }
+        }
+        col.innerHTML = html;
+        stream.appendChild(col);
+      })();
+    </script>
+
     <div class="liquid-preloader-container">
       <div class="liquid-svg-wrapper">
         <svg class="liquid-loader-svg" viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ITSA Loading Animation">
