@@ -119,7 +119,18 @@
   pointer-events: auto;
 }
 
-/* Headline Wrap */
+/* Full Hero TechText Canvas (Unconfined Draggable Canvas) */
+.hero-tech-text-full {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: auto;
+  overflow: visible;
+}
+
+/* Headline Wrap / Anchor */
 .hero-headline-wrap {
   overflow: visible;
   padding-bottom: 8px;
@@ -128,7 +139,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  pointer-events: auto;
+  pointer-events: none;
 }
 
 .hero-headline {

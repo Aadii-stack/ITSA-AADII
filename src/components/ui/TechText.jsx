@@ -61,6 +61,7 @@ const TechText = ({
   introDuration = 2,
   guides = false,
   className = '',
+  anchorSelector = '',
   style
 }) => {
   const containerRef = useRef(null);
@@ -95,7 +96,8 @@ const TechText = ({
       clickKick,
       intro,
       introDuration,
-      guides
+      guides,
+      anchorSelector
     };
     wakeRef.current();
   });
@@ -224,11 +226,21 @@ const TechText = ({
       const probe = scratchCtx;
       setFont(probe, s, s.fontSize);
       let m = probe.measureText(s.text);
-      const fit = Math.min(
+      let fit = Math.min(
         1,
         (width * 0.9) / Math.max(m.actualBoundingBoxLeft + m.actualBoundingBoxRight, 1),
         (height * 0.66) / Math.max(m.actualBoundingBoxAscent + m.actualBoundingBoxDescent, 1)
       );
+      if (s.anchorSelector) {
+        const anchorEl = document.querySelector(s.anchorSelector);
+        if (anchorEl && anchorEl.clientWidth > 0 && anchorEl.clientHeight > 0) {
+          fit = Math.min(
+            1,
+            (anchorEl.clientWidth * 0.95) / Math.max(m.actualBoundingBoxLeft + m.actualBoundingBoxRight, 1),
+            (anchorEl.clientHeight * 0.85) / Math.max(m.actualBoundingBoxAscent + m.actualBoundingBoxDescent, 1)
+          );
+        }
+      }
       const size = s.fontSize * fit;
       setFont(probe, s, size);
       m = probe.measureText(s.text);
@@ -237,8 +249,22 @@ const TechText = ({
       const margin = width * 0.05;
       const start =
         s.align === 'left' ? margin : s.align === 'right' ? width - margin - inkWidth : (width - inkWidth) / 2;
-      const x = start + m.actualBoundingBoxLeft;
-      const baseline = (height - inkHeight) / 2 + m.actualBoundingBoxAscent;
+      let x = start + m.actualBoundingBoxLeft;
+      let baseline = (height - inkHeight) / 2 + m.actualBoundingBoxAscent;
+
+      if (s.anchorSelector) {
+        const anchorEl = document.querySelector(s.anchorSelector);
+        if (anchorEl) {
+          const cRect = container.getBoundingClientRect();
+          const aRect = anchorEl.getBoundingClientRect();
+          const anchorCenterY = (aRect.top + aRect.bottom) / 2 - cRect.top;
+          baseline = anchorCenterY - inkHeight / 2 + m.actualBoundingBoxAscent;
+          if (s.align === 'center') {
+            const anchorCenterX = (aRect.left + aRect.right) / 2 - cRect.left;
+            x = anchorCenterX - inkWidth / 2 + m.actualBoundingBoxLeft;
+          }
+        }
+      }
       const xHeight = baseline - probe.measureText('x').actualBoundingBoxAscent;
       const capHeight = baseline - probe.measureText('H').actualBoundingBoxAscent;
       const ascender = baseline - probe.measureText('d').actualBoundingBoxAscent;
@@ -950,6 +976,15 @@ const TechText = ({
 
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(container);
+    let anchorObserver = null;
+    const aSelector = settingsRef.current?.anchorSelector;
+    if (aSelector) {
+      const aEl = document.querySelector(aSelector);
+      if (aEl) {
+        anchorObserver = new ResizeObserver(resize);
+        anchorObserver.observe(aEl);
+      }
+    }
     const intersectionObserver = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
       wake();
@@ -970,6 +1005,7 @@ const TechText = ({
       cancelAnimationFrame(raf);
       wakeRef.current = () => {};
       resizeObserver.disconnect();
+      anchorObserver?.disconnect();
       intersectionObserver.disconnect();
       themeObserver.disconnect();
       schemeQuery?.removeEventListener?.('change', wake);

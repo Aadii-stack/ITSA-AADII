@@ -82,34 +82,36 @@ export default function Hero() {
       {/* Decorative Grid Overlay */}
       <div className="hero-grid-overlay" aria-hidden="true" />
 
+      {/* Full Hero Canvas for ITSA TechText: Allows dragging letters anywhere across the entire hero section */}
+      <div className="hero-tech-text-full" aria-hidden="false">
+        <TechText
+          text="ITSA"
+          fontWeight={700}
+          fontSize={180}
+          reveal="letter"
+          dashLength={4}
+          dashGap={2}
+          specks={8}
+          intro="metrics"
+          introDuration={2.6}
+          clickKick={true}
+          draggable={true}
+          guides={false}
+          fontFamily="'Bevan', Georgia, 'Times New Roman', serif"
+          letterSpacing={0.04}
+          accentColor="#b793d2"
+          lineStyle="solid"
+          strokeWidth={1.5}
+          bounce={0.75}
+          color="#ffffff"
+          sweep={true}
+          anchorSelector="#hero-headline-anchor"
+        />
+      </div>
+
       <div className="hero-content">
-        {/* Headline: ITSA rendered with TechText from React Bits */}
-        <div className="hero-headline-wrap" style={{ width: '100%', maxWidth: '820px', pointerEvents: 'auto' }}>
-          <div style={{ width: '100%', height: '240px', position: 'relative' }}>
-            <TechText
-              text="ITSA"
-              fontWeight={700}
-              fontSize={180}
-              reveal="letter"
-              dashLength={4}
-              dashGap={2}
-              specks={8}
-              intro="metrics"
-              introDuration={2.6}
-              clickKick={true}
-              draggable={true}
-              guides={false}
-              fontFamily="'Bevan', Georgia, 'Times New Roman', serif"
-              letterSpacing={0.04}
-              accentColor="#b793d2"
-              lineStyle="solid"
-              strokeWidth={1.5}
-              bounce={0.75}
-              color="#ffffff"
-              sweep={true}
-            />
-          </div>
-        </div>
+        {/* Anchor placeholder defining the resting slot for ITSA */}
+        <div id="hero-headline-anchor" className="hero-headline-wrap" style={{ width: '100%', maxWidth: '820px', height: '240px', pointerEvents: 'none' }} />
 
         {/* Subtitle: Make it happen */}
         <div className="hero-motto" id="hero-motto">
