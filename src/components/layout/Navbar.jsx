@@ -1,74 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import { siteConfig } from '../../data/siteConfig';
+import React, { useState } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import logoImg from '../../assets/itsa-logo.png';
 import './Navbar.css';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const navLinks = [
     { label: 'Home', path: '#' },
-    { label: 'Team', path: '#faculty' },
+    { label: 'About', path: '#about' },
+    { label: 'Events', path: '#events' },
+    { label: 'Faculty', path: '#faculty' },
+    { label: 'Team', path: '#team' },
   ];
 
   return (
     <>
-      <header className={`floating-nav-wrapper ${isScrolled ? 'scrolled' : ''}`}>
-        <div 
-          className={`nav-pill-container ${isHovered ? 'expanded' : 'collapsed'}`}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          {/* Brand Logo */}
-          <a href="#" className="pill-logo-btn" aria-label="ITSA Home">
-            <img 
-              src={logoImg} 
-              alt="ITSA Logo" 
-              className="pill-logo-img"
-              onError={(e) => { e.target.style.display = 'none'; }}
-            />
-            <span className="pill-brand-text">ITSA</span>
+      <header className="navbar-wrap">
+        <nav className="navbar" aria-label="Main navigation">
+          {/* Brand Logo & Title on Left */}
+          <a href="#" className="brand" aria-label="ITSA Home">
+            <span className="brand-logo" aria-hidden="true">
+              <img 
+                src={logoImg} 
+                alt="ITSA Logo" 
+                className="brand-logo-img"
+                onError={(e) => { e.target.style.display = 'none'; }}
+              />
+            </span>
+            ITSA
           </a>
 
-          {/* Navigation Links */}
-          <nav className="pill-nav-menu">
-            <ul className="pill-nav-list">
-              {navLinks.map((link) => (
-                <li key={link.path} className="pill-nav-item">
-                  <a href={link.path} className="pill-nav-link">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
+          {/* Nav Links */}
+          <ul className="nav-links">
+            {navLinks.map((link) => (
+              <li key={link.label}>
+                <a href={link.path}>{link.label}</a>
+              </li>
+            ))}
+          </ul>
 
-        {/* Mobile Top Navbar Header */}
-        <div className="mobile-nav-bar">
-          <a href="#" className="mobile-brand-link">
-            <img src={logoImg} alt="ITSA Logo" className="mobile-logo-img" />
-            <span className="mobile-brand-title">ITSA SLRTCE</span>
+          {/* Action / Connect button */}
+          <a href="#team" className="btn-download">
+            <svg viewBox="0 0 24 24" aria-hidden="true" className="btn-icon">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z" />
+            </svg>
+            Connect
           </a>
+
+          {/* Mobile Hamburger Button */}
           <button
             type="button"
-            className="mobile-hamburger-btn"
+            className="navbar-hamburger-btn"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
-        </div>
+        </nav>
       </header>
 
       {/* Mobile Drawer */}
@@ -76,15 +66,24 @@ export default function Navbar() {
         <div className="mobile-drawer-inner">
           <div className="drawer-header">
             <span className="circuit-tag">• NAVIGATION CIRCUIT</span>
-            <button className="drawer-close-btn" onClick={() => setMobileMenuOpen(false)}>
+            <button
+              type="button"
+              className="drawer-close-btn"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-label="Close menu"
+            >
               <X size={20} />
             </button>
           </div>
-          
+
           <ul className="drawer-links-list">
             {navLinks.map((link) => (
-              <li key={link.path}>
-                <a href={link.path} className="drawer-link" onClick={() => setMobileMenuOpen(false)}>
+              <li key={link.label}>
+                <a
+                  href={link.path}
+                  className="drawer-link"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
                   <span>{link.label}</span>
                   <ArrowUpRight size={18} />
                 </a>
