@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import LetterGlitch from './LetterGlitch';
+import heroVideo from '../../assets/hero_section.mp4';
 import './Hero.css';
 
 export default function Hero() {
@@ -108,23 +108,17 @@ export default function Hero() {
 
   return (
     <section className="hero-container" id="hero" ref={heroWrapperRef}>
-      {/* LetterGlitch Background Animation */}
-      <div className="hero-glitch-bg" aria-hidden="true">
-        <LetterGlitch
-          glitchColors={["#ffffff", "#b793d2"]}
-          fontSize={12}
-          glitchAmount={0.49}
-          flow={0.37}
-          speed={1}
-          density={0.9}
-          spacing={0.6}
-          baseOpacity={0.16}
-          smooth={true}
-          interactive={true}
-          baseColor="#b793d2"
-          backgroundColor="#08070b"
-          clickEffect="tear"
+      {/* Video Background */}
+      <div className="hero-video-bg" aria-hidden="true">
+        <video
+          className="hero-bg-video"
+          src={heroVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
         />
+        <div className="hero-video-overlay" />
       </div>
 
       {/* Decorative Grid Overlay */}
