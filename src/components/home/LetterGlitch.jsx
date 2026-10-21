@@ -5,8 +5,8 @@ import './LetterGlitch.css';
 
 const DEFAULT_CHARACTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$&*()-_+=/[]{};:<>.,0123456789';
 const DEFAULT_FONT = "ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, 'Liberation Mono', monospace";
-const DARK_COLORS = ['#ffffff', '#b793d2'];
-const LIGHT_COLORS = ['#18181b', '#b793d2'];
+const DARK_COLORS = ['#ffffff', '#61dca3'];
+const LIGHT_COLORS = ['#18181b', '#0f9f6e'];
 const MAX_COLORS = 8;
 const INTRO_SECONDS = 1.4;
 const REST_RATE = 0.2;
@@ -156,22 +156,22 @@ const LetterGlitch = ({
   baseColor,
   characters = DEFAULT_CHARACTERS,
   fontFamily = DEFAULT_FONT,
-  fontSize = 12,
+  fontSize = 14,
   spacing = 0.6,
   density = 0.9,
   baseOpacity = 0.16,
-  glitchAmount = 0.49,
+  glitchAmount = 0.5,
   speed = 1,
   smooth = true,
   interactive = true,
   cursorRadius = 140,
   clickEffect = 'tear',
-  flow = 0.37,
+  flow = 0.5,
   edgeFade = 0,
   centerFade = 0,
   intro = true,
   lightMode = false,
-  backgroundColor = '#08070b',
+  backgroundColor,
   dpr,
   className = '',
   style,
@@ -183,7 +183,7 @@ const LetterGlitch = ({
   const customColors = Array.isArray(glitchColors) && glitchColors.length ? glitchColors : null;
   const settings = {
     colors: (customColors || (lightMode ? LIGHT_COLORS : DARK_COLORS)).slice(0, MAX_COLORS),
-    baseColor: baseColor || (lightMode ? '#18181b' : '#b793d2'),
+    baseColor: baseColor || (lightMode ? '#18181b' : '#ffffff'),
     characters: characters || DEFAULT_CHARACTERS,
     fontFamily: fontFamily || DEFAULT_FONT,
     fontSize: clamp(fontSize, 6, 96),
@@ -200,89 +200,26 @@ const LetterGlitch = ({
     edgeFade: clamp(edgeFade, 0, 0.5),
     centerFade: clamp(centerFade, 0, 1),
     intro,
-    backgroundColor: backgroundColor || '#08070b',
+    backgroundColor,
     dpr
   };
   const settingsRef = useRef(settings);
-  useEffect(() => {
-    settingsRef.current = settings;
-  });
+  settingsRef.current = settings;
 
   useEffect(() => {
     const container = containerRef.current;
     const canvas = canvasRef.current;
-    if (!container || !canvas) return undefined;
-
-    const gl = canvas.getContext('webgl2', {
+    const gl = canvas?.getContext('webgl2', {
       alpha: true,
       premultipliedAlpha: true,
       antialias: false,
       depth: false,
       stencil: false
     });
+    if (!container || !canvas || !gl) return undefined;
 
-    const program = gl ? link(gl) : null;
-
-    // Graceful 2D fallback if WebGL2 is not supported
-    if (!gl || !program) {
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return undefined;
-      let animId = 0;
-      let lastTime = 0;
-      let alive2D = true;
-
-      const resize2D = () => {
-        if (!container || !canvas) return;
-        const w = Math.max(1, container.clientWidth || window.innerWidth || 1);
-        const h = Math.max(1, container.clientHeight || window.innerHeight || 1);
-        canvas.width = w;
-        canvas.height = h;
-      };
-      resize2D();
-
-      const ro2D = new ResizeObserver(resize2D);
-      ro2D.observe(container);
-
-      const render2D = now => {
-        if (!alive2D) return;
-        animId = requestAnimationFrame(render2D);
-        if (now - lastTime < 50) return;
-        lastTime = now;
-        const s = settingsRef.current;
-        const w = canvas.width;
-        const h = canvas.height;
-        ctx.fillStyle = s.backgroundColor || '#08070b';
-        ctx.fillRect(0, 0, w, h);
-        ctx.font = `${s.fontSize}px ${s.fontFamily}`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        const step = s.fontSize * (1 + s.spacing);
-        const cols = Math.ceil(w / step) + 1;
-        const rows = Math.ceil(h / step) + 1;
-        const chars = s.characters;
-        const colsArr = s.colors;
-        for (let r = 0; r < rows; r++) {
-          for (let c = 0; c < cols; c++) {
-            if (Math.random() > s.density) continue;
-            const ch = chars[(Math.random() * chars.length) | 0];
-            const isGlitch = Math.random() < s.glitchAmount * 0.12;
-            ctx.fillStyle = isGlitch
-              ? colsArr[(Math.random() * colsArr.length) | 0]
-              : s.baseColor;
-            ctx.globalAlpha = isGlitch ? 0.95 : s.baseOpacity;
-            ctx.fillText(ch, c * step + step / 2, r * step + step / 2);
-          }
-        }
-      };
-      animId = requestAnimationFrame(render2D);
-
-      return () => {
-        alive2D = false;
-        cancelAnimationFrame(animId);
-        ro2D.disconnect();
-      };
-    }
-
+    const program = link(gl);
+    if (!program) return undefined;
     const u = program.uniforms;
     const vao = gl.createVertexArray();
     const makeTexture = () => {
@@ -304,14 +241,11 @@ const LetterGlitch = ({
 
     const colorCache = new Map();
     const parse = value => {
-      const key = String(value).trim();
+      const key = String(value);
       const cached = colorCache.get(key);
       if (cached) return cached;
       let rgb = [1, 1, 1];
-      const hexMatch = key.match(/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i);
-      if (hexMatch) {
-        rgb = [parseInt(hexMatch[1], 16) / 255, parseInt(hexMatch[2], 16) / 255, parseInt(hexMatch[3], 16) / 255];
-      } else if (probe) {
+      if (probe) {
         probe.clearRect(0, 0, 1, 1);
         probe.fillStyle = '#ffffff';
         probe.fillStyle = key;
@@ -368,7 +302,6 @@ const LetterGlitch = ({
       luck[i] < settingsRef.current.density ? Math.round(level[i] * 255 * appear) : 0;
 
     const cellAt = (x, y) => {
-      if (grid.cellW <= 0 || grid.cellH <= 0) return -1;
       const c = Math.floor((x - grid.originX) / grid.cellW);
       const r = Math.floor((y - grid.originY) / grid.cellH);
       if (c < 0 || r < 0 || c >= grid.cols || r >= grid.rows) return -1;
@@ -376,7 +309,6 @@ const LetterGlitch = ({
     };
 
     const ignite = (i, strength, holdTime, fadeTime, color, after = 0) => {
-      if (i < 0 || i >= count) return;
       if (slot[i] < 0) {
         slot[i] = activeCount;
         active[activeCount++] = i;
@@ -427,9 +359,7 @@ const LetterGlitch = ({
       atlasContext.textAlign = 'center';
       atlasContext.textBaseline = 'alphabetic';
       atlasContext.fillStyle = '#ffffff';
-      const ascent = metrics.actualBoundingBoxAscent || size * 0.75;
-      const descent = metrics.actualBoundingBoxDescent || size * 0.25;
-      const baseline = cellH / 2 + (ascent - descent) / 2;
+      const baseline = cellH / 2 + (metrics.actualBoundingBoxAscent - metrics.actualBoundingBoxDescent) / 2;
       unique.forEach((char, i) => {
         atlasContext.fillText(char, (i % columns) * cellW + cellW / 2, Math.floor(i / columns) * cellH + baseline);
       });
@@ -465,7 +395,6 @@ const LetterGlitch = ({
     };
 
     const buildGrid = () => {
-      if (!grid.cellW || !grid.cellH) return;
       const cols = Math.ceil(canvas.width / grid.cellW) + 1;
       const rows = Math.ceil(canvas.height / grid.cellH) + 1;
       grid.originX = Math.floor((canvas.width - cols * grid.cellW) / 2);
@@ -482,9 +411,9 @@ const LetterGlitch = ({
         for (let c = 0; c < cols; c++) {
           const i = r * cols + c;
           const oc = c + shiftC;
-          const or_ = r + shiftR;
-          if (oc >= 0 && or_ >= 0 && oc < grid.cols && or_ < grid.rows) {
-            const j = or_ * grid.cols + oc;
+          const or = r + shiftR;
+          if (oc >= 0 && or >= 0 && oc < grid.cols && or < grid.rows) {
+            const j = or * grid.cols + oc;
             nextData[i * 4] = data[j * 4];
             nextData[i * 4 + 1] = data[j * 4 + 1];
             nextLuck[i] = luck[j];
@@ -805,7 +734,7 @@ const LetterGlitch = ({
 
     const frame = now => {
       raf = 0;
-      if (document.hidden) return;
+      if (!visible || document.hidden) return;
       const s = settingsRef.current;
       const dt = last ? clamp((now - last) / 1000, 0.0005, 0.05) : 1 / 60;
       last = now;
@@ -890,10 +819,9 @@ const LetterGlitch = ({
     }
 
     const resize = () => {
-      if (!container || !canvas) return;
       const s = settingsRef.current;
-      view.width = Math.max(1, container.clientWidth || window.innerWidth || 1);
-      view.height = Math.max(1, container.clientHeight || window.innerHeight || 1);
+      view.width = Math.max(1, container.clientWidth);
+      view.height = Math.max(1, container.clientHeight);
       view.ratio = Math.min(s.dpr || window.devicePixelRatio || 1, 2);
       canvas.width = Math.max(1, Math.round(view.width * view.ratio));
       canvas.height = Math.max(1, Math.round(view.height * view.ratio));
@@ -951,10 +879,7 @@ const LetterGlitch = ({
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(container);
     const intersection = new IntersectionObserver(entries => {
-      const isIntersecting = entries.some(entry => entry.isIntersecting);
-      if (entries.some(e => e.boundingClientRect.width > 0 || e.boundingClientRect.height > 0)) {
-        visible = isIntersecting;
-      }
+      visible = entries.some(entry => entry.isIntersecting);
       if (visible) {
         last = 0;
         wake();

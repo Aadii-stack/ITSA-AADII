@@ -1,2 +1,2 @@
-import LetterGlitch from './home/LetterGlitch';
-export default LetterGlitch;
+export * from './home/LetterGlitch';
+export { default } from './home/LetterGlitch';

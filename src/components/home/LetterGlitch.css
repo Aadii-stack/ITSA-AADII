@@ -3,7 +3,6 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: #08070b;
 }
 
 .letter-glitch-canvas {
@@ -12,5 +11,4 @@
   display: block;
   width: 100%;
   height: 100%;
-  background-color: #08070b;
 }
