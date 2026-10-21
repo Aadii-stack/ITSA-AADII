@@ -213,12 +213,12 @@
 }
 
 .hero-shader-frame {
-  width: 250px;
-  height: 64px;
+  width: 200px;
+  height: 56px;
   position: relative;
   border-radius: 9999px;
   overflow: hidden;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(183, 147, 210, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(183, 147, 210, 0.2);
   background: #0d0a12;
 }
 

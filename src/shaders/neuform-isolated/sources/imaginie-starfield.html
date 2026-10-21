@@ -41,6 +41,11 @@
     .holo-btn:hover {
       transform: translateY(-1px);
     }
+    #ambient-starfield, #portal-stars {
+      display: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
   </style>
 </head>
 <body class="bg-[#030303] text-[#f4f4f6] font-sans antialiased overflow-x-hidden min-h-screen flex flex-col justify-between" style="background-image: radial-gradient(circle at 10% 20%, rgba(15, 11, 28, 0.6) 0%, rgba(3, 3, 3, 1) 80%);">
@@ -240,18 +245,6 @@
 
     function initStars() {
       stars = [];
-      const count = 45;
-      for (let i = 0; i < count; i++) {
-        stars.push({
-          x: Math.random() * portalWidth,
-          y: Math.random() * portalHeight,
-          radius: Math.random() * 1.5 + 0.5,
-          color: getRandomColor(),
-          speed: Math.random() * 0.15 + 0.05,
-          angle: Math.random() * Math.PI * 2,
-          pulse: Math.random() * 0.02
-        });
-      }
     }
 
     function getRandomColor() {
@@ -306,16 +299,6 @@
 
     function initAmbientStars() {
       ambientStars = [];
-      const count = 70;
-      for (let i = 0; i < count; i++) {
-        ambientStars.push({
-          x: Math.random() * ambientCanvas.width,
-          y: Math.random() * ambientCanvas.height,
-          size: Math.random() * 0.8 + 0.2,
-          opacity: Math.random() * 0.6 + 0.1,
-          drift: Math.random() * 0.02 + 0.01
-        });
-      }
     }
 
     function drawAmbientStars() {
