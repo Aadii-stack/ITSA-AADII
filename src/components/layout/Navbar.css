@@ -25,10 +25,11 @@
   padding: 0 16px;
   background: var(--nav-bg);
   border-radius: 0 0 var(--nav-radius) var(--nav-radius);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  border: 1px solid #ffffff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.08);
 }
 
-/* Concave flares at the top-left / top-right corners */
+/* Concave flares at the top-left / top-right corners with white border stroke */
 .navbar::before,
 .navbar::after {
   content: "";
@@ -41,12 +42,12 @@
 
 .navbar::before {
   left: calc(var(--flare) * -1);
-  background: radial-gradient(circle at 0 100%, transparent var(--flare), var(--nav-bg) calc(var(--flare) + 0.5px));
+  background: radial-gradient(circle at 0 100%, transparent calc(var(--flare) - 1px), #ffffff calc(var(--flare) - 1px), #ffffff var(--flare), var(--nav-bg) calc(var(--flare) + 0.5px));
 }
 
 .navbar::after {
   right: calc(var(--flare) * -1);
-  background: radial-gradient(circle at 100% 100%, transparent var(--flare), var(--nav-bg) calc(var(--flare) + 0.5px));
+  background: radial-gradient(circle at 100% 100%, transparent calc(var(--flare) - 1px), #ffffff calc(var(--flare) - 1px), #ffffff var(--flare), var(--nav-bg) calc(var(--flare) + 0.5px));
 }
 
 /* Brand on Left */
