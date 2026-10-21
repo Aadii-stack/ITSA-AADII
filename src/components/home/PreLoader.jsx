@@ -48,7 +48,7 @@ export default function PreLoader({ onComplete }) {
       onComplete: () => {
         gsap.to(preloaderRef.current, {
           clipPath: 'inset(0 0 100% 0)',
-          duration: 0.9,
+          duration: 1.0,
           ease: 'power4.inOut',
           onComplete: () => {
             if (onComplete) onComplete();
@@ -58,9 +58,10 @@ export default function PreLoader({ onComplete }) {
     });
 
     // Animate liquid rising smoothly through ITSA from 0% (y = 200) to 100% (y = 20)
+    // Extended duration so the preloader lasts longer and creates an immersive build-up
     tl.to(bootObj, {
       progress: 100,
-      duration: 2.0,
+      duration: 4.2,
       ease: 'power2.inOut',
       onUpdate: () => {
         const p = bootObj.progress;
@@ -71,7 +72,8 @@ export default function PreLoader({ onComplete }) {
       }
     });
 
-    tl.to({}, { duration: 0.2 });
+    // Hold at 100% full before revealing the homepage
+    tl.to({}, { duration: 0.8 });
 
     return () => {
       tl.kill();
@@ -88,88 +90,98 @@ export default function PreLoader({ onComplete }) {
 
   return (
     <div id="preloader" ref={preloaderRef} aria-live="polite">
-      {/* Background Scrolling Code Stream */}
+      {/* Background continuous scrolling code monitor scan */}
       <div className="preloader-code-stream" aria-hidden="true">
         <div className="code-stream-col">
-          {repeatedLines.map((line, idx) => (
-            <span key={idx} dangerouslySetInnerHTML={{ __html: line }} />
+          {repeatedLines.map((lineHtml, idx) => (
+            <div
+              key={idx}
+              className="code-stream-row"
+              dangerouslySetInnerHTML={{ __html: lineHtml }}
+            />
           ))}
         </div>
       </div>
 
-      {/* Centered Liquid Water ITSA Logo */}
+      {/* Main Liquid ITSA Visual */}
       <div className="liquid-preloader-container">
         <div className="liquid-svg-wrapper">
           <svg
+            viewBox="0 0 800 240"
             className="liquid-loader-svg"
-            viewBox="0 0 700 240"
             xmlns="http://www.w3.org/2000/svg"
             role="img"
-            aria-label="ITSA Loading Animation"
+            aria-label="ITSA Liquid Wave Loading"
           >
             <defs>
-              {/* White liquid - no gradient needed, pure white fill */}
-              <clipPath id="itsa-water-clip">
+              {/* Thick Bevan Serif ITSA Mask */}
+              <mask id="itsa-text-mask">
                 <text
-                  x="350"
-                  y="175"
+                  x="50%"
+                  y="62%"
                   textAnchor="middle"
-                  fontFamily="'Bevan', Georgia, serif"
-                  fontWeight="700"
-                  fontSize="170"
-                  letterSpacing="6"
+                  dominantBaseline="middle"
+                  className="itsa-mask-text"
                 >
                   ITSA
                 </text>
-              </clipPath>
+              </mask>
+
+              {/* Seamless sinusoidal liquid wave */}
+              <path
+                id="wave-unit"
+                d="M 0 30 Q 75 0 150 30 T 300 30 T 450 30 T 600 30 T 750 30 T 900 30 T 1050 30 T 1200 30 V 300 H 0 Z"
+              />
+
+              {/* Lavender / Lilac Water Gradient */}
+              <linearGradient id="lavender-water-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#d4b8e8" stopOpacity="0.95" />
+                <stop offset="45%" stopColor="#b793d2" stopOpacity="0.88" />
+                <stop offset="100%" stopColor="#7e539e" stopOpacity="0.98" />
+              </linearGradient>
+
+              {/* Deep Water Gradient */}
+              <linearGradient id="lavender-deep-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#b793d2" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#552f73" stopOpacity="0.85" />
+              </linearGradient>
             </defs>
 
-            {/* Ghost letters — lavender border */}
+            {/* Ghost outline: Bevan serif ITSA background with subtle lavender edge */}
             <text
-              className="liquid-ghost-text"
-              x="350"
-              y="175"
+              x="50%"
+              y="62%"
               textAnchor="middle"
-              fontFamily="'Bevan', Georgia, serif"
-              fontWeight="700"
-              fontSize="170"
-              letterSpacing="6"
+              dominantBaseline="middle"
+              className="liquid-ghost-text"
             >
               ITSA
             </text>
 
-            {/* Rising Liquid Wave — white */}
-            <g clipPath="url(#itsa-water-clip)">
-              <g ref={waterGroupRef} id="liquid-water-group" transform="translate(0, 200)">
-                <path
+            {/* Rising Water Container clipped by the ITSA text */}
+            <g mask="url(#itsa-text-mask)">
+              {/* Group animated vertically from y=200 down to y=20 */}
+              <g ref={waterGroupRef} transform="translate(0, 200)">
+                {/* Back wave layer (slower, offset phase) */}
+                <use
+                  href="#wave-unit"
                   className="wave-back"
-                  d="M -700 0 Q -525 18 -350 0 T 0 0 T 350 0 T 700 0 T 1050 0 T 1400 0 L 1400 300 L -700 300 Z"
-                  fill="rgba(255, 255, 255, 0.45)"
-                  opacity="0.65"
+                  fill="url(#lavender-deep-grad)"
                 />
-                <path
+                {/* Front wave layer (faster, primary wave) */}
+                <use
+                  href="#wave-unit"
                   className="wave-front"
-                  d="M -700 0 Q -525 -18 -350 0 T 0 0 T 350 0 T 700 0 T 1050 0 T 1400 0 L 1400 300 L -700 300 Z"
-                  fill="#FFFFFF"
-                  opacity="0.95"
+                  fill="url(#lavender-water-grad)"
                 />
               </g>
             </g>
-
-            {/* Specular rim */}
-            <text
-              className="liquid-rim-text"
-              x="350"
-              y="175"
-              textAnchor="middle"
-              fontFamily="'Bevan', Georgia, serif"
-              fontWeight="700"
-              fontSize="170"
-              letterSpacing="6"
-            >
-              ITSA
-            </text>
           </svg>
+        </div>
+
+        {/* Status Motto */}
+        <div className="liquid-status-motto" aria-hidden="true">
+          <span>Make it happen</span>
         </div>
       </div>
     </div>

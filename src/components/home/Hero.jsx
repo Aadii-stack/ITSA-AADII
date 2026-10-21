@@ -12,7 +12,6 @@ export default function Hero() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // --- GSAP ANIMATION ELEMENTS ---
-    const logoEl = heroWrapperRef.current?.querySelector('.hero-logo-wrap');
     const wordInfo = heroWrapperRef.current?.querySelector('.word-information');
     const wordTech = heroWrapperRef.current?.querySelector('.word-technology');
     const wordStudent = heroWrapperRef.current?.querySelector('.word-student');
@@ -22,7 +21,6 @@ export default function Hero() {
 
     let tl = null;
     if (prefersReducedMotion) {
-      if (logoEl) { logoEl.style.opacity = '1'; logoEl.style.transform = 'none'; }
       [wordInfo, wordTech, wordStudent, wordAssoc].forEach(el => {
         if (el) { el.style.opacity = '1'; el.style.transform = 'none'; }
       });
@@ -31,22 +29,16 @@ export default function Hero() {
     } else {
       tl = gsap.timeline();
 
-      if (logoEl) gsap.set(logoEl, { scale: 0.7, opacity: 0 });
       if (wordInfo) gsap.set(wordInfo, { y: -170, opacity: 0, scale: 0.95 });
       if (wordTech) gsap.set(wordTech, { x: -280, opacity: 0, scale: 0.95 });
       if (wordStudent) gsap.set(wordStudent, { x: 280, opacity: 0, scale: 0.95 });
       if (wordAssoc) gsap.set(wordAssoc, { y: 170, opacity: 0, scale: 0.95 });
 
-      // Phase 0: Logo fade and scale in
-      if (logoEl) {
-        tl.to(logoEl, { scale: 1, opacity: 1, duration: 0.55, ease: 'back.out(1.8)' }, 0);
-      }
-
       // Phase 1: Fast inward rush to collision point
-      tl.to(wordInfo, { y: 4, opacity: 1, scale: 1, duration: 0.46, ease: 'power3.in' }, 0.1);
-      tl.to(wordAssoc, { y: -4, opacity: 1, scale: 1, duration: 0.46, ease: 'power3.in' }, 0.1);
-      tl.to(wordTech, { x: 4, opacity: 1, scale: 1, duration: 0.46, ease: 'power3.in' }, 0.1);
-      tl.to(wordStudent, { x: -4, opacity: 1, scale: 1, duration: 0.46, ease: 'power3.in' }, 0.1);
+      tl.to(wordInfo, { y: 4, opacity: 1, scale: 1, duration: 0.46, ease: 'power3.in' }, 0.05);
+      tl.to(wordAssoc, { y: -4, opacity: 1, scale: 1, duration: 0.46, ease: 'power3.in' }, 0.05);
+      tl.to(wordTech, { x: 4, opacity: 1, scale: 1, duration: 0.46, ease: 'power3.in' }, 0.05);
+      tl.to(wordStudent, { x: -4, opacity: 1, scale: 1, duration: 0.46, ease: 'power3.in' }, 0.05);
 
       // Phase 2: Instant elastic recoil away from each other
       tl.to(wordTech, {
@@ -55,7 +47,7 @@ export default function Hero() {
           { x: 3, duration: 0.14, ease: 'power2.inOut' },
           { x: 0, duration: 0.18, ease: 'power3.out' }
         ]
-      }, 0.56);
+      }, 0.51);
 
       tl.to(wordStudent, {
         keyframes: [
@@ -63,7 +55,7 @@ export default function Hero() {
           { x: -3, duration: 0.14, ease: 'power2.inOut' },
           { x: 0, duration: 0.18, ease: 'power3.out' }
         ]
-      }, 0.56);
+      }, 0.51);
 
       tl.to(wordInfo, {
         keyframes: [
@@ -71,7 +63,7 @@ export default function Hero() {
           { y: 2, duration: 0.14, ease: 'power2.inOut' },
           { y: 0, duration: 0.18, ease: 'power3.out' }
         ]
-      }, 0.56);
+      }, 0.51);
 
       tl.to(wordAssoc, {
         keyframes: [
@@ -79,7 +71,7 @@ export default function Hero() {
           { y: -2, duration: 0.14, ease: 'power2.inOut' },
           { y: 0, duration: 0.18, ease: 'power3.out' }
         ]
-      }, 0.56);
+      }, 0.51);
 
       // Impact vibration
       tl.to('.hero-headline', {
@@ -88,7 +80,7 @@ export default function Hero() {
           { scale: 0.99, duration: 0.1, ease: 'power1.inOut' },
           { scale: 1, duration: 0.12, ease: 'power2.out' }
         ]
-      }, 0.56);
+      }, 0.51);
 
       // Motto: Make it happen
       if (mottoEl) {
@@ -125,13 +117,6 @@ export default function Hero() {
       <div className="hero-grid-overlay" aria-hidden="true" />
 
       <div className="hero-content">
-        {/* Circular Logo at the top */}
-        <div className="hero-logo-wrap" id="hero-logo">
-          <div className="hero-logo-circle">
-            <img src="/assets/itsa-logo.png" alt="ITSA Logo" className="hero-logo-img" />
-          </div>
-        </div>
-
         {/* Headline: INFORMATION TECHNOLOGY STUDENT ASSOCIATION */}
         <div className="hero-headline-wrap">
           <h1 className="hero-headline" id="hero-headline" aria-label="Information Technology Student Association">
