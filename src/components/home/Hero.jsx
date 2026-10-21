@@ -75,11 +75,11 @@ export default function Hero() {
               guides={false}
               fontFamily="'Bevan', Georgia, 'Times New Roman', serif"
               letterSpacing={0.04}
-              accentColor="#ffffff"
+              accentColor="#b793d2"
               lineStyle="solid"
               strokeWidth={1.5}
               bounce={0.75}
-              color="#b793d2"
+              color="#ffffff"
               sweep={true}
             />
           </div>
