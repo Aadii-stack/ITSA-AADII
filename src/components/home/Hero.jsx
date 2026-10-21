@@ -4,7 +4,6 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import TechText from '../ui/TechText';
 import heroVideo from '../../assets/hero_section.mp4';
-import heroPoster from '../../assets/hero-bg.png';
 import './Hero.css';
 
 export default function Hero() {
@@ -49,13 +48,12 @@ export default function Hero() {
 
   return (
     <section className="hero-container" id="hero" ref={heroWrapperRef}>
-      {/* Video Background with Poster Fallback */}
+      {/* Video Background */}
       <div className="hero-video-bg" aria-hidden="true">
         <video
           className="hero-bg-video"
           src={heroVideo}
-          poster={heroPoster}
-          preload="metadata"
+          preload="auto"
           autoPlay
           loop
           muted
