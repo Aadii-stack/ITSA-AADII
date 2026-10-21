@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import TechText from '../ui/TechText';
 import './BigTitleBanner.css';
 
 const BigTitleBanner = () => {
@@ -26,16 +27,34 @@ const BigTitleBanner = () => {
       <div className={`big-title-container ${isVisible ? 'animate-in' : ''}`}>
         <span className="aesthetic-tag">/// OUR UNCOMPROMISING MOTTO</span>
         
-        <h1 className="aesthetic-big-heading">
-          <div className="title-line-1">
-            <span className="word word-1">MAKE</span>{' '}
-            <span className="word word-2 gold-stroke">IT</span>
-          </div>
-          <div className="title-line-2">
-            <span className="word word-3">HAPPEN</span>
-            <span className="accent-dot">.</span>
-          </div>
-        </h1>
+        <div
+          className="tech-text-wrapper"
+          style={{ width: '100%', height: '260px', position: 'relative', margin: '24px auto', maxWidth: '1100px' }}
+        >
+          <TechText
+            text="MAKE IT HAPPEN"
+            fontWeight={400}
+            fontSize={130}
+            reveal="letter"
+            dashLength={4}
+            dashGap={2}
+            specks={6}
+            intro="metrics"
+            introDuration={2.8}
+            clickKick={true}
+            draggable={true}
+            guides={false}
+            fontFamily="'Bevan', Georgia, 'Times New Roman', serif"
+            letterSpacing={-0.02}
+            accentColor="#ffffff"
+            lineStyle="solid"
+            strokeWidth={1.25}
+            bounce={0.75}
+            color="#b793d2"
+            sweep={true}
+          />
+        </div>
+
         <p className="aesthetic-subtext">
           Ideas become events. Events become experiences. Experiences become the ITSA story.
         </p>
