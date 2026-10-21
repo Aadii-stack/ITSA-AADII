@@ -20,14 +20,12 @@ export default function Navbar() {
         <nav className="navbar" aria-label="Main navigation">
           {/* Brand Logo & Title on Left */}
           <a href="#" className="brand" aria-label="ITSA Home">
-            <span className="brand-logo" aria-hidden="true">
-              <img 
-                src={logoImg} 
-                alt="ITSA Logo" 
-                className="brand-logo-img"
-                onError={(e) => { e.target.style.display = 'none'; }}
-              />
-            </span>
+            <img 
+              src={logoImg} 
+              alt="ITSA Logo" 
+              className="brand-logo-img"
+              onError={(e) => { e.target.style.display = 'none'; }}
+            />
             ITSA
           </a>
 
