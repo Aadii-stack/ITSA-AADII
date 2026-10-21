@@ -20,13 +20,13 @@ const MetaSummitTicket = () => {
   }, []);
 
   return (
-    <section className="ticket-section" ref={ticketRef}>
+    <section id="meta-summit" className="ticket-section" ref={ticketRef}>
       <div className={`cyber-ticket-container ${isVisible ? 'ticket-pop' : ''}`}>
         <div className="ticket-grain-texture" />
 
         <div className="ticket-body">
           <div className="ticket-top-meta">
-            <span className="cyber-edition">FLAGSHIP EVENT // COMING SOON</span>
+            <span className="cyber-edition">ANNUAL FLAGSHIP SUMMIT // COMING SOON</span>
           </div>
 
           <div className="ticket-main-title">
@@ -58,7 +58,10 @@ const MetaSummitTicket = () => {
 
         <div className="ticket-stub-vertical">
           <span className="vip-text">VIP ACCESS</span>
-          <a href="/meta-summit" className="notify-btn">GET NOTIFIED ↗</a>
+          <div className="barcode-container">
+            <div className="barcode-bars" />
+            <span className="barcode-code">ITSA-2026</span>
+          </div>
         </div>
       </div>
     </section>

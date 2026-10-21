@@ -3,9 +3,8 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import TechText from '../ui/TechText';
-import { ShaderButtons } from '@designcodeio/threeui';
-import '@designcodeio/threeui/style.css';
 import heroVideo from '../../assets/hero_section.mp4';
+import heroPoster from '../../assets/hero-bg.png';
 import './Hero.css';
 
 export default function Hero() {
@@ -35,24 +34,8 @@ export default function Hero() {
       }
     }
 
-    // Scroll smoothly to overview if iframe is clicked
-    const onIframeBlur = () => {
-      if (document.activeElement && document.activeElement.tagName === 'IFRAME') {
-        const frame = heroWrapperRef.current?.querySelector('.hero-shader-frame iframe');
-        if (document.activeElement === frame) {
-          const target = document.querySelector('#make-it-happen');
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-          }
-          window.focus();
-        }
-      }
-    };
-    window.addEventListener('blur', onIframeBlur);
-
     return () => {
       if (tl) tl.kill();
-      window.removeEventListener('blur', onIframeBlur);
     };
   }, []);
 
@@ -66,11 +49,13 @@ export default function Hero() {
 
   return (
     <section className="hero-container" id="hero" ref={heroWrapperRef}>
-      {/* Video Background */}
+      {/* Video Background with Poster Fallback */}
       <div className="hero-video-bg" aria-hidden="true">
         <video
           className="hero-bg-video"
           src={heroVideo}
+          poster={heroPoster}
+          preload="metadata"
           autoPlay
           loop
           muted
@@ -118,22 +103,18 @@ export default function Hero() {
           <span>Make it happen</span>
         </div>
 
-        {/* CTA: Explore with ShaderButtons (Star Portal) */}
+        {/* CTA: Hardened Accessible Explore Pill Button */}
         <div className="hero-cta-wrap" id="hero-cta">
           <a
             href="#make-it-happen"
-            className="hero-shader-btn-link"
+            className="hero-explore-cta"
             onClick={handleExploreClick}
-            aria-label="Explore ITSA overview section"
+            aria-label="Explore ITSA overview and initiatives"
           >
-            <div className="shader-frame hero-shader-frame">
-              <ShaderButtons
-                mode="dark"
-                hue={0}
-                saturation={1.00}
-                brightness={1.00}
-              />
-            </div>
+            <span className="hero-explore-inner">
+              <span className="hero-explore-text">EXPLORE</span>
+              <span className="hero-explore-arrow" aria-hidden="true">→</span>
+            </span>
           </a>
         </div>
       </div>

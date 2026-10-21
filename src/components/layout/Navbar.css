@@ -139,7 +139,9 @@
   border: none;
   color: #ffffff;
   cursor: pointer;
-  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px;
   align-items: center;
   justify-content: center;
   border-radius: 8px;
@@ -220,10 +222,18 @@ button:focus-visible {
   border: none;
   color: #ffffff;
   cursor: pointer;
-  padding: 6px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.drawer-close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .drawer-links-list {
@@ -243,6 +253,7 @@ button:focus-visible {
   text-decoration: none;
   font-size: 1.05rem;
   font-weight: 600;
+  min-height: 48px;
   padding: 14px 18px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.05);
@@ -264,6 +275,24 @@ button:focus-visible {
   }
   .navbar-hamburger-btn {
     display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-wrap {
+    width: calc(100% - 16px);
+  }
+  .navbar::before,
+  .navbar::after {
+    display: none;
+  }
+  .navbar {
+    border-radius: 0 0 18px 18px;
+    padding: 0 12px;
+  }
+  .brand-logo-img {
+    width: 44px;
+    height: 44px;
   }
 }
 

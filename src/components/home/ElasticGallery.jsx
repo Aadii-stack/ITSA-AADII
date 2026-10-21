@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import './ElasticGallery.css';
 
 // Dynamically import all images inside src/assets/initiatives/
@@ -45,16 +46,80 @@ const initiativesData = [
 
 const ElasticGallery = () => {
   const [activeId, setActiveId] = useState(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  const handleCardKeyDown = (e, id) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setActiveId((prev) => (prev === id ? null : id));
+    }
+  };
+
+  const headerVariants = {
+    hidden: {
+      opacity: 0,
+      y: shouldReduceMotion ? 0 : 20,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0.2 : 0.6,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: shouldReduceMotion ? 0 : 0.08,
+        delayChildren: shouldReduceMotion ? 0 : 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: {
+      opacity: 0,
+      y: shouldReduceMotion ? 0 : 32,
+      scale: shouldReduceMotion ? 1 : 0.96,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: shouldReduceMotion ? 0.2 : 0.65,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
 
   return (
     <section className="elastic-section">
-      <div className="elastic-header">
-        <span className="gold-tag">WHAT WE DO</span>
+      <motion.div
+        className="elastic-header"
+        variants={headerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <span className="gold-tag">/// WHAT WE DO</span>
         <h2>OUR CORE INITIATIVES</h2>
-        <p className="elastic-sub">Hover over any pillar to explore how ITSA drives technical growth.</p>
-      </div>
+        <p className="elastic-sub">Explore how ITSA drives technical mastery and peer collaboration at SLRTCE.</p>
+      </motion.div>
 
-      <div className="elastic-container" onMouseLeave={() => setActiveId(null)}>
+      <motion.div
+        className="elastic-container"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.15 }}
+        onMouseLeave={() => setActiveId(null)}
+      >
         {initiativesData.map((item, index) => {
           const isActive = activeId === item.id;
           const isHoveringAny = activeId !== null;
@@ -63,15 +128,30 @@ const ElasticGallery = () => {
           const imageSrc = loadedImages[index % loadedImages.length] || '';
 
           return (
-            <div
+            <motion.div
               key={item.id}
+              variants={itemVariants}
+              tabIndex={0}
+              role="button"
+              aria-expanded={isActive}
+              aria-label={`${item.title} (${item.category}). Press Enter to toggle details.`}
+              onClick={() => setActiveId((prev) => (prev === item.id ? null : item.id))}
               onMouseEnter={() => setActiveId(item.id)}
+              onKeyDown={(e) => handleCardKeyDown(e, item.id)}
               className={`elastic-card ${
                 isActive ? 'is-active' : isHoveringAny ? 'is-shrunk' : 'is-default'
               }`}
             >
               <div className="elastic-bg-wrapper">
-                {imageSrc && <img src={imageSrc} alt={item.title} className="elastic-img" />}
+                {imageSrc && (
+                  <img
+                    src={imageSrc}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="elastic-img"
+                  />
+                )}
                 <div className={`elastic-gradient ${isActive ? 'visible' : ''}`} />
               </div>
 
@@ -83,14 +163,15 @@ const ElasticGallery = () => {
                 </div>
 
                 <div className={`inactive-details ${isActive ? 'hide' : 'show'}`}>
-                  <span className="vertical-title">{item.title}</span>
                   <span className="card-id-badge">{item.id}</span>
+                  <span className="vertical-title">{item.title}</span>
+                  <span className="mobile-inactive-title">{item.title}</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
           );
         })}
-      </div>
+      </motion.div>
     </section>
   );
 };

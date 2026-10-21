@@ -83,7 +83,7 @@
 }
 
 .aesthetic-subtext {
-  color: #a0a0a0;
+  color: var(--color-text-subtle, #b8bdd0);
   font-size: clamp(1rem, 1.8vw, 1.25rem);
   max-width: 700px;
   margin: 40px auto 0 auto;

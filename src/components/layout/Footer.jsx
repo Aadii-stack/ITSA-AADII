@@ -24,6 +24,7 @@ export default function Footer() {
                 src={siteConfig.logo} 
                 alt="ITSA SLRTCE Logo" 
                 className="footer-logo-img" 
+                loading="lazy" 
                 onError={(e) => { e.target.style.display = 'none'; }}
               />
               <div>
@@ -100,12 +101,6 @@ export default function Footer() {
             <p className="affiliation-subtext">
               Constituent student association under Shree L. R. Tiwari College of Engineering.
             </p>
-          </div>
-          <div className="footer-bottom-right">
-            <span className="circuit-status-chip">
-              <span className="circuit-pulse-dot"></span>
-              <span>The ITSA Circuit • Active</span>
-            </span>
           </div>
         </div>
       </div>

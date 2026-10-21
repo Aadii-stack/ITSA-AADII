@@ -13,26 +13,36 @@
   --color-warm-dim: #d8d4c7;
   --color-warm-surface: #f3efe6;
 
-  /* ITSA Lavender & Purple Accents */
-  --color-gold: #b793d2;
-  --color-gold-hover: #c9a5e0;
-  --color-gold-light: #dcc5ee;
-  --color-gold-dim: rgba(183, 147, 210, 0.12);
-  --color-gold-border: rgba(183, 147, 210, 0.3);
-  --color-gold-glow: rgba(183, 147, 210, 0.2);
+  /* ITSA Tech Lavender & Violet Accents (Official Brand Commitment) */
+  --color-lavender: #b793d2;
+  --color-lavender-hover: #c9a5e0;
+  --color-lavender-light: #dcc5ee;
+  --color-lavender-dim: rgba(183, 147, 210, 0.12);
+  --color-lavender-border: rgba(183, 147, 210, 0.3);
+  --color-lavender-glow: rgba(183, 147, 210, 0.22);
+  --color-lavender-deep: #7852a9;
 
-  /* Text & Readability */
-  --color-text-main: #f5f6f9;
-  --color-text-secondary: #9aa0b2;
-  --color-text-muted: #6b7284;
-  --color-text-inverse: #0b0c10;
-  --color-text-gold: #c9a5e0;
+  /* Backward Compatibility Token Aliases */
+  --color-gold: var(--color-lavender);
+  --color-gold-hover: var(--color-lavender-hover);
+  --color-gold-light: var(--color-lavender-light);
+  --color-gold-dim: var(--color-lavender-dim);
+  --color-gold-border: var(--color-lavender-border);
+  --color-gold-glow: var(--color-lavender-glow);
+
+  /* High-Contrast Readability (WCAG AAA ≥7:1 on dark surfaces) */
+  --color-text-main: #ffffff;
+  --color-text-secondary: #c2c6d6;
+  --color-text-subtle: #b8bdd0;
+  --color-text-muted: #8b90a6;
+  --color-text-inverse: #08070b;
+  --color-text-gold: var(--color-lavender-hover);
 
   /* Borders & Circuit Lines */
   --color-border-subtle: rgba(255, 255, 255, 0.08);
-  --color-border-medium: rgba(255, 255, 255, 0.14);
-  --color-border-hover: rgba(183, 147, 210, 0.45);
-  --color-circuit-line: rgba(183, 147, 210, 0.22);
+  --color-border-medium: rgba(255, 255, 255, 0.15);
+  --color-border-hover: rgba(183, 147, 210, 0.5);
+  --color-circuit-line: rgba(183, 147, 210, 0.25);
   --color-circuit-node: #b793d2;
 
   /* Typography */
@@ -73,4 +83,5 @@
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
   --shadow-gold: 0 4px 20px rgba(183, 147, 210, 0.18);
+  --shadow-lavender: 0 4px 24px rgba(183, 147, 210, 0.24);
 }

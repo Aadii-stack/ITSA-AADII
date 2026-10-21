@@ -61,10 +61,7 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 60px 60px;
+  background: radial-gradient(circle at 50% 45%, rgba(183, 147, 210, 0.08) 0%, transparent 70%);
   pointer-events: none;
   z-index: 1;
 }
@@ -187,7 +184,7 @@
   will-change: opacity, transform;
 }
 
-/* CTA Button: Explore — ShaderButtons (Star Portal) */
+/* CTA Button: Explore — Hardened Native Holographic Pill Button */
 .hero-cta-wrap {
   margin-top: 36px;
   opacity: 0;
@@ -199,48 +196,60 @@
   align-items: center;
 }
 
-.hero-shader-btn-link {
-  display: inline-block;
+.hero-explore-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
-  pointer-events: auto;
   border-radius: 9999px;
   cursor: pointer;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+  padding: 2px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(220, 200, 245, 0.85) 50%, rgba(195, 220, 255, 0.95) 100%);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6), 0 0 20px rgba(183, 147, 210, 0.25);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease;
+  min-height: 48px;
 }
 
-.hero-shader-btn-link:hover {
-  transform: translateY(-2px);
+.hero-explore-cta:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 26px rgba(183, 147, 210, 0.4);
 }
 
-.hero-shader-frame {
-  width: 200px;
-  height: 56px;
-  position: relative;
+.hero-explore-cta:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.hero-explore-cta:focus-visible {
+  outline: 2px solid #b793d2;
+  outline-offset: 4px;
+}
+
+.hero-explore-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 28px;
   border-radius: 9999px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(183, 147, 210, 0.2);
-  background: #0d0a12;
+  background: linear-gradient(135deg, #ffffff 0%, #f6efff 50%, #eef5ff 100%);
+  color: #08070b;
 }
 
-.hero-shader-frame:hover {
-  /* No hover glow */
-}
-
-.hero-shader-frame iframe {
-  width: 100% !important;
-  height: 100% !important;
-  border: 0 !important;
-  display: block !important;
-  pointer-events: auto;
-}
-
-.hero-cta-btn .cta-arrow {
+.hero-explore-text {
   font-family: 'Archivo Black', 'Arial Black', sans-serif;
-  display: inline-block;
-  transition: transform 0.25s ease;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-.hero-cta-btn:hover .cta-arrow {
+.hero-explore-arrow {
+  font-size: 16px;
+  font-weight: 700;
+  transition: transform 0.22s ease;
+}
+
+.hero-explore-cta:hover .hero-explore-arrow {
   transform: translateX(4px);
 }
 

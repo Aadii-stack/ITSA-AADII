@@ -29,21 +29,21 @@
 }
 
 .events-subtext {
-  color: #888888;
+  color: var(--color-text-subtle, #b8bdd0);
   font-size: 0.95rem;
 }
 
 /* 3 Photo Cards Grid */
 .events-photo-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: 25px;
   margin-bottom: 50px;
 }
 
 .photo-event-card {
   position: relative;
-  height: 480px;
+  height: clamp(420px, 50vw, 480px);
   border-radius: 20px;
   overflow: hidden;
   background-color: #121212;

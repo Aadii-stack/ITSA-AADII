@@ -24,20 +24,31 @@
 }
 
 .faculty-sub {
-  color: #777777;
+  color: var(--color-text-subtle, #b8bdd0);
   font-size: 0.9rem;
 }
 
 .faculty-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
   gap: 25px;
   max-width: 1300px;
   margin: 0 auto;
 }
 
+.faculty-flip-card:focus-visible {
+  outline: 2px solid #b793d2;
+  outline-offset: 4px;
+  border-radius: 16px;
+}
+
+.faculty-photo-box:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
 .faculty-flip-card {
-  height: 400px; /* Taller card to fit avatar & text comfortably */
+  height: clamp(380px, 45vw, 420px); /* Taller card to fit avatar & text comfortably */
   perspective: 1000px;
   cursor: pointer;
 }
@@ -46,7 +57,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   transform-style: preserve-3d;
 }
 
@@ -202,7 +213,7 @@
 }
 
 .back-bio {
-  color: #aaaaaa;
+  color: var(--color-text-secondary, #c2c6d6);
   font-size: 0.82rem;
   margin-top: 10px;
   line-height: 1.5;
@@ -210,7 +221,7 @@
 
 .flip-back-hint {
   font-size: 0.6rem;
-  color: #666;
+  color: rgba(183, 147, 210, 0.75);
   font-weight: 600;
   letter-spacing: 1px;
   margin-top: 15px;
@@ -246,6 +257,12 @@
 }
 
 .lightbox-close-btn {
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
   position: absolute;
   top: 15px;
   right: 18px;
