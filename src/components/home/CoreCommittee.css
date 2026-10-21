@@ -1,5 +1,5 @@
 .committee-section {
-  background-color: #060606;
+  background-color: #050505;
   padding: 110px 5% 100px 5%;
   color: #ffffff;
   position: relative;
@@ -12,21 +12,23 @@
 }
 
 .committee-header .gold-tag {
-  color: #e2a829;
+  color: #ffffff;
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 4px;
+  text-shadow: 0 0 10px rgba(183, 147, 210, 0.8);
 }
 
 .committee-header h2 {
   font-size: 2.5rem;
   font-weight: 900;
   margin: 8px 0;
-  text-shadow: 0 0 20px rgba(226, 168, 41, 0.15);
+  color: #ffffff;
+  text-shadow: 0 0 25px rgba(183, 147, 210, 0.8);
 }
 
 .committee-sub {
-  color: #777;
+  color: rgba(255, 255, 255, 0.7);
   font-size: 0.85rem;
 }
 
@@ -64,12 +66,12 @@
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   border-radius: 24px;
-  border: 1px solid rgba(226, 168, 41, 0.3);
+  border: 1px solid rgba(183, 147, 210, 0.65);
 }
 
 /* FRONT CARD CONTAINER */
 .popout-card-front {
-  background: radial-gradient(circle at top center, #1c1810 0%, #080808 100%);
+  background: radial-gradient(circle at top center, #1c0636 0%, #050505 100%);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -83,7 +85,7 @@
   inset: 0;
   opacity: 0.12;
   pointer-events: none;
-  background-image: radial-gradient(#e2a829 0.8px, transparent 0.8px);
+  background-image: radial-gradient(#ffffff 0.8px, transparent 0.8px);
   background-size: 20px 20px;
   border-radius: 24px;
   z-index: 1;
@@ -102,7 +104,7 @@
   cursor: pointer;
 }
 
-/* Subtle gold halo glow behind the person */
+/* Subtle Royal Amethyst halo glow behind the person */
 .photo-backdrop-glow {
   position: absolute;
   top: 40px;
@@ -111,8 +113,8 @@
   width: 160px;
   height: 160px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(226, 168, 41, 0.3) 0%, transparent 70%);
-  filter: blur(12px);
+  background: radial-gradient(circle, rgba(183, 147, 210, 0.9) 0%, transparent 70%);
+  filter: blur(14px);
   pointer-events: none;
   z-index: 1;
 }
@@ -138,7 +140,7 @@
 /* POPOUT ON PHOTO HOVER */
 .popout-photo-container:hover .popout-member-img {
   transform: scale(1.15) translateY(-18px); /* Head pops UP beyond top border */
-  filter: drop-shadow(0 0 20px rgba(226, 168, 41, 0.5)) drop-shadow(0 15px 25px rgba(0, 0, 0, 0.95));
+  filter: drop-shadow(0 0 25px rgba(183, 147, 210, 0.98)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.35));
   z-index: 20;
 }
 
@@ -148,28 +150,29 @@
   z-index: 5;
   padding: 15px;
   text-align: center;
-  background: rgba(10, 10, 10, 0.9);
+  background: rgba(5, 5, 5, 0.92);
   border-radius: 0 0 24px 24px;
-  border-top: 1px solid rgba(226, 168, 41, 0.15);
+  border-top: 1px solid rgba(183, 147, 210, 0.5);
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .popout-card-body:hover {
-  background: rgba(226, 168, 41, 0.08);
+  background: rgba(183, 147, 210, 0.25);
 }
 
 .popout-badge {
   display: inline-block;
-  background-color: rgba(226, 168, 41, 0.18);
-  color: #e2a829;
-  border: 1px solid rgba(226, 168, 41, 0.4);
+  background-color: #B793D2;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   font-size: 0.65rem;
   font-weight: 800;
   padding: 3px 12px;
   border-radius: 12px;
   margin-bottom: 6px;
   letter-spacing: 0.5px;
+  box-shadow: 0 0 10px rgba(183, 147, 210, 0.7);
 }
 
 .popout-name {
@@ -182,18 +185,17 @@
 
 .popout-dept {
   font-size: 0.78rem;
-  color: #8c8c8c;
+  color: rgba(255, 255, 255, 0.7);
   margin-top: 2px;
 }
 
 .flip-prompt {
   display: block;
   font-size: 0.62rem;
-  color: #e2a829;
+  color: rgba(255, 255, 255, 0.85);
   font-weight: 700;
   margin-top: 8px;
   letter-spacing: 1.5px;
-  opacity: 0.85;
 }
 
 /* BACK FACE */
@@ -205,22 +207,24 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: radial-gradient(circle at center, #121212 0%, #050505 100%);
-  border: 1.5px solid rgba(226, 168, 41, 0.5);
+  background: radial-gradient(circle at center, #1c0636 0%, #050505 100%);
+  border: 1.5px solid rgba(183, 147, 210, 0.85);
   border-radius: 24px;
   z-index: 15;
+  box-shadow: 0 0 25px rgba(183, 147, 210, 0.45);
 }
 
 .back-avatar-circle {
   width: 65px;
   height: 65px;
   border-radius: 50%;
-  background: #1a1a1a;
-  border: 1.5px solid #e2a829;
+  background: #08080c;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 15px;
+  box-shadow: 0 0 15px rgba(183, 147, 210, 0.8);
 }
 
 .back-avatar-circle img {
@@ -230,10 +234,11 @@
 }
 
 .back-position-tag {
-  color: #e2a829;
+  color: #ffffff;
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 1.5px;
+  text-shadow: 0 0 8px rgba(183, 147, 210, 0.8);
 }
 
 .back-member-name {
@@ -245,7 +250,7 @@
 
 .back-bio-text {
   font-size: 0.82rem;
-  color: #aaaaaa;
+  color: rgba(255, 255, 255, 0.75);
   line-height: 1.5;
   margin: 10px 0 18px 0;
 }
@@ -257,17 +262,18 @@
 
 .social-btn {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(183, 147, 210, 0.4);
   padding: 6px 14px;
   border-radius: 20px;
   font-size: 0.7rem;
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.25s ease;
 }
 
 .social-btn:hover {
-  background: #e2a829;
-  color: #000;
-  border-color: #e2a829;
+  background: #B793D2;
+  color: #ffffff;
+  border-color: #ffffff;
+  box-shadow: 0 0 15px rgba(183, 147, 210, 0.8);
 }

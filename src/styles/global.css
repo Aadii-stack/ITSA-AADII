@@ -27,7 +27,7 @@ body {
 
 /* Accessible focus outlines */
 :focus-visible {
-  outline: 2px solid var(--color-gold);
+  outline: 2px solid var(--color-amethyst-bright);
   outline-offset: 3px;
   border-radius: var(--radius-xs);
 }
@@ -39,8 +39,8 @@ body {
   pointer-events: none;
   z-index: 0;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    linear-gradient(to right, rgba(183, 147, 210, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(183, 147, 210, 0.15) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: radial-gradient(circle at 50% 30%, black 40%, transparent 80%);
   -webkit-mask-image: radial-gradient(circle at 50% 30%, black 40%, transparent 80%);
@@ -147,13 +147,13 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 0.5rem;
   padding: 0.35rem 0.85rem;
-  background: rgba(212, 175, 55, 0.08);
-  border: 1px solid var(--color-gold-border);
+  background: var(--color-amethyst-dim);
+  border: 1px solid var(--color-amethyst-border);
   border-radius: var(--radius-pill);
   font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 500;
-  color: var(--color-gold);
+  color: #ffffff;
   letter-spacing: 0.05em;
   white-space: nowrap;
 }
@@ -177,9 +177,10 @@ h1, h2, h3, h4, h5, h6 {
 .circuit-divider-node {
   width: 5px;
   height: 5px;
-  background: var(--color-gold);
+  background: #ffffff;
   border-radius: 50%;
-  opacity: 0.7;
+  box-shadow: 0 0 8px rgba(183, 147, 210, 0.9), 0 0 3px #ffffff;
+  opacity: 0.9;
 }
 
 /* Editorial Tagline */
@@ -187,7 +188,8 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   font-weight: 800;
   letter-spacing: -0.01em;
-  color: var(--color-gold);
+  color: #ffffff;
+  text-shadow: 0 0 20px var(--color-amethyst-glow);
 }
 
 /* Buttons */
@@ -209,39 +211,43 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-primary {
-  background-color: var(--color-gold);
-  color: var(--color-bg-base);
-  box-shadow: var(--shadow-gold);
+  background-color: var(--color-amethyst);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-amethyst);
 }
 
 .btn-primary:hover {
-  background-color: var(--color-gold-hover);
+  background-color: var(--color-amethyst-light);
+  border-color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 6px 24px rgba(183, 147, 210, 0.9), 0 0 15px rgba(255, 255, 255, 0.4);
 }
 
 .btn-secondary {
   background-color: var(--color-bg-surface);
-  color: var(--color-warm-white);
-  border: 1px solid var(--color-border-medium);
+  color: #ffffff;
+  border: 1px solid var(--color-amethyst-border);
 }
 
 .btn-secondary:hover {
-  border-color: var(--color-gold-border);
-  background-color: var(--color-bg-surface-elevated);
-  color: var(--color-gold);
+  border-color: #ffffff;
+  background-color: var(--color-amethyst-dim);
+  color: #ffffff;
   transform: translateY(-2px);
+  box-shadow: 0 0 15px var(--color-amethyst-glow);
 }
 
 .btn-warm {
-  background-color: var(--color-warm-white);
+  background-color: #ffffff;
   color: var(--color-bg-base);
   font-weight: 700;
 }
 
 .btn-warm:hover {
-  background-color: var(--color-warm-cream);
+  background-color: #e5e5ea;
   transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
 }
 
 .btn-ghost {
@@ -251,7 +257,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-ghost:hover {
-  color: var(--color-gold);
+  color: #ffffff;
 }
 
 .btn-sm {
@@ -267,16 +273,17 @@ h1, h2, h3, h4, h5, h6 {
 /* Editorial Cards */
 .card-circuit {
   background: var(--color-bg-card);
-  border: 1px solid var(--color-border-subtle);
+  border: 1px solid var(--color-amethyst-border);
   border-radius: var(--radius-md);
   padding: 1.75rem;
-  transition: border-color var(--transition-base), transform var(--transition-base);
+  transition: border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
   position: relative;
 }
 
 .card-circuit:hover {
-  border-color: var(--color-border-hover);
+  border-color: rgba(255, 255, 255, 0.4);
   transform: translateY(-2px);
+  box-shadow: 0 8px 30px var(--color-amethyst-dim);
 }
 
 /* Editorial Section Spacing */

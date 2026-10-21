@@ -1,5 +1,5 @@
 .elastic-section {
-  background-color: #0c0c0c;
+  background-color: #050505;
   padding: 80px 6% 100px 6%;
   color: #ffffff;
 }
@@ -10,10 +10,11 @@
 }
 
 .gold-tag {
-  color: #e2a829;
+  color: #ffffff;
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 4px;
+  text-shadow: 0 0 10px rgba(183, 147, 210, 0.8);
 }
 
 .elastic-header h2 {
@@ -21,10 +22,11 @@
   font-weight: 900;
   margin-top: 8px;
   margin-bottom: 8px;
+  color: #ffffff;
 }
 
 .elastic-sub {
-  color: #777777;
+  color: rgba(255, 255, 255, 0.7);
   font-size: 0.9rem;
 }
 
@@ -48,22 +50,24 @@
   position: relative;
   overflow: hidden;
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background-color: #161616;
+  border: 1px solid rgba(183, 147, 210, 0.6);
+  background-color: #08080c;
   cursor: pointer;
-  transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.5s ease;
+  transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.5s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 /* Default state: Evenly distributed cards */
 .elastic-card.is-default {
   flex: 1;
-  filter: brightness(75%);
+  filter: brightness(80%);
 }
 
 /* Hover active expanded card */
 .elastic-card.is-active {
   flex: 3.5;
   filter: brightness(100%);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 35px rgba(183, 147, 210, 0.8), 0 0 15px rgba(255, 255, 255, 0.2);
 }
 
 /* Shrunk sibling cards on hover */
@@ -93,8 +97,8 @@
 .elastic-gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
-  opacity: 0.6;
+  background: linear-gradient(to top, rgba(5, 5, 5, 0.95) 0%, rgba(183, 147, 210, 0.45) 60%, transparent 100%);
+  opacity: 0.65;
   transition: opacity 0.5s ease;
 }
 
@@ -132,15 +136,16 @@
 
 .category-pill {
   align-self: flex-start;
-  background: rgba(226, 168, 41, 0.2);
-  border: 1px solid rgba(226, 168, 41, 0.5);
-  color: #e2a829;
+  background: #B793D2;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 0.7rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1px;
+  box-shadow: 0 0 12px rgba(183, 147, 210, 0.8);
 }
 
 .elastic-title {
@@ -153,7 +158,7 @@
 
 .elastic-desc {
   font-size: 0.88rem;
-  color: #cccccc;
+  color: rgba(255, 255, 255, 0.75);
   line-height: 1.5;
   max-width: 450px;
 }
@@ -199,5 +204,5 @@
 .card-id-badge {
   font-size: 0.8rem;
   font-weight: 800;
-  color: #e2a829;
+  color: #ffffff;
 }

@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   min-height: 95vh;
-  background-color: #0c0c0c;
+  background-color: #050505;
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -19,8 +19,8 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.22;
-  filter: contrast(110%) grayscale(30%);
+  opacity: 0.18;
+  filter: contrast(120%) grayscale(40%);
   z-index: 1;
 }
 
@@ -40,8 +40,8 @@
   z-index: 2;
   background-size: 60px 60px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(183, 147, 210, 0.2) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(183, 147, 210, 0.2) 1px, transparent 1px);
   mask-image: radial-gradient(ellipse at center, black 0%, transparent 75%);
   -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 75%);
 }
@@ -74,11 +74,12 @@
 .badge-line {
   width: 40px;
   height: 2px;
-  background-color: #e2a829;
+  background-color: #B793D2;
+  box-shadow: 0 0 10px rgba(183, 147, 210, 0.9), 0 0 4px #ffffff;
 }
 
 .badge-text {
-  color: #e2a829;
+  color: #ffffff;
   font-weight: 800;
   letter-spacing: 3px;
   font-size: 0.8rem;
@@ -92,16 +93,18 @@
   letter-spacing: -0.5px;
   margin-bottom: 20px;
   text-transform: uppercase;
+  color: #ffffff;
   animation: heroTextFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .gold-text {
-  color: #e2a829;
+  color: #ffffff;
+  text-shadow: 0 0 35px rgba(183, 147, 210, 0.95), 0 0 15px rgba(92, 22, 166, 0.6);
 }
 
 .hero-dept-name {
   font-size: 0.95rem;
-  color: #cccccc;
+  color: rgba(255, 255, 255, 0.75);
   margin-bottom: 25px;
   letter-spacing: 1.5px;
 }
@@ -113,7 +116,7 @@
 
 .hero-quote {
   font-size: 0.95rem;
-  color: #888888;
+  color: rgba(255, 255, 255, 0.65);
   line-height: 1.7;
   max-width: 600px;
   margin: 0 auto 35px auto;
@@ -121,20 +124,25 @@
 }
 
 .explore-btn {
-  color: #e2a829;
+  color: #ffffff;
+  background-color: #B793D2;
   text-decoration: none;
   font-size: 0.8rem;
   letter-spacing: 3px;
   font-weight: 800;
-  padding: 10px 20px;
-  border: 1px solid rgba(226, 168, 41, 0.4);
+  padding: 10px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 30px;
+  box-shadow: 0 0 20px rgba(183, 147, 210, 0.7);
   transition: all 0.3s ease;
 }
 
 .explore-btn:hover {
-  background-color: #e2a829;
-  color: #000000;
+  background-color: var(--color-amethyst-light);
+  border-color: #ffffff;
+  color: #ffffff;
+  box-shadow: 0 0 25px rgba(183, 147, 210, 0.95), 0 0 10px rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
 }
 
 .slide-counter-floating {
@@ -148,8 +156,8 @@
 }
 
 .counter-current { color: #ffffff; }
-.counter-divider { color: #444444; margin: 0 4px; }
-.counter-total { color: #666666; }
+.counter-divider { color: rgba(255, 255, 255, 0.3); margin: 0 4px; }
+.counter-total { color: rgba(255, 255, 255, 0.5); }
 
 @keyframes heroTextFadeIn {
   from { opacity: 0; transform: translateY(20px); }

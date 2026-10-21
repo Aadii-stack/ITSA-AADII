@@ -43,15 +43,15 @@ const GlassCard = React.forwardRef(
         className={`group h-[320px] w-[300px] [perspective:1000px] ${className}`}
         {...props}
       >
-        <div className="relative h-full rounded-[40px] bg-gradient-to-br from-zinc-900 via-black to-zinc-950 border border-amber-500/20 shadow-2xl transition-all duration-500 ease-in-out [transform-style:preserve-3d] group-hover:[box-shadow:rgba(234,179,8,0.2)_0px_30px_50px_-20px] group-hover:[transform:rotate3d(1,1,0,20deg)]">
-          <div className="absolute inset-2 rounded-[35px] border-b border-l border-amber-500/30 bg-gradient-to-b from-white/10 to-transparent backdrop-blur-md [transform-style:preserve-3d] [transform:translate3d(0,0,25px)]"></div>
+        <div className="relative h-full rounded-[40px] bg-gradient-to-br from-[#0d0517] via-[#050505] to-[#140624] border border-[#B793D2]/60 shadow-2xl transition-all duration-500 ease-in-out [transform-style:preserve-3d] group-hover:[box-shadow:rgba(183,147,210,0.7)_0px_30px_50px_-20px] group-hover:[transform:rotate3d(1,1,0,20deg)]">
+          <div className="absolute inset-2 rounded-[35px] border-b border-l border-[#B793D2]/50 bg-gradient-to-b from-[#B793D2]/20 to-transparent backdrop-blur-md [transform-style:preserve-3d] [transform:translate3d(0,0,25px)]"></div>
           
           <div className="absolute inset-0 [transform:translate3d(0,0,26px)]">
             <div className="px-6 pt-20 pb-0">
-              <span className="block text-xl font-black text-amber-400 font-mono tracking-tight">
+              <span className="block text-xl font-black text-white font-mono tracking-tight text-shadow-[0_0_15px_rgba(183,147,210,0.8)]">
                 {title}
               </span>
-              <span className="mt-3 block text-[13px] leading-relaxed text-zinc-300">
+              <span className="mt-3 block text-[13px] leading-relaxed text-white/80">
                 {description}
               </span>
             </div>
@@ -66,19 +66,19 @@ const GlassCard = React.forwardRef(
               ].map(({ icon: Icon, delay }, index) => (
                 <button
                   key={index}
-                  className="group/social grid h-[28px] w-[28px] place-content-center rounded-full border-none bg-amber-400 shadow-md transition-all duration-200 ease-in-out hover:bg-white active:bg-amber-500"
+                  className="group/social grid h-[28px] w-[28px] place-content-center rounded-full border border-white/20 bg-white shadow-md transition-all duration-200 ease-in-out hover:bg-[#B793D2] hover:border-[#B793D2]"
                   style={{ transitionDelay: delay }}
                 >
-                  <Icon className="h-3.5 w-3.5 stroke-black transition-colors" />
+                  <Icon className="h-3.5 w-3.5 stroke-[#050505] group-hover/social:stroke-white transition-colors" />
                 </button>
               ))}
             </div>
 
             <div className="flex items-center gap-1 cursor-pointer transition-all duration-200 ease-in-out hover:translate-x-1">
-              <button className="border-none bg-none text-xs font-bold text-amber-400 font-mono">
+              <button className="border-none bg-none text-xs font-bold text-white font-mono">
                 EXPLORE
               </button>
-              <ChevronDown className="h-4 w-4 stroke-amber-400 -rotate-90" strokeWidth={3} />
+              <ChevronDown className="h-4 w-4 stroke-white -rotate-90" strokeWidth={3} />
             </div>
           </div>
 
@@ -90,7 +90,7 @@ const GlassCard = React.forwardRef(
             ].map((circle, index) => (
               <div
                 key={index}
-                className="absolute aspect-square rounded-full bg-amber-500/10 border border-amber-500/20 transition-all duration-500 ease-in-out"
+                className="absolute aspect-square rounded-full bg-[#B793D2]/25 border border-[#B793D2]/50 transition-all duration-500 ease-in-out"
                 style={{
                   width: circle.size,
                   top: circle.pos,
@@ -101,10 +101,10 @@ const GlassCard = React.forwardRef(
               ></div>
             ))}
             <div
-              className="absolute grid aspect-square w-[46px] place-content-center rounded-full bg-amber-400 shadow-lg transition-all duration-500 ease-in-out [transform:translate3d(0,0,90px)] group-hover:[transform:translate3d(0,0,110px)]"
+              className="absolute grid aspect-square w-[46px] place-content-center rounded-full bg-[#B793D2] border border-white/20 shadow-lg transition-all duration-500 ease-in-out [transform:translate3d(0,0,90px)] group-hover:[transform:translate3d(0,0,110px)]"
               style={{ top: "24px", right: "24px" }}
             >
-              <ULogo className="w-5 fill-black" />
+              <ULogo className="w-5 fill-white" />
             </div>
           </div>
         </div>

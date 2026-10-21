@@ -1,13 +1,13 @@
 .about-redirect-section {
-  background-color: #0c0c0c;
+  background-color: #050505;
   padding: 60px 6%;
 }
 
 .about-redirect-card {
   max-width: 1250px;
   margin: 0 auto;
-  background: linear-gradient(90deg, #141414 0%, #1c180e 100%);
-  border: 1px solid rgba(226, 168, 41, 0.25);
+  background: linear-gradient(90deg, #08080c 0%, #1d0736 100%);
+  border: 1px solid rgba(183, 147, 210, 0.8);
   border-radius: 20px;
   padding: 45px 50px;
   display: flex;
@@ -15,16 +15,18 @@
   align-items: center;
   gap: 30px;
   flex-wrap: wrap;
+  box-shadow: 0 10px 40px rgba(183, 147, 210, 0.4);
 }
 
 .gold-sub {
-  color: #e2a829;
+  color: #ffffff;
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 3px;
   text-transform: uppercase;
   display: block;
   margin-bottom: 8px;
+  text-shadow: 0 0 10px rgba(183, 147, 210, 0.8);
 }
 
 .about-redirect-text h2 {
@@ -32,18 +34,20 @@
   font-weight: 900;
   color: #ffffff;
   margin-bottom: 8px;
+  text-shadow: 0 0 20px rgba(183, 147, 210, 0.7);
 }
 
 .about-redirect-text p {
-  color: #aaaaaa;
+  color: rgba(255, 255, 255, 0.75);
   font-size: 0.92rem;
   max-width: 650px;
 }
 
 .about-cta-btn {
-  background-color: #e2a829;
-  color: #000000;
+  background-color: #B793D2;
+  color: #ffffff;
   padding: 14px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 30px;
   font-weight: 800;
   font-size: 0.85rem;
@@ -54,10 +58,13 @@
   gap: 8px;
   transition: all 0.3s ease;
   white-space: nowrap;
+  box-shadow: 0 0 20px rgba(183, 147, 210, 0.6);
 }
 
 .about-cta-btn:hover {
-  background-color: #ffffff;
+  background-color: var(--color-amethyst-light);
+  border-color: #ffffff;
+  color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(226, 168, 41, 0.2);
+  box-shadow: 0 10px 25px rgba(183, 147, 210, 0.9), 0 0 15px rgba(255, 255, 255, 0.4);
 }

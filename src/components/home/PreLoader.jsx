@@ -17,7 +17,7 @@ const CODE_LINES = [
   '  }',
   '}',
   'docker compose up --build',
-  'const theme = { primary: "#e2a829", dark: "#080808" };',
+  'const theme = { primary: "#ffffff", highlight: "#B793D2", dark: "#050505" };',
   'export default function App() {',
   '  return <ITSA loading={true} />;',
   '}',

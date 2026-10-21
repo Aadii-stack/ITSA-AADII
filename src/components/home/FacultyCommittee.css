@@ -1,5 +1,5 @@
 .faculty-section {
-  background-color: #080808;
+  background-color: #050505;
   padding: 80px 6%;
   color: #ffffff;
 }
@@ -10,10 +10,11 @@
 }
 
 .faculty-header .gold-tag {
-  color: #e2a829;
+  color: #ffffff;
   font-size: 0.75rem;
   font-weight: 900;
   letter-spacing: 4px;
+  text-shadow: 0 0 10px rgba(183, 147, 210, 0.8);
 }
 
 .faculty-header h2 {
@@ -21,10 +22,12 @@
   font-weight: 900;
   margin-top: 6px;
   margin-bottom: 6px;
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(183, 147, 210, 0.6);
 }
 
 .faculty-sub {
-  color: #777777;
+  color: rgba(255, 255, 255, 0.7);
   font-size: 0.9rem;
 }
 
@@ -62,13 +65,13 @@
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(183, 147, 210, 0.65);
   overflow: hidden;
 }
 
 /* FRONT FACE */
 .faculty-card-front {
-  background-color: #121212;
+  background-color: #08080c;
   display: flex;
   flex-direction: column;
 }
@@ -76,7 +79,7 @@
 .faculty-photo-box {
   position: relative;
   height: 240px;
-  background-color: #1a1a1a;
+  background-color: #0c0914;
   cursor: zoom-in;
 }
 
@@ -96,8 +99,8 @@
 .zoom-hint-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  color: #fff;
+  background: rgba(5, 5, 5, 0.75);
+  color: #ffffff;
   font-weight: 800;
   font-size: 0.85rem;
   letter-spacing: 1.5px;
@@ -116,13 +119,14 @@
   position: absolute;
   bottom: 10px;
   left: 10px;
-  background: rgba(0, 0, 0, 0.85);
-  border: 1px solid #e2a829;
-  color: #e2a829;
+  background: #B793D2;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
   padding: 3px 8px;
   border-radius: 12px;
   font-size: 0.65rem;
   font-weight: 800;
+  box-shadow: 0 0 10px rgba(183, 147, 210, 0.85);
 }
 
 .faculty-info-front {
@@ -142,12 +146,12 @@
 
 .faculty-info-front p {
   font-size: 0.78rem;
-  color: #888888;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .flip-hint {
   font-size: 0.65rem;
-  color: #e2a829;
+  color: rgba(255, 255, 255, 0.8);
   font-weight: 700;
   letter-spacing: 1px;
   margin-top: 8px;
@@ -155,7 +159,7 @@
 
 /* BACK FACE */
 .faculty-card-back {
-  background: linear-gradient(145deg, #181818 0%, #0d0d0d 100%);
+  background: linear-gradient(145deg, #170729 0%, #050505 100%);
   transform: rotateY(180deg);
   padding: 25px;
   display: flex;
@@ -163,7 +167,8 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  border: 1px solid rgba(226, 168, 41, 0.4);
+  border: 1px solid rgba(183, 147, 210, 0.85);
+  box-shadow: 0 0 25px rgba(183, 147, 210, 0.5);
 }
 
 .back-content {
@@ -176,14 +181,14 @@
 .back-avatar-container {
   width: 70px;
   height: 70px;
-  background: #111;
-  border: 1px solid rgba(226, 168, 41, 0.4);
+  background: #08080c;
+  border: 1px solid #B793D2;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 12px;
-  box-shadow: inset 0 0 10px rgba(226, 168, 41, 0.2);
+  box-shadow: inset 0 0 12px rgba(183, 147, 210, 0.8), 0 0 15px rgba(183, 147, 210, 0.6);
 }
 
 .back-avatar-graphic {
@@ -194,7 +199,7 @@
 }
 
 .back-pos {
-  color: #e2a829;
+  color: #ffffff;
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 1px;
@@ -202,7 +207,7 @@
 }
 
 .back-bio {
-  color: #aaaaaa;
+  color: rgba(255, 255, 255, 0.75);
   font-size: 0.82rem;
   margin-top: 10px;
   line-height: 1.5;
@@ -210,7 +215,7 @@
 
 .flip-back-hint {
   font-size: 0.6rem;
-  color: #666;
+  color: rgba(255, 255, 255, 0.5);
   font-weight: 600;
   letter-spacing: 1px;
   margin-top: 15px;
@@ -221,7 +226,7 @@
   position: fixed;
   inset: 0;
   z-index: 2000;
-  background-color: rgba(0, 0, 0, 0.92);
+  background-color: rgba(5, 5, 5, 0.94);
   backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
@@ -231,8 +236,8 @@
 
 .photo-lightbox-content {
   position: relative;
-  background-color: #111;
-  border: 1px solid rgba(226, 168, 41, 0.3);
+  background-color: #08080c;
+  border: 1px solid rgba(183, 147, 210, 0.85);
   padding: 20px;
   border-radius: 16px;
   max-width: 500px;
@@ -240,7 +245,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 10px 40px rgba(183, 147, 210, 0.7), 0 0 25px rgba(183, 147, 210, 0.4);
   transform: scale(0.9);
   animation: scaleInLightbox 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
@@ -255,7 +260,8 @@
   font-size: 1.4rem;
   cursor: pointer;
   z-index: 10;
-  opacity: 0.8;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
 }
 
 .lightbox-close-btn:hover {
@@ -267,7 +273,7 @@
   max-height: 400px;
   border-radius: 12px;
   overflow: hidden;
-  background-color: #1a1a1a;
+  background-color: #050505;
 }
 
 .lightbox-image-wrapper img {
@@ -289,7 +295,7 @@
 }
 
 .lightbox-info p {
-  color: #e2a829;
+  color: rgba(255, 255, 255, 0.85);
   font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 1px;
