@@ -199,7 +199,6 @@
 
 .hero-shader-btn-link:hover {
   transform: translateY(-2px);
-  filter: drop-shadow(0 0 24px rgba(183, 147, 210, 0.45));
 }
 
 .hero-shader-frame {
@@ -210,11 +209,10 @@
   overflow: hidden;
   box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(183, 147, 210, 0.25);
   background: #0d0a12;
-  transition: box-shadow 0.3s ease;
 }
 
 .hero-shader-frame:hover {
-  box-shadow: 0 6px 32px rgba(183, 147, 210, 0.35), inset 0 0 0 1.5px rgba(183, 147, 210, 0.5);
+  /* No hover glow */
 }
 
 .hero-shader-frame iframe {
