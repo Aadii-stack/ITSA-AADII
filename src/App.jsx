@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import PreLoader from './components/home/PreLoader';
@@ -15,15 +15,7 @@ import './App.css';
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const hasLoadedBefore = sessionStorage.getItem('itsa_has_loaded');
-    if (hasLoadedBefore) {
-      setIsLoading(false);
-    }
-  }, []);
-
   const handlePreloaderComplete = () => {
-    sessionStorage.setItem('itsa_has_loaded', 'true');
     setIsLoading(false);
   };
 
@@ -49,8 +41,8 @@ export default function App() {
             <FacultyCommittee />
           </div>
 
-          {/* Core Committee Section with #committee anchor */}
-          <div id="committee">
+          {/* Core Committee Section with #team anchor */}
+          <div id="team">
             <CoreCommittee />
           </div>
         </main>

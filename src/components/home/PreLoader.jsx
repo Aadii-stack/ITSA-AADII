@@ -37,12 +37,6 @@ export default function PreLoader({ onComplete }) {
   const waterGroupRef = useRef(null);
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      if (onComplete) onComplete();
-      return;
-    }
-
     const bootObj = { progress: 0 };
     const tl = gsap.timeline({
       onComplete: () => {
@@ -58,10 +52,10 @@ export default function PreLoader({ onComplete }) {
     });
 
     // Animate liquid rising smoothly through ITSA from 0% (y = 200) to 100% (y = 20)
-    // Extended duration so the preloader lasts longer and creates an immersive build-up
+    // Extended to 5.5s to ensure a sustained, cinematic presence on screen
     tl.to(bootObj, {
       progress: 100,
-      duration: 4.2,
+      duration: 5.5,
       ease: 'power2.inOut',
       onUpdate: () => {
         const p = bootObj.progress;
@@ -72,8 +66,8 @@ export default function PreLoader({ onComplete }) {
       }
     });
 
-    // Hold at 100% full before revealing the homepage
-    tl.to({}, { duration: 0.8 });
+    // Hold at 100% full for 1.2 seconds before transitioning to hero
+    tl.to({}, { duration: 1.2 });
 
     return () => {
       tl.kill();
