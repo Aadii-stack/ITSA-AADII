@@ -1,0 +1,273 @@
+.committee-section {
+  background-color: #060606;
+  padding: 110px 5% 100px 5%;
+  color: #ffffff;
+  position: relative;
+  overflow: visible;
+}
+
+.committee-header {
+  text-align: center;
+  margin-bottom: 75px;
+}
+
+.committee-header .gold-tag {
+  color: #b793d2;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 4px;
+}
+
+.committee-header h2 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin: 8px 0;
+  text-shadow: 0 0 20px rgba(183, 147, 210, 0.15);
+}
+
+.committee-sub {
+  color: #777;
+  font-size: 0.85rem;
+}
+
+.committee-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 60px 35px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* 3D Wrapper */
+.popout-card-wrapper {
+  height: 440px;
+  perspective: 1200px;
+  position: relative;
+}
+
+.popout-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+  transform-style: preserve-3d;
+}
+
+.popout-card-wrapper.is-flipped .popout-card-inner {
+  transform: rotateY(180deg);
+}
+
+.popout-card-front,
+.popout-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 24px;
+  border: 1px solid rgba(183, 147, 210, 0.3);
+}
+
+/* FRONT CARD CONTAINER */
+.popout-card-front {
+  background: radial-gradient(circle at top center, #16111f 0%, #080808 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: visible; /* Lets head pop out top */
+}
+
+/* Background Pattern */
+.bg-circuit-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  pointer-events: none;
+  background-image: radial-gradient(#b793d2 0.8px, transparent 0.8px);
+  background-size: 20px 20px;
+  border-radius: 24px;
+  z-index: 1;
+}
+
+/* PHOTO AREA (RELATIVE POSITION - NO MIDDLE OVERLAP) */
+.popout-photo-container {
+  position: relative;
+  width: 100%;
+  height: 290px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: visible;
+  z-index: 2;
+  cursor: pointer;
+}
+
+/* Subtle lavender halo glow behind the person */
+.photo-backdrop-glow {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(183, 147, 210, 0.3) 0%, transparent 70%);
+  filter: blur(12px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* MEMBER PHOTO */
+.popout-member-img {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  z-index: 2;
+  
+  /* Blends bottom torso cut seamlessly into the dark card */
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
+
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.95));
+  transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1), filter 0.4s ease;
+  transform-origin: bottom center;
+}
+
+/* POPOUT ON PHOTO HOVER */
+.popout-photo-container:hover .popout-member-img {
+  transform: scale(1.15) translateY(-18px); /* Head pops UP beyond top border */
+  filter: drop-shadow(0 0 20px rgba(183, 147, 210, 0.5)) drop-shadow(0 15px 25px rgba(0, 0, 0, 0.95));
+  z-index: 20;
+}
+
+/* CARD DETAILS (STAYS BELOW PHOTO) */
+.popout-card-body {
+  position: relative;
+  z-index: 5;
+  padding: 15px;
+  text-align: center;
+  background: rgba(10, 10, 10, 0.9);
+  border-radius: 0 0 24px 24px;
+  border-top: 1px solid rgba(183, 147, 210, 0.15);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.popout-card-body:hover {
+  background: rgba(183, 147, 210, 0.08);
+}
+
+.popout-badge {
+  display: inline-block;
+  background-color: rgba(183, 147, 210, 0.18);
+  color: #b793d2;
+  border: 1px solid rgba(183, 147, 210, 0.4);
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 3px 12px;
+  border-radius: 12px;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+
+.popout-name {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.popout-dept {
+  font-size: 0.78rem;
+  color: #8c8c8c;
+  margin-top: 2px;
+}
+
+.flip-prompt {
+  display: block;
+  font-size: 0.62rem;
+  color: #b793d2;
+  font-weight: 700;
+  margin-top: 8px;
+  letter-spacing: 1.5px;
+  opacity: 0.85;
+}
+
+/* BACK FACE */
+.popout-card-back {
+  transform: rotateY(180deg);
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: radial-gradient(circle at center, #121212 0%, #050505 100%);
+  border: 1.5px solid rgba(183, 147, 210, 0.5);
+  border-radius: 24px;
+  z-index: 15;
+}
+
+.back-avatar-circle {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  border: 1.5px solid #b793d2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.back-avatar-circle img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.back-position-tag {
+  color: #b793d2;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.back-member-name {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 5px 0;
+}
+
+.back-bio-text {
+  font-size: 0.82rem;
+  color: #aaaaaa;
+  line-height: 1.5;
+  margin: 10px 0 18px 0;
+}
+
+.social-links-row {
+  display: flex;
+  gap: 12px;
+}
+
+.social-btn {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.25s ease;
+}
+
+.social-btn:hover {
+  background: #b793d2;
+  color: #000;
+  border-color: #b793d2;
+}
