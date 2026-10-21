@@ -8,6 +8,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(import.meta.dirname, './src'),
+      '@designcodeio/threeui/style.css': path.resolve(import.meta.dirname, './src/shaders/threeui.css'),
+      '@designcodeio/threeui': path.resolve(import.meta.dirname, './src/shaders/shader-buttons/ShaderButtons.tsx'),
     },
   },
   server: {

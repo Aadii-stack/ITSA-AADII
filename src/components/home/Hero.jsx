@@ -3,6 +3,8 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import TechText from '../ui/TechText';
+import { ShaderButtons } from '@designcodeio/threeui';
+import '@designcodeio/threeui/style.css';
 import heroVideo from '../../assets/hero_section.mp4';
 import './Hero.css';
 
@@ -33,10 +35,34 @@ export default function Hero() {
       }
     }
 
+    // Scroll smoothly to overview if iframe is clicked
+    const onIframeBlur = () => {
+      if (document.activeElement && document.activeElement.tagName === 'IFRAME') {
+        const frame = heroWrapperRef.current?.querySelector('.hero-shader-frame iframe');
+        if (document.activeElement === frame) {
+          const target = document.querySelector('#make-it-happen');
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+          window.focus();
+        }
+      }
+    };
+    window.addEventListener('blur', onIframeBlur);
+
     return () => {
       if (tl) tl.kill();
+      window.removeEventListener('blur', onIframeBlur);
     };
   }, []);
+
+  const handleExploreClick = (e) => {
+    e.preventDefault();
+    const target = document.querySelector('#make-it-happen');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <section className="hero-container" id="hero" ref={heroWrapperRef}>
@@ -90,11 +116,22 @@ export default function Hero() {
           <span>Make it happen</span>
         </div>
 
-        {/* CTA: Explore */}
+        {/* CTA: Explore with ShaderButtons (Star Portal) */}
         <div className="hero-cta-wrap" id="hero-cta">
-          <a href="#make-it-happen" className="hero-cta-btn" id="cta-button" aria-label="Explore ITSA overview section">
-            <span>Explore</span>
-            <span className="cta-arrow" aria-hidden="true">→</span>
+          <a
+            href="#make-it-happen"
+            className="hero-shader-btn-link"
+            onClick={handleExploreClick}
+            aria-label="Explore ITSA overview section"
+          >
+            <div className="shader-frame hero-shader-frame">
+              <ShaderButtons
+                mode="dark"
+                hue={0}
+                saturation={1.00}
+                brightness={1.00}
+              />
+            </div>
           </a>
         </div>
       </div>

@@ -176,46 +176,53 @@
   will-change: opacity, transform;
 }
 
-/* CTA Button: Explore → — Lavender theme */
+/* CTA Button: Explore — ShaderButtons (Star Portal) */
 .hero-cta-wrap {
   margin-top: 36px;
   opacity: 0;
   transform: translateY(16px);
   will-change: opacity, transform;
   pointer-events: auto;
-}
-
-.hero-cta-btn {
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 12px;
-  background: transparent;
-  border: 1px solid #b793d2;
-  border-radius: 4px;
-  color: #b793d2;
-  font-family: 'Archivo Black', 'Arial Black', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  padding: 14px 28px;
+}
+
+.hero-shader-btn-link {
+  display: inline-block;
   text-decoration: none;
+  pointer-events: auto;
+  border-radius: 9999px;
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
 }
 
-.hero-cta-btn:hover {
-  background-color: rgba(183, 147, 210, 0.14);
-  border-color: #d4b8e8;
-  color: #d4b8e8;
+.hero-shader-btn-link:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(183, 147, 210, 0.22);
+  filter: drop-shadow(0 0 24px rgba(183, 147, 210, 0.45));
 }
 
-.hero-cta-btn:active {
-  transform: translateY(0);
+.hero-shader-frame {
+  width: 250px;
+  height: 64px;
+  position: relative;
+  border-radius: 9999px;
+  overflow: hidden;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(183, 147, 210, 0.25);
+  background: #0d0a12;
+  transition: box-shadow 0.3s ease;
+}
+
+.hero-shader-frame:hover {
+  box-shadow: 0 6px 32px rgba(183, 147, 210, 0.35), inset 0 0 0 1.5px rgba(183, 147, 210, 0.5);
+}
+
+.hero-shader-frame iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+  display: block !important;
+  pointer-events: auto;
 }
 
 .hero-cta-btn .cta-arrow {
