@@ -1,0 +1,534 @@
+.meta-hero-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: clamp(560px, 88svh, 900px);
+  padding-top: clamp(3.5rem, 6vw, 5.5rem);
+  padding-bottom: clamp(4rem, 6.5vw, 6rem);
+  background: linear-gradient(180deg, #07090f 0%, #0a1428 52%, #07090f 100%);
+  overflow: hidden;
+}
+
+/* ---------- Backdrop: cityscape, atmosphere, grain ---------- */
+
+.meta-hero-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.meta-hero-recede {
+  position: absolute;
+  inset: 0;
+  will-change: transform, opacity;
+}
+
+.meta-hero-darkness {
+  position: absolute;
+  inset: 0;
+  background: #07090f;
+}
+
+/* The scene sinking back into night as the reader leaves the hero */
+.meta-hero-veil {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 90% at 50% 45%, transparent 30%, rgba(7, 9, 15, 0.85) 100%),
+    linear-gradient(180deg, rgba(7, 9, 15, 0.75) 0%, transparent 45%, rgba(7, 9, 15, 0.9) 100%);
+}
+
+/* Crimson-to-blue light trail travelling through the scene on scroll */
+.meta-hero-trail {
+  position: absolute;
+  top: 34%;
+  left: 0;
+  width: 38%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(227, 38, 54, 0.85) 28%,
+    rgba(245, 245, 247, 0.75) 50%,
+    rgba(37, 99, 235, 0.85) 72%,
+    transparent 100%
+  );
+  box-shadow: 0 0 22px rgba(227, 38, 54, 0.35), 0 0 22px rgba(37, 99, 235, 0.35);
+}
+
+/* Far skyline plane — moves slower than the foreground city */
+.meta-hero-city-far {
+  position: absolute;
+  left: -6%;
+  right: -6%;
+  bottom: 2%;
+  height: 62%;
+  opacity: 0.32;
+  filter: saturate(0.6);
+  will-change: transform;
+}
+
+.meta-hero-city-far img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.9) 20%, transparent 88%);
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.9) 20%, transparent 88%);
+}
+
+/* Slow-burning city lights behind the skyline */
+.meta-hero-lights {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 46%;
+  background:
+    radial-gradient(circle at 18% 78%, rgba(227, 38, 54, 0.3) 0 2px, transparent 3px),
+    radial-gradient(circle at 27% 62%, rgba(140, 184, 255, 0.32) 0 1.5px, transparent 3px),
+    radial-gradient(circle at 44% 84%, rgba(245, 245, 247, 0.22) 0 1.5px, transparent 3px),
+    radial-gradient(circle at 61% 68%, rgba(37, 99, 235, 0.3) 0 2px, transparent 3px),
+    radial-gradient(circle at 76% 88%, rgba(227, 38, 54, 0.26) 0 1.5px, transparent 3px),
+    radial-gradient(circle at 88% 72%, rgba(140, 184, 255, 0.26) 0 2px, transparent 3px);
+  opacity: 0.75;
+  animation: metaCityLights 9s ease-in-out infinite alternate;
+}
+
+@keyframes metaCityLights {
+  from {
+    opacity: 0.5;
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0.95;
+    transform: translate3d(-10px, -3px, 0);
+  }
+}
+
+/* Drifting light specks — two offset layers, transform + opacity only */
+.meta-hero-particles,
+.meta-hero-particles::before,
+.meta-hero-particles::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.meta-hero-particles {
+  top: 8%;
+  bottom: 26%;
+  background-image:
+    radial-gradient(circle, rgba(245, 245, 247, 0.55) 0 1px, transparent 1.6px),
+    radial-gradient(circle, rgba(140, 184, 255, 0.5) 0 1px, transparent 1.6px),
+    radial-gradient(circle, rgba(227, 38, 54, 0.45) 0 1.2px, transparent 1.8px);
+  background-size: 430px 380px, 620px 520px, 780px 640px;
+  background-position: 12% 30%, 68% 62%, 38% 82%;
+  background-repeat: repeat;
+  opacity: 0.7;
+  animation: metaSpecks 34s linear infinite;
+}
+
+.meta-hero-particles::before {
+  content: '';
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(140, 184, 255, 0.45) 0 1px, transparent 1.5px);
+  background-size: 300px 260px;
+  opacity: 0.7;
+  animation: metaSpecks 52s linear infinite reverse;
+}
+
+.meta-hero-particles::after {
+  content: '';
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(227, 38, 54, 0.38) 0 1px, transparent 1.5px);
+  background-size: 520px 440px;
+  opacity: 0.55;
+  animation: metaSpecks 68s linear infinite;
+}
+
+@keyframes metaSpecks {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-60px, -140px, 0);
+  }
+}
+
+/* Red/blue light passing slowly through the skyline, on a long loop */
+.meta-hero-skyline-sweep {
+  position: absolute;
+  top: 26%;
+  bottom: 0;
+  left: 0;
+  width: 46%;
+  pointer-events: none;
+  background: linear-gradient(
+    104deg,
+    transparent 0%,
+    rgba(227, 38, 54, 0.22) 32%,
+    rgba(245, 245, 247, 0.1) 50%,
+    rgba(37, 99, 235, 0.26) 68%,
+    transparent 100%
+  );
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translate3d(-130%, 0, 0);
+  animation: metaSkylineSweep 13s cubic-bezier(0.16, 1, 0.3, 1) 1.25s infinite both;
+}
+
+@keyframes metaSkylineSweep {
+  0% {
+    opacity: 0.95;
+    transform: translate3d(-130%, 0, 0);
+  }
+  15% {
+    opacity: 0;
+    transform: translate3d(320%, 0, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(320%, 0, 0);
+  }
+}
+
+/* Continuous depth: the city breathes, the rim lighting drifts */
+@media (prefers-reduced-motion: no-preference) {
+  .meta-hero-city img {
+    animation: metaCityDrift 32s ease-in-out infinite alternate;
+  }
+
+  .meta-hero-city-far img {
+    animation: metaCityDrift 48s ease-in-out infinite alternate-reverse;
+  }
+
+  .meta-hero-atmo-red {
+    animation: metaAtmoRed 19s ease-in-out infinite alternate;
+  }
+
+  .meta-hero-atmo-blue {
+    animation: metaAtmoBlue 24s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes metaCityDrift {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.045) translate3d(-1.2%, 1%, 0);
+  }
+}
+
+@keyframes metaAtmoRed {
+  from {
+    opacity: 0.7;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(4%, 2%, 0) scale(1.07);
+  }
+}
+
+@keyframes metaAtmoBlue {
+  from {
+    opacity: 0.75;
+    transform: translate3d(0, 0, 0) scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(-4%, -2%, 0) scale(1);
+  }
+}
+
+.meta-hero-city {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4%;
+  height: 74%;
+  will-change: transform;
+}
+
+.meta-hero-city img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  opacity: 0.9;
+  -webkit-mask-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 1) 30%,
+    rgba(0, 0, 0, 0.55) 62%,
+    transparent 96%
+  );
+  mask-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 1) 30%,
+    rgba(0, 0, 0, 0.55) 62%,
+    transparent 96%
+  );
+}
+
+.meta-hero-atmo {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.meta-hero-atmo-red {
+  width: 58vw;
+  height: 58vw;
+  max-width: 820px;
+  max-height: 820px;
+  left: -18vw;
+  top: -12vw;
+  background: radial-gradient(circle, rgba(227, 38, 54, 0.16) 0%, transparent 62%);
+}
+
+.meta-hero-atmo-blue {
+  width: 52vw;
+  height: 52vw;
+  max-width: 760px;
+  max-height: 760px;
+  right: -14vw;
+  bottom: -10vw;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, transparent 62%);
+}
+
+.meta-hero-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
+
+.meta-hero-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 42%,
+    transparent 52%,
+    rgba(7, 9, 15, 0.5) 100%
+  );
+}
+
+/* ---------- Decorative placement ---------- */
+
+.meta-hero-web {
+  top: clamp(70px, 10vh, 104px);
+  right: clamp(0.75rem, 3vw, 2.5rem);
+  width: clamp(110px, 15vw, 210px);
+  height: auto;
+}
+
+.meta-hero-tether-slot {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.meta-hero-tether-slot .meta-tether {
+  height: clamp(52px, 8vh, 96px);
+}
+
+.meta-hero-spider {
+  top: 0;
+  right: clamp(140px, 22vw, 300px);
+  height: 108px;
+  width: auto;
+}
+
+@media (max-width: 719px) {
+  .meta-hero-spider {
+    display: none;
+  }
+}
+
+/* ---------- Content ---------- */
+
+.meta-hero-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-hero-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 2.4vw, 2rem);
+  container-type: inline-size;
+}
+
+/* Status + single call to action share one composed row across the width */
+.meta-hero-below {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.1rem 1.5rem;
+  width: 100%;
+  padding-top: clamp(1.1rem, 2vw, 1.6rem);
+  border-top: 1px solid var(--meta-border-blue);
+}
+
+/* Oversized condensed display headline with red depth + blue offset */
+.meta-hero-title-mask {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  padding: 0.06em 0.12em 0.12em 0;
+}
+
+/* Red / blue highlight sweeping across the title edges, then settling */
+.meta-hero-title-mask::after {
+  content: '';
+  position: absolute;
+  top: -10%;
+  bottom: -10%;
+  left: 0;
+  width: 42%;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(227, 38, 54, 0.28) 35%,
+    rgba(245, 245, 247, 0.16) 50%,
+    rgba(37, 99, 235, 0.3) 65%,
+    transparent 100%
+  );
+  mix-blend-mode: screen;
+  transform: translate3d(-140%, 0, 0);
+  opacity: 0;
+  animation: metaTitleSweep 2.1s cubic-bezier(0.16, 1, 0.3, 1) 1.85s 2 both;
+}
+
+@keyframes metaTitleSweep {
+  0% {
+    opacity: 0.9;
+    transform: translate3d(-140%, 0, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(320%, 0, 0);
+  }
+}
+
+/* Sized against its own container (not the viewport) so the string always
+   fills one line: Anton renders "COMING SOON!!" at 5.52 x font-size, so
+   16.5cqw puts the glyphs at ~91% of the available content width. */
+.meta-hero-headline {
+  font-family: var(--meta-font-display);
+  font-size: clamp(2rem, 16.5cqw, 215px);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  color: var(--meta-white);
+  text-shadow:
+    0.028em 0.028em 0 rgba(227, 38, 54, 0.9),
+    0.058em 0.058em 0 rgba(148, 27, 43, 0.6),
+    0 0 52px rgba(227, 38, 54, 0.32),
+    -0.016em -0.012em 0 rgba(37, 99, 235, 0.5);
+  animation: metaHeadSettle 1.6s cubic-bezier(0.16, 1, 0.3, 1) 1.2s 1 both;
+}
+
+@keyframes metaHeadSettle {
+  from {
+    text-shadow:
+      0.085em 0.085em 0 rgba(227, 38, 54, 0.55),
+      0.17em 0.17em 0 rgba(148, 27, 43, 0.35),
+      0 0 72px rgba(227, 38, 54, 0.5),
+      -0.055em -0.045em 0 rgba(37, 99, 235, 0.55);
+  }
+  to {
+    text-shadow:
+      0.028em 0.028em 0 rgba(227, 38, 54, 0.9),
+      0.058em 0.058em 0 rgba(148, 27, 43, 0.6),
+      0 0 52px rgba(227, 38, 54, 0.32),
+      -0.016em -0.012em 0 rgba(37, 99, 235, 0.5);
+  }
+}
+
+.meta-hero-tagline-motto {
+  font-size: clamp(0.95rem, 1.5vw, 1.2rem);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  line-height: 1.45;
+  max-width: 34ch;
+  background: linear-gradient(92deg, #ff4d5e 0%, #e32636 55%, #8cb8ff 130%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Mystery status line ---------- */
+
+.meta-hero-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.status-tick {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--meta-crimson);
+  box-shadow: 0 0 0 4px rgba(227, 38, 54, 0.14), 0 0 12px rgba(227, 38, 54, 0.9);
+  animation: metaStatusTick 2.6s ease-in-out infinite;
+}
+
+@keyframes metaStatusTick {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.status-word {
+  font-size: 0.76rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #ffb3ba;
+}
+
+/* ---------- CTA group ---------- */
+
+.notify-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+@media (max-width: 679px) {
+  .meta-hero-below {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .notify-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .meta-hero-particles,
+  .meta-hero-skyline-sweep {
+    display: none;
+  }
+}

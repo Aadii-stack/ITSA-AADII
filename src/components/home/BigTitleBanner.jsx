@@ -24,7 +24,7 @@ const BigTitleBanner = () => {
       <div className={`big-title-glow-bg ${isVisible ? 'active' : ''}`} />
       
       <div className={`big-title-container ${isVisible ? 'animate-in' : ''}`}>
-        <span className="aesthetic-tag">/// ASSOCIATION MOTTO</span>
+        <span className="aesthetic-tag">ASSOCIATION MOTTO</span>
         
         <h1 className="aesthetic-big-heading">
           <div className="title-line-1">

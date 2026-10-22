@@ -1,15 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './AboutRedirect.css';
 
 const AboutRedirect = () => {
-  const handleScrollToTeam = (e) => {
-    e.preventDefault();
-    const target = document.querySelector('#faculty');
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <section id="about" className="about-redirect-section">
       <div className="about-redirect-card">
@@ -20,14 +13,13 @@ const AboutRedirect = () => {
             ITSA unites student engineers, mentors, and creators across all academic years to organize hands-on technical workshops, competitive hackathons, and collaborative campus initiatives.
           </p>
         </div>
-        <a 
-          href="#faculty" 
+        <Link 
+          to="/team" 
           className="about-cta-btn"
-          onClick={handleScrollToTeam}
           aria-label="Discover faculty advisors and student committee leadership"
         >
-          VIEW LEADERSHIP & ADVISORS <span className="arrow" aria-hidden="true">↓</span>
-        </a>
+          VIEW LEADERSHIP & ADVISORS <span className="arrow" aria-hidden="true">→</span>
+        </Link>
       </div>
     </section>
   );

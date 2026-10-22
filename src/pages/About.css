@@ -1,0 +1,147 @@
+.about-page-view {
+  position: relative;
+  background-color: var(--color-bg-base);
+  color: var(--color-text-main);
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+/* Subtle Ambient Background Grid */
+.about-ambient-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: radial-gradient(circle at 50% 20%, black 0%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at 50% 20%, black 0%, transparent 80%);
+}
+
+/* Bottom CTA Navigation Section */
+.about-bottom-cta-section {
+  position: relative;
+  z-index: 1;
+  padding: 5rem 1.5rem;
+}
+
+.about-cta-card {
+  position: relative;
+  background: var(--color-bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-border-medium, rgba(255, 255, 255, 0.15));
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  overflow: hidden;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-md), 0 0 25px rgba(183, 147, 210, 0.1);
+}
+
+.cta-ambient-glow {
+  position: absolute;
+  top: -50%;
+  left: -20%;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, var(--color-lavender-dim) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.about-cta-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--color-warm-white);
+  margin: 0.5rem 0;
+  letter-spacing: -0.02em;
+}
+
+.about-cta-sub {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+  max-width: 580px;
+  line-height: 1.6;
+}
+
+.cta-card-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Custom Engineered Buttons */
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border-radius: var(--radius-xs);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  letter-spacing: 0.03em;
+}
+
+.cta-btn-primary {
+  background: var(--color-lavender);
+  color: #08070b;
+  border: 1px solid var(--color-lavender);
+  box-shadow: 0 4px 16px var(--color-lavender-glow);
+}
+
+.cta-btn-primary:hover {
+  background: var(--color-lavender-hover);
+  border-color: var(--color-lavender-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(183, 147, 210, 0.4);
+}
+
+.cta-btn-secondary {
+  background: var(--color-bg-surface);
+  color: var(--color-text-main);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.cta-btn-secondary:hover {
+  background: var(--color-bg-card-hover);
+  border-color: var(--color-lavender-border);
+  color: var(--color-lavender);
+  transform: translateY(-2px);
+}
+
+.circuit-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--color-lavender);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+
+.circuit-box {
+  background: var(--color-lavender-dim);
+  border: 1px solid var(--color-lavender-border);
+  padding: 0.15rem 0.4rem;
+  border-radius: 2px;
+  font-size: 0.7rem;
+}
+
+@media (max-width: 840px) {
+  .about-cta-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem 1.5rem;
+  }
+}

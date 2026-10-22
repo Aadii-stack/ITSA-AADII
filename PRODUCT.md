@@ -24,9 +24,9 @@ Desktop and mobile browsers used by engineering students on campus and at home. 
 
 ## Capabilities and Constraints
 
-- **Confirmed Functionality:** Interactive Hero with video and dynamic text shaders, motto overview section, interactive elastic gallery showcase, recent events listing, Meta Summit ticket/event card, faculty committee roster, and core committee roster with contact/profile links.
-- **Technical Constraints:** React 19, Vite, GSAP animations, Lucide icons, responsive layout, Docker-ready development standards, zero paid API dependencies.
-- **Undecided:** Online registration processing backend (currently routes to external links or forms).
+- **Confirmed Functionality:** Multi-page web architecture (Home, About, Events, Meta Summit, Team), interactive video-driven Hero with dynamic typography, motto and engineering mission showcase, recent events listing and registration entrypoints, Meta Summit flagship feature card, dedicated faculty committee and student core committee roster with profile/social links.
+- **Technical Constraints:** React 19, Vite, Tailwind CSS, Framer Motion, GSAP animations, Lucide icons, responsive mobile-first layout, zero external paid API dependencies.
+- **Undecided:** On-site registration processing backend (currently routes to external links/Google Forms).
 
 ## Brand Commitments
 

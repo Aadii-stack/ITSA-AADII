@@ -1,0 +1,63 @@
+.about-redirect-section {
+  background-color: #0c0c0c;
+  padding: 60px 6%;
+}
+
+.about-redirect-card {
+  max-width: 1250px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, #141414 0%, #1c180e 100%);
+  border: 1px solid rgba(226, 168, 41, 0.25);
+  border-radius: 20px;
+  padding: 45px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.gold-sub {
+  color: #e2a829;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.about-redirect-text h2 {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 900;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.about-redirect-text p {
+  color: #aaaaaa;
+  font-size: 0.92rem;
+  max-width: 650px;
+}
+
+.about-cta-btn {
+  background-color: #e2a829;
+  color: #000000;
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.about-cta-btn:hover {
+  background-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(226, 168, 41, 0.2);
+}

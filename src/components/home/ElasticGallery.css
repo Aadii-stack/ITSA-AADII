@@ -1,7 +1,8 @@
 .elastic-section {
-  background-color: #0c0c0c;
+  background-color: transparent;
   padding: clamp(60px, 8vw, 100px) 6%;
   color: #ffffff;
+  position: relative;
 }
 
 .elastic-header {

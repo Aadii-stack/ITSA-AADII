@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import logoImg from '../../assets/itsa-logo.png';
 import './Navbar.css';
@@ -7,13 +8,13 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const hamburgerBtnRef = useRef(null);
   const drawerRef = useRef(null);
+  const location = useLocation();
 
   const navLinks = [
-    { label: 'Home', path: '#' },
-    { label: 'About', path: '#about' },
-    { label: 'Events', path: '#events' },
-    { label: 'Faculty', path: '#faculty' },
-    { label: 'Team', path: '#team' },
+    { label: 'About', path: '/about', isHash: false },
+    { label: 'Events', path: '/events', isHash: false },
+    { label: 'Team', path: '/team', isHash: false },
+    { label: 'Meta Summit', path: '/meta-summit', isHash: false },
   ];
 
   // Mobile drawer keyboard and focus management
@@ -73,12 +74,22 @@ export default function Navbar() {
     hamburgerBtnRef.current?.focus();
   };
 
+  const handleHashClick = (e, hashId) => {
+    if (location.pathname === '/') {
+      e.preventDefault();
+      const el = document.getElementById(hashId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <>
       <header className="navbar-wrap">
         <nav className="navbar" aria-label="Main navigation">
           {/* Brand Logo & Title on Left */}
-          <a href="#" className="brand" aria-label="ITSA Home">
+          <Link to="/" className="brand" aria-label="ITSA Home">
             <img 
               src={logoImg} 
               alt="ITSA Logo" 
@@ -86,24 +97,31 @@ export default function Navbar() {
               onError={(e) => { e.target.style.display = 'none'; }}
             />
             ITSA
-          </a>
+          </Link>
 
           {/* Nav Links */}
           <ul className="nav-links">
             {navLinks.map((link) => (
               <li key={link.label}>
-                <a href={link.path}>{link.label}</a>
+                {link.isHash ? (
+                  <Link 
+                    to={link.path}
+                    onClick={(e) => handleHashClick(e, link.hashId)}
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <NavLink 
+                    to={link.path}
+                    className={({ isActive }) => (isActive ? 'active' : '')}
+                    end={link.path === '/'}
+                  >
+                    {link.label}
+                  </NavLink>
+                )}
               </li>
             ))}
           </ul>
-
-          {/* Action / Connect button */}
-          <a href="#team" className="btn-download" aria-label="Connect with ITSA team">
-            <svg viewBox="0 0 24 24" aria-hidden="true" className="btn-icon">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z" />
-            </svg>
-            Connect
-          </a>
 
           {/* Mobile Hamburger Button */}
           <button
@@ -150,14 +168,29 @@ export default function Navbar() {
           <ul className="drawer-links-list">
             {navLinks.map((link) => (
               <li key={link.label}>
-                <a
-                  href={link.path}
-                  className="drawer-link"
-                  onClick={closeMobileMenu}
-                >
-                  <span>{link.label}</span>
-                  <ArrowUpRight size={18} />
-                </a>
+                {link.isHash ? (
+                  <Link
+                    to={link.path}
+                    className="drawer-link"
+                    onClick={(e) => {
+                      handleHashClick(e, link.hashId);
+                      closeMobileMenu();
+                    }}
+                  >
+                    <span>{link.label}</span>
+                    <ArrowUpRight size={18} />
+                  </Link>
+                ) : (
+                  <NavLink
+                    to={link.path}
+                    className={({ isActive }) => `drawer-link ${isActive ? 'active' : ''}`}
+                    onClick={closeMobileMenu}
+                    end={link.path === '/'}
+                  >
+                    <span>{link.label}</span>
+                    <ArrowUpRight size={18} />
+                  </NavLink>
+                )}
               </li>
             ))}
           </ul>

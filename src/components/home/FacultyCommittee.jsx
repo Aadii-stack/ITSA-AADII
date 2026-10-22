@@ -100,7 +100,7 @@ const FacultyCommittee = ({ faculties = initialFacultyData }) => {
   return (
     <section className="faculty-section">
       <div className="faculty-header">
-        <span className="gold-tag">/// ACADEMIC MENTORSHIP</span>
+        <span className="gold-tag">ACADEMIC MENTORSHIP</span>
         <h2>OUR FACULTY ADVISORS</h2>
         <p className="faculty-sub">Guiding the Information Technology Student Association towards academic and technical leadership.</p>
       </div>
@@ -132,8 +132,15 @@ const FacultyCommittee = ({ faculties = initialFacultyData }) => {
                     aria-label={`Enlarge photo of ${faculty.name}`}
                     title="Click or press Enter to zoom photo"
                   >
-                    <img src={faculty.photo || placeholderImg} alt={faculty.name} loading="lazy" />
-                    <div className="zoom-hint-overlay" aria-hidden="true">🔍 VIEW</div>
+                    <img
+                      src={faculty.photo || placeholderImg}
+                      alt={faculty.name}
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = placeholderImg;
+                      }}
+                    />
                     <div className="faculty-badge">{faculty.position}</div>
                   </div>
                   <div className="faculty-info-front">
@@ -182,7 +189,14 @@ const FacultyCommittee = ({ faculties = initialFacultyData }) => {
               ✕
             </button>
             <div className="lightbox-image-wrapper">
-              <img src={zoomedFaculty.photo || placeholderImg} alt={zoomedFaculty.name} />
+              <img
+                src={zoomedFaculty.photo || placeholderImg}
+                alt={zoomedFaculty.name}
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = placeholderImg;
+                }}
+              />
             </div>
             <div className="lightbox-info">
               <h3>{zoomedFaculty.name}</h3>

@@ -1,13 +1,59 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { siteConfig } from '../../data/siteConfig';
 import { ArrowUpRight, MapPin, Mail } from 'lucide-react';
+import { WebCorner } from '../meta/MetaDecor';
 import './Footer.css';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const { pathname } = useLocation();
+
+  // Meta Summit applies its own cinematic footer accents; every other route keeps default tokens
+  const isMetaSummit = pathname === siteConfig.links.metaSummit;
+  const footerRef = useRef(null);
+  const [metaRevealed, setMetaRevealed] = useState(false);
+
+  useEffect(() => {
+    if (!isMetaSummit) return undefined;
+
+    setMetaRevealed(false);
+    const el = footerRef.current;
+
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setMetaRevealed(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setMetaRevealed(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [isMetaSummit]);
+
+  const footerClasses = ['site-footer'];
+  if (isMetaSummit) {
+    footerClasses.push('meta-footer');
+    if (metaRevealed) footerClasses.push('meta-footer-revealed');
+  }
 
   return (
-    <footer className="site-footer">
+    <footer ref={footerRef} className={footerClasses.join(' ')}>
+      {isMetaSummit && (
+        <>
+          <WebCorner className="meta-footer-web meta-footer-web-tr" />
+          <WebCorner className="meta-footer-web meta-footer-web-bl" orientation="bl" />
+        </>
+      )}
+
       {/* Circuit accent border on top */}
       <div className="footer-top-rule">
         <span className="footer-circuit-node left"></span>
@@ -47,7 +93,39 @@ export default function Footer() {
             <p className="footer-institution">{siteConfig.institution}</p>
           </div>
 
-          {/* Col 2: Focus Areas */}
+          {/* Col 2: Navigation Links */}
+          <div className="footer-links-col">
+            <span className="footer-col-label">Navigation</span>
+            <ul className="footer-links-list">
+              <li>
+                <Link to={siteConfig.links.home} className="footer-link">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to={siteConfig.links.about} className="footer-link">
+                  About ITSA
+                </Link>
+              </li>
+              <li>
+                <Link to={siteConfig.links.events} className="footer-link">
+                  Events Archive
+                </Link>
+              </li>
+              <li>
+                <Link to={siteConfig.links.team} className="footer-link">
+                  Team & Leadership
+                </Link>
+              </li>
+              <li>
+                <Link to={siteConfig.links.metaSummit} className="footer-link footer-flagship-link">
+                  Meta Summit <span className="flagship-mini-badge">Flagship</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 3: Focus Areas */}
           <div className="footer-pillars-col">
             <span className="footer-col-label">The ITSA Circuit</span>
             <ul className="footer-pillars-list">
@@ -59,7 +137,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 3: Campus & Connectivity */}
+          {/* Col 4: Campus & Connectivity */}
           <div className="footer-contact-col">
             <span className="footer-col-label">Official Touchpoints</span>
             <div className="footer-contact-item">

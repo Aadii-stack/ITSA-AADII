@@ -1,0 +1,67 @@
+.gallery-page-view {
+  position: relative;
+  background-color: var(--color-bg-base);
+  color: var(--color-text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-top: clamp(5.5rem, 8vw, 6.5rem);
+}
+
+.gallery-header-strip {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+}
+
+.gallery-top-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--color-lavender);
+  letter-spacing: 0.08em;
+  background: var(--color-lavender-dim);
+  border: 1px solid var(--color-lavender-border);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: 0.75rem;
+}
+
+.gallery-top-badge .circuit-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-lavender);
+  box-shadow: 0 0 8px var(--color-lavender-glow);
+}
+
+.gallery-main-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  color: var(--color-warm-white);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.gallery-main-subtitle {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  max-width: 650px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.gallery-stage-container {
+  flex: 1;
+  width: 100%;
+  min-height: 680px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}

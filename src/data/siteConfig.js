@@ -15,6 +15,7 @@ export const siteConfig = {
     home: "/",
     about: "/about",
     events: "/events",
+    team: "/team",
     metaSummit: "/meta-summit",
   },
   socials: [

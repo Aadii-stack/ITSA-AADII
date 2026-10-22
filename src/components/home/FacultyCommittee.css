@@ -104,25 +104,6 @@
   transform: scale(1.05);
 }
 
-.zoom-hint-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  color: #fff;
-  font-weight: 800;
-  font-size: 0.85rem;
-  letter-spacing: 1.5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.faculty-photo-box:hover .zoom-hint-overlay {
-  opacity: 1;
-}
-
 .faculty-badge {
   position: absolute;
   bottom: 10px;

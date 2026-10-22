@@ -1,0 +1,208 @@
+.about-section-padding {
+  padding: 5rem 1.5rem;
+  background-color: var(--color-bg-base);
+  border-bottom: 1px solid var(--color-border-subtle);
+  color: var(--color-text-main);
+  position: relative;
+}
+
+.about-section-header {
+  margin-bottom: 2.5rem;
+}
+
+.margin-top-xl {
+  margin-top: 5rem;
+}
+
+.about-section-label {
+  font-size: 0.78rem;
+  color: var(--color-lavender);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.about-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  font-weight: 800;
+  color: var(--color-warm-white);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+/* Scanner Grid (Selector + Spec Pane) */
+.principles-scanner-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.principles-selector-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.principle-selector-item {
+  position: relative;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  overflow: hidden;
+}
+
+.principle-selector-item:hover,
+.principle-selector-item.active {
+  background: var(--color-bg-card-hover);
+  border-color: var(--color-lavender-border);
+}
+
+.selector-index {
+  font-size: 0.9rem;
+  color: var(--color-lavender);
+  font-weight: 700;
+}
+
+.selector-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin: 0;
+}
+
+.selector-indicator {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: background var(--transition-fast);
+}
+
+.principle-selector-item.active .selector-indicator {
+  background: var(--color-lavender);
+  box-shadow: 0 0 10px var(--color-lavender-glow);
+}
+
+/* Display Pane */
+.principles-display-pane {
+  background: var(--color-bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-border-medium, rgba(255, 255, 255, 0.15));
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+}
+
+.pane-glass-inner {
+  position: relative;
+}
+
+.pane-num {
+  font-size: 0.78rem;
+  color: var(--color-lavender);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.pane-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  font-weight: 800;
+  color: var(--color-warm-white);
+  margin-bottom: 1rem;
+  line-height: 1.25;
+}
+
+.pane-desc {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+/* Multi-Dimensional Spotlight Grid */
+.initiatives-spotlight-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.initiative-spotlight-card {
+  position: relative;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.75rem;
+  overflow: hidden;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.initiative-spotlight-card:hover {
+  border-color: var(--color-lavender-border);
+  box-shadow: var(--shadow-md), 0 0 20px rgba(183, 147, 210, 0.1);
+}
+
+.card-ambient-light {
+  position: absolute;
+  top: -30%;
+  right: -20%;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, var(--color-lavender-dim) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.card-top-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-lavender-border), transparent);
+}
+
+.initiative-index {
+  font-size: 0.72rem;
+  color: var(--color-lavender);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.initiative-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-warm-white);
+  margin-bottom: 0.75rem;
+}
+
+.initiative-desc {
+  font-size: 0.92rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+@media (max-width: 860px) {
+  .principles-scanner-grid {
+    grid-template-columns: 1fr;
+  }
+}

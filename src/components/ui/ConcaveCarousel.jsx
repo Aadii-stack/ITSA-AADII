@@ -293,6 +293,8 @@ export default function ConcaveCarousel({
                   transform: `translate3d(${x}px, 0, ${z}px) rotateY(${rotY}deg)`,
                   zIndex: Math.round(100 - Math.abs(delta)),
                 }}
+                onMouseEnter={handleHoverStart}
+                onMouseLeave={handleHoverEnd}
                 onClick={(e) => {
                   e.stopPropagation();
                   if (Math.abs(delta) > 3) {
@@ -330,11 +332,6 @@ export default function ConcaveCarousel({
                       <p className="concave-panel-desc">{item.desc}</p>
                     )}
                   </div>
-
-                  {/* ID Badge */}
-                  {item.id && (
-                    <span className="concave-id-tag">{item.id}</span>
-                  )}
 
                   {/* Active highlight border glow */}
                   <div className="concave-border-highlight" />

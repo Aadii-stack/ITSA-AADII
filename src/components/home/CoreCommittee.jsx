@@ -173,6 +173,10 @@ const CoreCommittee = ({ members = initialCommitteeData }) => {
                       alt={member.name}
                       className="popout-member-img"
                       loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = placeholderImg;
+                      }}
                     />
                   </div>
 

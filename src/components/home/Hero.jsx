@@ -53,7 +53,7 @@ export default function Hero() {
         <video
           className="hero-bg-video"
           src={heroVideo}
-          preload="auto"
+          preload="metadata"
           autoPlay
           loop
           muted
@@ -96,9 +96,10 @@ export default function Hero() {
         {/* Anchor placeholder defining the resting slot for ITSA */}
         <div id="hero-headline-anchor" className="hero-headline-wrap" style={{ width: '100%', maxWidth: '820px', height: '240px', pointerEvents: 'none' }} />
 
-        {/* Subtitle: Make it happen */}
+        {/* Department & Association Identity */}
         <div className="hero-motto" id="hero-motto">
-          <span>Make it happen</span>
+          <span className="hero-line-dept">Information Technology</span>
+          <span className="hero-line-association">STUDENT ASSOCIATION</span>
         </div>
 
         {/* CTA: Hardened Accessible Explore Pill Button */}

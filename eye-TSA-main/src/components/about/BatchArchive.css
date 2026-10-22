@@ -1,0 +1,108 @@
+.section-sub {
+  font-size: 0.95rem;
+  color: #a1a1aa;
+  margin-top: 0.4rem;
+}
+
+.roster-year-bar {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.year-filter-btn {
+  background: rgba(18, 20, 26, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 0.85rem 1.25rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  min-width: 160px;
+  transition: all 0.2s ease;
+}
+
+.year-filter-btn:hover,
+.year-filter-btn.active {
+  background: rgba(24, 28, 38, 0.95);
+  border-color: rgba(234, 179, 8, 0.4);
+}
+
+.year-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.year-filter-btn.active .year-title {
+  color: #eab308;
+}
+
+.year-label {
+  font-size: 0.7rem;
+  color: #71717a;
+}
+
+.roster-board {
+  background: rgba(18, 20, 26, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.board-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  color: #eab308;
+  font-weight: 700;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 1.5rem;
+}
+
+.board-members-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 1rem;
+}
+
+.board-member-card {
+  background: rgba(12, 14, 18, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.board-member-card:hover {
+  border-color: rgba(234, 179, 8, 0.3);
+  transform: translateY(-2px);
+}
+
+.member-position {
+  font-size: 0.75rem;
+  color: #eab308;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+.member-fullname {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.25rem 0;
+}
+
+.member-department {
+  font-size: 0.75rem;
+  color: #71717a;
+}

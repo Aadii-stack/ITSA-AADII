@@ -75,9 +75,8 @@ const ElasticGallery = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
       >
-        <span className="gold-tag">/// WHAT WE DO</span>
+        <span className="gold-tag">WHAT WE DO</span>
         <h2>OUR CORE INITIATIVES</h2>
-        <p className="elastic-sub">Explore how ITSA drives technical mastery and peer collaboration at SLRTCE.</p>
       </motion.div>
 
       <ConcaveCarousel

@@ -1,0 +1,49 @@
+.gallery-page-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #080808;
+  color: #ffffff;
+  position: relative;
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.gallery-header-overlay {
+  text-align: center;
+  z-index: 10;
+  padding: 20px;
+  pointer-events: none;
+}
+
+.gallery-tag {
+  color: #e2a829;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 4px;
+}
+
+.gallery-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  margin: 10px 0 5px 0;
+  letter-spacing: -1px;
+}
+
+.gallery-subtext {
+  color: #888888;
+  font-size: 0.95rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.dome-gallery-viewport {
+  width: 100%;
+  height: 75vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

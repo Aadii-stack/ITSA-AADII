@@ -1,0 +1,126 @@
+/* Progress Stepper Bar */
+.stepper-navigation-bar {
+  position: relative;
+  margin-bottom: 2.5rem;
+  padding: 1.5rem 0;
+}
+
+.stepper-track-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-border-subtle);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.stepper-buttons-row {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  overflow-x: auto;
+  gap: 1rem;
+}
+
+.stepper-node-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all var(--transition-base);
+  min-width: 120px;
+}
+
+.node-ring {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-bg-base);
+  border: 2px solid var(--color-border-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+}
+
+.node-core {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: transparent;
+  transition: background var(--transition-fast);
+}
+
+.stepper-node-btn.passed .node-ring,
+.stepper-node-btn.active .node-ring {
+  border-color: var(--color-lavender);
+  box-shadow: 0 0 16px var(--color-lavender-glow);
+}
+
+.stepper-node-btn.passed .node-core,
+.stepper-node-btn.active .node-core {
+  background: var(--color-lavender);
+}
+
+.node-phase {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  transition: color var(--transition-fast);
+  text-align: center;
+}
+
+.stepper-node-btn.active .node-phase {
+  color: var(--color-lavender);
+  font-weight: 700;
+}
+
+/* Showcase Spec Card */
+.stepper-showcase-card {
+  background: var(--color-bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-border-medium, rgba(255, 255, 255, 0.15));
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-md), 0 0 20px rgba(183, 147, 210, 0.08);
+}
+
+.showcase-top-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  color: var(--color-lavender);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.meta-tag {
+  background: var(--color-lavender-dim);
+  border: 1px solid var(--color-lavender-border);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+}
+
+.showcase-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  font-weight: 800;
+  color: var(--color-warm-white);
+  margin-bottom: 0.75rem;
+}
+
+.showcase-detail {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  max-width: 800px;
+}

@@ -291,12 +291,21 @@ h1, h2, h3, h4, h5, h6 {
   padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
 }
 
-/* Reduced Motion Override */
+/* Intentional Reduced Motion: Calms displacement and parallax without destroying functional state transitions */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  html {
     scroll-behavior: auto !important;
+  }
+
+  *, *::before, *::after {
+    animation-iteration-count: 1 !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 150ms !important;
+  }
+
+  .circuit-canvas-bg,
+  .hero-video-bg,
+  .meta-hero-backdrop {
+    animation: none !important;
   }
 }
